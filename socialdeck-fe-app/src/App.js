@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './App.css'
 
 import ApolloClient from 'apollo-boost'
@@ -28,14 +28,18 @@ const client = new ApolloClient({
   uri: 'https://socialdeck.herokuapp.com/graphql'
 })
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <div className='app'>
-      <LoginForm />
-      <RegisterForm />
-      <ul><Schema /></ul>
-    </div>
-  </ApolloProvider>
-)
+class App extends Component {
+  render () {
+    return (
+      <ApolloProvider client={client}>
+        <div className='app'>
+          <LoginForm />
+          <RegisterForm />
+          <ul><Schema /></ul>
+        </div>
+      </ApolloProvider>
+    )
+  }
+}
 
 export default App
