@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Mutation } from 'react-apollo'
+import { CREATE_USER } from './queries'
 
 class RegisterForm extends Component {
   constructor () {
@@ -50,44 +52,57 @@ class RegisterForm extends Component {
   render () {
     return (
       <React.Fragment>
-        <div className='loginForm'>
-          <div className='loginRow'>
-            <label>Email</label>
-            <input
-              className='signin_input'
-              type='text'
-              onChange={event => this.updateEmail(event.target.value)} />
-          </div>
+        <Mutation mutation={CREATE_USER}>
+          {(createUser) => (
+            <div className='loginForm'>
+              <div className='loginRow'>
+                <label>Email</label>
+                <input
+                  className='signin_input'
+                  type='text'
+                  onChange={event => this.updateEmail(event.target.value)} />
+              </div>
 
-          <div className='loginRow'>
-            <label>Username</label>
-            <input
-              className='signin_input'
-              type='text'
-              onChange={event => this.updateUsername(event.target.value)} />
-          </div>
+              <div className='loginRow'>
+                <label>Username</label>
+                <input
+                  className='signin_input'
+                  type='text'
+                  onChange={event => this.updateUsername(event.target.value)} />
+              </div>
 
-          <div className='loginRow'>
-            <label>Password</label>
-            <input
-              className='signin_input'
-              type='password'
-              onChange={event => this.updatePassword(event.target.value)} />
-          </div>
+              <div className='loginRow'>
+                <label>Password</label>
+                <input
+                  className='signin_input'
+                  type='password'
+                  onChange={event => this.updatePassword(event.target.value)} />
+              </div>
 
-          <div className='loginRow'>
-            <label>Confirm Password</label>
-            <input
-              className='signin_input'
-              type='password'
-              onChange={event => this.updateConfirmation(event.target.value)} />
+              <div className='loginRow'>
+                <label>Confirm Password</label>
+                <input
+                  className='signin_input'
+                  type='password'
+                  onChange={event => this.updateConfirmation(event.target.value)} />
 
-          </div>
+              </div>
 
-          <a className='buttonSignIn' onClick={e => this.sendRegisterData(e)}>Register</a>
-          <p>Already have an account? <a className='switch' onClick={() => this.props.setLogin()}>Login</a> </p>
+              <a className='buttonSignIn' onClick={e => {
+                console.log(this.state.email)
+                createUser({ variables: {
+                  email: this.state.email,
+                  username: this.state.username,
+                  password: this.state.password
+                } })
+                  .then(data => console.log(data))
+              }} >Register</a>
+              <p>Already have an account? <a className='switch' onClick={() => this.props.setLogin()}>Login</a> </p>
 
-        </div>
+            </div>
+          )
+          }
+        </Mutation>
 
       </React.Fragment>
 
