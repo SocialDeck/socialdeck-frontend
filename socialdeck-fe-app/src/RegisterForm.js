@@ -31,15 +31,6 @@ class RegisterForm extends Component {
     })
   }
 
-  clearForm () {
-    this.setState({
-      username: '',
-      password: '',
-      confirmation: '',
-      email: ''
-    })
-  }
-
   sendRegisterData (e) {
     let email = this.state.email
     let username = this.state.username
@@ -69,7 +60,6 @@ class RegisterForm extends Component {
                 <input
                   className='signin_input'
                   type='text'
-                  defaultValue={this.state.email}
                   onChange={event => this.updateEmail(event.target.value)} />
               </div>
 
@@ -105,7 +95,6 @@ class RegisterForm extends Component {
                   password: this.state.password
                 } })
                   .then(data => console.log(data))
-                this.clearForm()
               }} >Register</a>
               <p>Already have an account? <a className='switch' onClick={() => this.props.setLogin()}>Login</a> </p>
 

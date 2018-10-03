@@ -8,6 +8,7 @@ import { GET_SCHEMA } from './queries'
 
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
+import Contacts from './Contacts'
 
 const Schema = () => (
   <Query
@@ -36,6 +37,7 @@ class App extends Component {
           <LoginForm />
           <RegisterForm />
           <ul><Schema /></ul>
+          <ul><Contacts /></ul>
         </div>
       </ApolloProvider>
     )

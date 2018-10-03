@@ -18,3 +18,39 @@ mutation createUser($email: String!, $username: String!, $password: String!) {
   }
 }
 `
+
+export const LOGIN_USER = gql`
+mutation login($username: String!, $password: String!) {
+  login(user: {username: $username, password: $password}) {
+    token
+  }
+}
+`
+
+export const GET_CONTACTS = gql`
+{
+  contacts {
+    name
+    displayName
+    number
+    email
+    address {
+      address1
+      address2
+      city
+      state
+      postalCode
+    }
+    personName
+    verified
+  }
+}
+`
+
+export const GET_USERS = gql`
+{
+  users{
+    username
+  }
+}
+`
