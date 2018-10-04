@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { CREATE_USER } from './queries'
+import { Link } from '@reach/router'
 
 class RegisterForm extends Component {
   constructor () {
@@ -96,7 +97,7 @@ class RegisterForm extends Component {
                 } })
                   .then(data => console.log(data))
               }} >Register</a>
-              <p>Already have an account? <a className='switch' onClick={() => this.props.setLogin()}>Login</a> </p>
+              <p>Already have an account? <Link to='/'>Login</Link> </p>
 
             </div>
           )

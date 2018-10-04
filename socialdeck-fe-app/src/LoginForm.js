@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-
+import { Link } from '@reach/router'
 import { Mutation } from 'react-apollo'
 import { LOGIN_USER } from './queries'
 
@@ -52,7 +52,7 @@ class LoginForm extends Component {
                 } })
                   .then(data => console.log(data))
               }}>Sign In</a>
-              <p>Don't have an account? <a className='switch' onClick={() => this.props.setRegister()}>Register</a> </p>
+              <p>Don't have an account? <Link to='register'>Register</Link></p>
 
             </div>
           )
