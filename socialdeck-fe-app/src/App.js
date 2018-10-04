@@ -3,28 +3,12 @@ import './App.css'
 
 import ApolloClient from 'apollo-boost'
 
-import { ApolloProvider, Query } from 'react-apollo'
-import { GET_SCHEMA } from './queries'
+import { ApolloProvider } from 'react-apollo'
 
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import Contacts from './Contacts'
-
-const Schema = () => (
-  <Query
-    query={GET_SCHEMA}
-  >
-    {({ loading, error, data }) => {
-      if (loading) return <p>Loading...</p>
-      if (error) return <p>Error :(</p>
-
-      return data.__schema.types.map((type, idx) => (
-        <li key={idx} >{type.name}</li>
-      ))
-    }}
-  </Query>
-)
-
+import Card from './Card'
 const client = new ApolloClient({
   uri: 'https://socialdeck.herokuapp.com/graphql'
 })
@@ -36,8 +20,8 @@ class App extends Component {
         <div className='app'>
           <LoginForm />
           <RegisterForm />
-          <ul><Schema /></ul>
-          <ul><Contacts /></ul>
+          <Card />
+          <div className='contactsLinks'><Contacts /></div>
         </div>
       </ApolloProvider>
     )

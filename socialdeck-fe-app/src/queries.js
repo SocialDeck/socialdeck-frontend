@@ -29,11 +29,24 @@ mutation login($username: String!, $password: String!) {
 
 export const GET_CONTACTS = gql`
 {
-  contacts {
+  contacts(token: "tFCUHc1TXkdZ4hK2FxiYBh75") {
+    id
+    user {
+      id
+      username
+      email
+      number
+    }
+    author {
+      id
+      username
+      email
+      number
+    }
     name
     displayName
-    number
-    email
+    personName
+    businessName
     address {
       address1
       address2
@@ -41,12 +54,55 @@ export const GET_CONTACTS = gql`
       state
       postalCode
     }
-    personName
+    number
+    email
+    birthDate
+    twitter
+    linkedIn
+    facebook
+    instagram
     verified
   }
 }
 `
-
+export const GET_CARD = gql`
+{
+  card(token: "tFCUHc1TXkdZ4hK2FxiYBh75", id:12) {
+    id
+    user {
+      id
+      username
+      email
+      number
+    }
+    author {
+      id
+      username
+      email
+      number
+    }
+    name
+    displayName
+    personName
+    businessName
+    address {
+      address1
+      address2
+      city
+      state
+      postalCode
+    }
+    number
+    email
+    birthDate
+    twitter
+    linkedIn
+    facebook
+    instagram
+    verified
+  }
+}
+`
 export const GET_USERS = gql`
 {
   users{

@@ -1,12 +1,32 @@
 body {
   background-color: #D0CCD0;
+  height: 100vh;
+  /* overflow-y: scroll; */
 }
-
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+  width: 12px;
+}
+::-webkit-scrollbar:horizontal {
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+  border: 2px solid #ffffff;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #ffffff;
+}
 .loginForm {
   display: flex;
   flex-direction: column;
   padding: 3vh;
-  margin: 1vh;
+  margin: 0 auto;
+  max-width: 400px;
   border: 1px solid red;
   border-radius: 15px;
 }
@@ -14,10 +34,23 @@ body {
 .loginRow {
   margin: 1vh;
   padding: 1vh;
+  display: flex;
+  flex-direction: column;
 }
  .buttonSignIn {
    margin: 1vh;
    padding: 1vh;
    border: 1px solid red;
    text-align: center;
+ }
+
+ .contactsLinks {
+   list-style: none;
+   display: flex;
+   flex-direction: column;
+ }
+
+ .contactsItem {
+    border-bottom: 1px solid red;
+    padding: 1vh;
  }
