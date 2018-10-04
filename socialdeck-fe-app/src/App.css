@@ -1,5 +1,5 @@
 body {
-  background-color: #D0CCD0;
+  background-color: #FAFAFA;
   height: 100vh;
   /* overflow-y: scroll; */
 }
@@ -18,8 +18,7 @@ body {
   border: 2px solid #ffffff;
 }
 ::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #fafafa;
 }
 .loginForm {
   display: flex;
@@ -27,7 +26,7 @@ body {
   padding: 3vh;
   margin: 0 auto;
   max-width: 400px;
-  border: 1px solid red;
+  border: 1px solid black;
   border-radius: 15px;
 }
 
@@ -37,10 +36,15 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.loginRow input {
+border: 1px solid black;
+}
+
  .buttonSignIn {
    margin: 1vh;
    padding: 1vh;
-   border: 1px solid red;
+   border: 1px solid black;
    text-align: center;
  }
 
@@ -51,7 +55,7 @@ body {
  }
 
  .contactsItem {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid black;
     padding: 1vh;
  }
 
@@ -59,6 +63,14 @@ body {
   background-color: #F5F5F5;
   padding: 2vh;
   margin: 2vh;
-  border: 1px solid red;
+  border: 1px solid black;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.address {
+  display: flex;
+}
+
+.cardIcon {
+  margin: 10px;
 }

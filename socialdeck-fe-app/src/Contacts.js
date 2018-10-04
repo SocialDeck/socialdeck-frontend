@@ -15,7 +15,7 @@ class Contacts extends Component {
           return data.users.map((user, idx) => (
             <a key={idx} className='contactsItem'
               onClick={() => console.log('open app to card view for', user.username)}>
-              {user.username}</a>
+              <i className='fas fa-address-card' /> {user.username}</a>
           ))
         }}
       </Query>
