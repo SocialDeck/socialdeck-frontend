@@ -6,6 +6,7 @@ import RegisterForm from './RegisterForm'
 import Contacts from './Contacts'
 import Card from './Card'
 import ExampleCard from './ExampleCard'
+import NewContact from './NewContact'
 import Home from './Home'
 
 class App extends Component {
@@ -42,6 +43,7 @@ class App extends Component {
             <Contacts path='contacts' username={this.state.username} token={this.state.token} />
             <Card path='/contacts/:cardId' />
             <ExampleCard path='/contacts/example-card' />
+            <NewContact path='/contacts/new-contact' />
           </Home>
 
         </Router>

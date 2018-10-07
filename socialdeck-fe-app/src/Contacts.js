@@ -8,6 +8,9 @@ class Contacts extends Component {
     return (
       <div className='contactsLinks'>
         <h2>{this.props.username}'s Contacts</h2>
+        <Link to='new-contact'>New Contact</Link>
+        <Link to='/my-cards'>My Cards</Link>
+        <Link to='connections'>Connections</Link>
         <Query
           query={GET_USERS}
         >
