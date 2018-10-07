@@ -25,10 +25,14 @@ class LoginForm extends Component {
     console.log(e, 'you will send some data via GraphQL Magic!')
   }
 
+  logCache (cache, { data }) {
+    console.log(cache, data)
+  }
+
   render () {
     return (
       <React.Fragment>
-        <Mutation mutation={LOGIN_USER}>
+        <Mutation mutation={LOGIN_USER} update={this.logCache}>
           {(login) => (
             <div className='loginForm'>
               <div className='loginRow'>
@@ -50,7 +54,7 @@ class LoginForm extends Component {
                   username: this.state.username,
                   password: this.state.password
                 } })
-                  .then(data => console.log(data))
+                  .then(data => console.log(data.data.login.token))
               }}>Sign In</a>
               <p>Don't have an account? <Link to='register'>Register</Link></p>
 
