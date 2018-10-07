@@ -28,8 +28,9 @@ mutation login($username: String!, $password: String!) {
 `
 
 export const GET_CONTACTS = gql`
+query contacts($token: String!)
 {
-  contacts(token: "tFCUHc1TXkdZ4hK2FxiYBh75") {
+  contacts(token: $token) {
     id
     user {
       id

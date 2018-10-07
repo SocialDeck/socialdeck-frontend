@@ -54,7 +54,12 @@ class LoginForm extends Component {
                   username: this.state.username,
                   password: this.state.password
                 } })
-                  .then(data => console.log(data.data.login.token))
+                  .then(data => data.data.login)
+                  .then(data => {
+                    window.localStorage.setItem('token', data.token)
+                    window.localStorage.setItem('username', this.state.username)
+                    this.props.setUser(data.token, this.state.username)
+                  })
               }}>Sign In</a>
               <p>Don't have an account? <Link to='register'>Register</Link></p>
 

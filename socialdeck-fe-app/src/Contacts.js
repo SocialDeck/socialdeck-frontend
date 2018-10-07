@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
+import { Link } from '@reach/router'
 import { GET_USERS } from './queries'
 
 class Contacts extends Component {
   render () {
     return (
       <div className='contactsLinks'>
+        <h2>{this.props.username}'s Contacts</h2>
         <Query
           query={GET_USERS}
         >
@@ -14,9 +16,7 @@ class Contacts extends Component {
             if (error) return <p>Error :(</p>
 
             return data.users.map((user, idx) => (
-              <a key={idx} className='contactsItem'
-                onClick={() => console.log('open app to card view for', user.username)}>
-                <i className='fas fa-address-card' /> {user.username}</a>
+              <Link to='example-card' key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {user.username}</Link>
             ))
           }
 
