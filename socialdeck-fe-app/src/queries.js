@@ -28,8 +28,9 @@ mutation login($username: String!, $password: String!) {
 `
 
 export const GET_CONTACTS = gql`
+query contacts($token: String!)
 {
-  contacts(token: "tFCUHc1TXkdZ4hK2FxiYBh75") {
+  contacts(token: $token) {
     id
     user {
       id
@@ -66,8 +67,49 @@ export const GET_CONTACTS = gql`
 }
 `
 export const GET_CARD = gql`
+query card($token: String!, $id: ID!)
 {
-  card(token: "tFCUHc1TXkdZ4hK2FxiYBh75", id:12) {
+  card(token: $token, id: $id) {
+    id
+    user {
+      id
+      username
+      email
+      number
+    }
+    author {
+      id
+      username
+      email
+      number
+    }
+    name
+    displayName
+    personName
+    businessName
+    address {
+      address1
+      address2
+      city
+      state
+      postalCode
+    }
+    number
+    email
+    birthDate
+    twitter
+    linkedIn
+    facebook
+    instagram
+    verified
+  }
+}
+`
+
+export const GET_MY_CARDS = gql`
+query ownedCards($token: String!)
+{
+  ownedCards(token: $token) {
     id
     user {
       id

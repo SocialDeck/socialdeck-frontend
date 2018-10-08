@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-
+import { Link, navigate } from '@reach/router'
 import { Mutation } from 'react-apollo'
 import { LOGIN_USER } from './queries'
 
@@ -25,10 +25,14 @@ class LoginForm extends Component {
     console.log(e, 'you will send some data via GraphQL Magic!')
   }
 
+  logCache (cache, { data }) {
+    console.log(cache, data)
+  }
+
   render () {
     return (
       <React.Fragment>
-        <Mutation mutation={LOGIN_USER}>
+        <Mutation mutation={LOGIN_USER} update={this.logCache}>
           {(login) => (
             <div className='loginForm'>
               <div className='loginRow'>
@@ -45,14 +49,20 @@ class LoginForm extends Component {
                   type='password'
                   onChange={event => this.updatePassword(event.target.value)} />
               </div>
-              <a className='buttonSignIn' onClick={e => {
-                login({ variables: {
+              <a className='buttonSignIn' onClick={async e => {
+                await login({ variables: {
                   username: this.state.username,
                   password: this.state.password
                 } })
-                  .then(data => console.log(data))
+                  .then(data => data.data.login)
+                  .then(data => {
+                    window.localStorage.setItem('token', data.token)
+                    window.localStorage.setItem('username', this.state.username)
+                    this.props.setUser(data.token, this.state.username)
+                    navigate('/contacts')
+                  })
               }}>Sign In</a>
-              <p>Don't have an account? <a className='switch' onClick={() => this.props.setRegister()}>Register</a> </p>
+              <p>Don't have an account? <Link to='/register'>Register</Link></p>
 
             </div>
           )
