@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { Link } from '@reach/router'
-import { GET_USERS, GET_CARD, GET_CONTACTS } from './queries'
+import { GET_CONTACTS } from './queries'
 
 class Contacts extends Component {
   render () {
@@ -22,7 +22,7 @@ class Contacts extends Component {
             if (error) return <p>Error :(</p>
 
             return data.contacts.map((contact, idx) => (
-              <Link to='example-card' key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {contact.personName}</Link>
+              <Link to={contact.id} key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {contact.personName}</Link>
             ))
           }
 

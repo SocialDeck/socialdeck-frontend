@@ -67,8 +67,49 @@ query contacts($token: String!)
 }
 `
 export const GET_CARD = gql`
+query card($token: String!, $id: ID!)
 {
-  card(token: "tFCUHc1TXkdZ4hK2FxiYBh75", id:12) {
+  card(token: $token, id: $id) {
+    id
+    user {
+      id
+      username
+      email
+      number
+    }
+    author {
+      id
+      username
+      email
+      number
+    }
+    name
+    displayName
+    personName
+    businessName
+    address {
+      address1
+      address2
+      city
+      state
+      postalCode
+    }
+    number
+    email
+    birthDate
+    twitter
+    linkedIn
+    facebook
+    instagram
+    verified
+  }
+}
+`
+
+export const GET_MY_CARDS = gql`
+query ownedCards($token: String!)
+{
+  ownedCards(token: $token) {
     id
     user {
       id

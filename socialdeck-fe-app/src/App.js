@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Router } from '@reach/router'
+import { Router, Match } from '@reach/router'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import Contacts from './Contacts'
@@ -43,6 +43,15 @@ class App extends Component {
             <RegisterForm path='register' />
 
             <Contacts path='contacts' username={this.state.username} token={this.state.token} />
+            <Match path='/contacts/:cardId'>
+              {props =>
+                props.match ? (
+                  <Card cardId={props.match.cardId} />
+                ) : (
+                  <div>Uncool</div>
+                )
+              }
+            </Match>
             <Card path='/contacts/:cardId' />
             <MyCards path='/my-cards' />
             <ExampleCard path='/contacts/example-card' />
