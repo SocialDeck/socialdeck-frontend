@@ -48,6 +48,11 @@ border: 1px solid black;
    text-align: center;
  }
 
+ .contacts-nav {
+   display: flex;
+   justify-content: space-around;
+ }
+
  .contactsLinks {
    list-style: none;
    display: flex;

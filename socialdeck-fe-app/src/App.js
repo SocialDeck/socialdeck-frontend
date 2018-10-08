@@ -5,8 +5,10 @@ import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import Contacts from './Contacts'
 import Card from './Card'
+import MyCards from './MyCards'
 import ExampleCard from './ExampleCard'
 import NewContact from './NewContact'
+import Connections from './Connections'
 import Home from './Home'
 
 class App extends Component {
@@ -42,8 +44,10 @@ class App extends Component {
 
             <Contacts path='contacts' username={this.state.username} token={this.state.token} />
             <Card path='/contacts/:cardId' />
+            <MyCards path='/my-cards' />
             <ExampleCard path='/contacts/example-card' />
             <NewContact path='/contacts/new-contact' />
+            <Connections path='/contacts/connections' />
           </Home>
 
         </Router>
