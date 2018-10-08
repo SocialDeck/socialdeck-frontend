@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
-import { Link } from '@reach/router'
+import { Link, Redirect } from '@reach/router'
 import { GET_MY_CARDS } from './queries'
 
 class MyCards extends Component {
   render () {
+    const token = window.localStorage.getItem('token')
     return (
       <React.Fragment>
         <Link to='/contacts'>Contacts List</Link>
-        <Query
+        {token ? <Query
           query={GET_MY_CARDS} variables={{ token: window.localStorage.getItem('token') }}
         >
           {({ loading, error, data }) => {
@@ -36,6 +37,8 @@ class MyCards extends Component {
           }
           }
         </Query>
+          : <Redirect to='/login' noThrow />
+        }
 
         <div>CREATE NEW CARD</div>
         <div className='card'>

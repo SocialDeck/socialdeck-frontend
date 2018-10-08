@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { Link } from '@reach/router'
+import { Link, navigate } from '@reach/router'
 import { Mutation } from 'react-apollo'
 import { LOGIN_USER } from './queries'
 
@@ -60,8 +60,9 @@ class LoginForm extends Component {
                     window.localStorage.setItem('username', this.state.username)
                     this.props.setUser(data.token, this.state.username)
                   })
+                  .then(navigate('/contacts'))
               }}>Sign In</a>
-              <p>Don't have an account? <Link to='register'>Register</Link></p>
+              <p>Don't have an account? <Link to='/register'>Register</Link></p>
 
             </div>
           )

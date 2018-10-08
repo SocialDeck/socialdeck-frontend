@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
-import { Link } from '@reach/router'
+import { Link, Redirect } from '@reach/router'
 import { GET_CARD } from './queries'
 
 class Card extends Component {
   render () {
-    console.log(this.props.cardId)
-    return (
-      <Query
+    const token = window.localStorage.getItem('token')
+    return <React.Fragment>{token
+      ? <Query
         query={GET_CARD} variables={{ token: window.localStorage.getItem('token'), id: this.props.cardId }}
       >
         {({ loading, error, data }) => {
@@ -35,7 +35,10 @@ class Card extends Component {
           </React.Fragment>
         }}
       </Query>
-    )
+      : <Redirect to='/login' noThrow />
+    }
+
+    </React.Fragment>
   }
 }
 export default Card

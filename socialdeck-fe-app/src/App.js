@@ -25,6 +25,7 @@ class App extends Component {
       this.state.username = username
     }
     this.setUser = this.setUser.bind(this)
+    this.logOut = this.logOut.bind(this)
   }
 
   setUser (token, username) {
@@ -34,11 +35,19 @@ class App extends Component {
     })
   }
 
+  logOut () {
+    window.localStorage.clear()
+    this.setState({
+      token: null,
+      username: null
+    })
+  }
+
   render () {
     return (
       <div className='app'>
         <Router>
-          <Home path='/'>
+          <Home path='/' logOut={this.logOut}>
             <LoginForm path='login' setUser={this.setUser} />
             <RegisterForm path='register' />
 
@@ -60,6 +69,20 @@ class App extends Component {
           </Home>
 
         </Router>
+        {/* <Query
+          query={GET_USERS}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>
+            if (error) return <p>Error :(</p>
+
+            return data.users.map((user, idx) => (
+              <Link to='example-card' key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {user.username}</Link>
+            ))
+          }
+
+          }
+        </Query> */}
       </div>
     )
   }
