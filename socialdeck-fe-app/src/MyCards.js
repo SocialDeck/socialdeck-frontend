@@ -5,6 +5,25 @@ import { GET_MY_CARDS } from './queries'
 import CardInfo from './CardInfo'
 
 class MyCards extends Component {
+  constructor () {
+    super()
+    this.state = {
+      newCard: false
+    }
+  }
+
+  startNewCard () {
+    this.setState({
+      newCard: true
+    })
+  }
+
+  addNewCard () {
+    this.setState({
+      newCard: false
+    })
+  }
+
   render () {
     const token = window.localStorage.getItem('token')
     return (
@@ -27,23 +46,36 @@ class MyCards extends Component {
         </Query>
           : <Redirect to='/login' noThrow />
         }
+        {!this.state.newCard
+          ? <button onClick={() => {
+            console.log('add my card to GraphQL for storage')
+            this.startNewCard()
+          }}>Add New Card</button>
+          : <div className='card'>
+            <div className='cardLine'><i className='fas fa-user-circle cardIcon' /><input type='text' defaultValue='name' /></div>
+            <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' defaultValue='business name' /></div>
+            <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' defaultValue='phone number' /></div>
+            <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input type='text' defaultValue='email' /></div>
 
-        <div>CREATE NEW CARD</div>
-        <div className='card'>
-          <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> <input type='text' defaultValue='Name' /></div>
-          <div className='cardLine'><i className='fas fa-briefcase cardIcon' /><input type='text' defaultValue='Business' /></div>
-          <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' defaultValue='999-999-9999' /></div>
-          <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input type='text' defaultValue='example@example.com' /></div>
-          <div className='address'>
-            <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
-            <div className='addressBlock'>
-              <div className='addressLine line1'><input type='text' defaultValue='Address Line 1' /></div>
-              <div className='addressLine line2'><input type='text' defaultValue='Address Line 2' /></div>
-              <div className='addressLine line3'> <input type='text' defaultValue='City' />, <input type='text' defaultValue='State' /> <input type='text' defaultValue='ZipCode' /></div>
+            <div className='address'>
+              <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
+              <div className='addressBlock'>
+                <div className='addressLine line1'> <input type='text' defaultValue='address line 1' /></div>
+                <div className='addressLine line2'> <input type='text' defaultValue='address line 2' /></div>
+                <div className='addressLine line3'>
+                  <input type='text' defaultValue='city' />,
+                  <input type='text' defaultValue='state' />
+                  <input type='text' defaultValue='zip code' />
+                </div>
+              </div>
             </div>
+
+            <button onClick={() => {
+              console.log('add new card to GraphQL for distribution')
+              this.addNewCard()
+            }}>Add</button>
           </div>
-        </div>
-        <button onClick={() => console.log('add my card to GraphQL for storage')}>Add New Card</button>
+        }
       </React.Fragment>
 
     )
