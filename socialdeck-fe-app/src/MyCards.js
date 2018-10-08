@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { Link, Redirect } from '@reach/router'
 import { GET_MY_CARDS } from './queries'
+import CardInfo from './CardInfo'
 
 class MyCards extends Component {
   render () {
@@ -18,20 +19,7 @@ class MyCards extends Component {
 
             return data.ownedCards.map((card, idx) => (
               <div key={idx} className='card'>
-                {card.personName && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {card.personName}</div>}
-                {card.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {card.businessName}</div>}
-                {card.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {card.number}</div>}
-                {card.email && <div className='cardLine'><i className='fas fa-envelope cardIcon' /> {card.email}</div>}
-                {card.address &&
-                <div className='address'>
-                  <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
-                  <div className='addressBlock'>
-                    <div className='addressLine line1'> {card.address.address1}</div>
-                    <div className='addressLine line2'> {card.address.address2}</div>
-                    <div className='addressLine line3'> {card.address.city}, {card.address.state} {card.address.postalCode}</div>
-                  </div>
-                </div>
-                }
+                <CardInfo info={card} />
               </div>
             ))
           }
