@@ -49,8 +49,8 @@ class LoginForm extends Component {
                   type='password'
                   onChange={event => this.updatePassword(event.target.value)} />
               </div>
-              <a className='buttonSignIn' onClick={e => {
-                login({ variables: {
+              <a className='buttonSignIn' onClick={async e => {
+                await login({ variables: {
                   username: this.state.username,
                   password: this.state.password
                 } })
@@ -59,8 +59,8 @@ class LoginForm extends Component {
                     window.localStorage.setItem('token', data.token)
                     window.localStorage.setItem('username', this.state.username)
                     this.props.setUser(data.token, this.state.username)
+                    navigate('/contacts')
                   })
-                  .then(navigate('/contacts'))
               }}>Sign In</a>
               <p>Don't have an account? <Link to='/register'>Register</Link></p>
 

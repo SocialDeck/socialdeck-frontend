@@ -13,7 +13,6 @@ class Card extends Component {
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error :(</p>
-          console.log(data.card.address)
           return <React.Fragment>
             <Link to='/contacts'>Contacts List</Link>
             <div className='card'>
