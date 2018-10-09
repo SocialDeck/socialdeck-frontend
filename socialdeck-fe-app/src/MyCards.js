@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Query } from 'react-apollo'
-import { Link, Redirect } from '@reach/router'
-import { GET_MY_CARDS } from './queries'
+import { Query, Mutation } from 'react-apollo'
+import { Link, Redirect, navigate } from '@reach/router'
+import { GET_MY_CARDS, CREATE_CARD } from './queries'
 import CardInfo from './CardInfo'
 
 class MyCards extends Component {
@@ -51,30 +51,46 @@ class MyCards extends Component {
             console.log('add my card to GraphQL for storage')
             this.startNewCard()
           }}>Add New Card</button>
-          : <div className='card'>
-            <div className='cardLine'><i className='fas fa-user-circle cardIcon' /><input type='text' defaultValue='name' /></div>
-            <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' defaultValue='business name' /></div>
-            <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' defaultValue='phone number' /></div>
-            <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input type='text' defaultValue='email' /></div>
+          : <Mutation mutation={CREATE_CARD} update={this.logCache}>
+            {(createCard) => (
+              <div className='card'>
+                <div className='cardLine'><i className='fas fa-user-circle cardIcon' /><input type='text' defaultValue='name' /></div>
+                <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' defaultValue='business name' /></div>
+                <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' defaultValue='phone number' /></div>
+                <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input type='text' defaultValue='email' /></div>
 
-            <div className='address'>
-              <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
-              <div className='addressBlock'>
-                <div className='addressLine line1'> <input type='text' defaultValue='address line 1' /></div>
-                <div className='addressLine line2'> <input type='text' defaultValue='address line 2' /></div>
-                <div className='addressLine line3'>
-                  <input type='text' defaultValue='city' />,
-                  <input type='text' defaultValue='state' />
-                  <input type='text' defaultValue='zip code' />
+                <div className='address'>
+                  <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
+                  <div className='addressBlock'>
+                    <div className='addressLine line1'> <input type='text' defaultValue='address line 1' /></div>
+                    <div className='addressLine line2'> <input type='text' defaultValue='address line 2' /></div>
+                    <div className='addressLine line3'>
+                      <input type='text' defaultValue='city' />,
+                      <input type='text' defaultValue='state' />
+                      <input type='text' defaultValue='zip code' />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <button onClick={() => {
-              console.log('add new card to GraphQL for distribution')
-              this.addNewCard()
-            }}>Add</button>
-          </div>
+                <button onClick={async e => {
+                  await createCard({ variables: {
+                    username: this.state.username,
+                    password: this.state.password
+                  } })
+                    .then(data => data.data.login)
+                    .then(data => {
+                      window.localStorage.setItem('token', data.token)
+                      window.localStorage.setItem('username', this.state.username)
+                      this.props.setUser(data.token, this.state.username)
+                      navigate('/my-cards')
+                    })
+                }}>Add</button>
+              </div>
+
+            )
+            }
+          </Mutation>
+
         }
       </React.Fragment>
 
