@@ -232,3 +232,9 @@ export const GET_USERS = gql`
   }
 }
 `
+
+export const SHARE_QR = gql`
+query shareCard($token: String!, $id: ID!)
+{ shareCard(token:$token, id:$id)
+}
+`

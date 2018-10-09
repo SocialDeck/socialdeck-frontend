@@ -23,7 +23,7 @@ class Contacts extends Component {
             if (error) return <p>Error :(</p>
 
             return data.contacts.map((contact, idx) => (
-              <Link to={contact.cardToken} key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {contact.name}{contact.cardToken}</Link>
+              <Link to={contact.cardToken} key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {contact.name}</Link>
             ))
           }
 

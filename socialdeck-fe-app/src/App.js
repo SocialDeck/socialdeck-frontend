@@ -9,6 +9,7 @@ import MyCards from './MyCards'
 import ExampleCard from './ExampleCard'
 import NewContact from './NewContact'
 import Connections from './Connections'
+import ShareQR from './ShareQR'
 import Home from './Home'
 
 class App extends Component {
@@ -63,6 +64,16 @@ class App extends Component {
             </Match>
             <Card path='/contacts/:cardToken' />
             <MyCards path='/my-cards' />
+            <Match path='/my-cards/:cardId'>
+              {props =>
+                props.match ? (
+                  <ShareQR cardId={props.match.cardId} />
+                ) : (
+                  <div>Uncool</div>
+                )
+              }
+            </Match>
+            <ShareQR path='/my-cards/:cardId' />
             <ExampleCard path='/contacts/example-card' />
             <NewContact path='/contacts/new-contact' />
             <Connections path='/contacts/connections' />

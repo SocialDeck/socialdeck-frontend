@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import { UPDATE_CARD } from './queries'
+import { Link } from '@reach/router'
+import { UPDATE_CARD, DELETE_CARD } from './queries'
 
 class CardInfo extends Component {
   constructor () {
@@ -78,6 +79,18 @@ class CardInfo extends Component {
         <button onClick={() => {
           this.editOn(info)
         }}>Edit Card</button>
+        <Mutation mutation={DELETE_CARD}>
+          {(deleteCard) =>
+            <button onClick={() => {
+              deleteCard({ variables: {
+                token: token,
+                id: info.id
+              } })
+            }}>Delete Card</button>
+          }
+        </Mutation>
+        <Link to={info.id} >Share</Link>
+
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
         {(updateCard) => (
