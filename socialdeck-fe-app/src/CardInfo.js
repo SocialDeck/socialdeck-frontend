@@ -105,12 +105,12 @@ class CardInfo extends Component {
             <div className='address'>
               <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
               <div className='addressBlock'>
-                <div className='addressLine line1'> Address Line 1 <input type='text' onChange={(e) => this.updateState(e, 'address1')} defaultValue={info.address1} /></div>
-                <div className='addressLine line2'> Address Line 2 <input type='text' onChange={(e) => this.updateState(e, 'address2')} defaultValue={info.address2} /></div>
+                <div className='addressLine line1'> Address Line 1 <input type='text' onChange={(e) => this.updateState(e, 'address1')} defaultValue={info.address && info.address.address1} /></div>
+                <div className='addressLine line2'> Address Line 2 <input type='text' onChange={(e) => this.updateState(e, 'address2')} defaultValue={info.address && info.address.address2} /></div>
                 <div className='addressLine line3'>
-                City <input type='text' onChange={(e) => this.updateState(e, 'city')} defaultValue={info.city} />,
-                State <input type='text' onChange={(e) => this.updateState(e, 'state')} defaultValue={info.state} />
-                Zip <input type='text' onChange={(e) => this.updateState(e, 'postalCode')} defaultValue={info.postalCode} />
+                City <input type='text' onChange={(e) => this.updateState(e, 'city')} defaultValue={info.address && info.address.city} />,
+                State <input type='text' onChange={(e) => this.updateState(e, 'state')} defaultValue={info.address && info.address.state} />
+                Zip <input type='text' onChange={(e) => this.updateState(e, 'postalCode')} defaultValue={info.address && info.address.postalCode} />
                 </div>
               </div>
             </div>
