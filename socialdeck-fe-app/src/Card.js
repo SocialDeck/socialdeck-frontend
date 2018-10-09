@@ -8,7 +8,7 @@ class Card extends Component {
     const token = window.localStorage.getItem('token')
     return <React.Fragment>{token
       ? <Query
-        query={GET_CARD} variables={{ token: window.localStorage.getItem('token'), id: this.props.cardId }}
+        query={GET_CARD} variables={{ cardToken: this.props.cardToken }}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>
@@ -16,7 +16,7 @@ class Card extends Component {
           return <React.Fragment>
             <Link to='/contacts'>Contacts List</Link>
             <div className='card'>
-              {data.card.personName && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {data.card.personName}</div>}
+              {data.card.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {data.card.name}</div>}
               {data.card.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {data.card.businessName}</div>}
               {data.card.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {data.card.number}</div>}
               {data.card.email && <div className='cardLine'><i className='fas fa-envelope cardIcon' /> {data.card.email}</div>}

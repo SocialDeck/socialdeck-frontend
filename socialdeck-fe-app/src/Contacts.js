@@ -16,14 +16,14 @@ class Contacts extends Component {
         </div>
         <h2>Contacts</h2>
         <Query
-          query={GET_CONTACTS} variables={{ token: window.localStorage.getItem('token') }}
+          query={GET_CONTACTS} variables={{ token: token }}
         >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>
             if (error) return <p>Error :(</p>
 
             return data.contacts.map((contact, idx) => (
-              <Link to={contact.id} key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {contact.personName}</Link>
+              <Link to={contact.cardToken} key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {contact.name}</Link>
             ))
           }
 
