@@ -11,8 +11,8 @@ export const GET_SCHEMA = gql`
 `
 
 export const CREATE_USER = gql`
-mutation createUser($email: String!, $username: String!, $password: String!) {
-  createUser(email: $email, user: {username: $username, password: $password}) {
+mutation createUser($email: String!, $name: String!, $username: String!, $password: String!) {
+  createUser(email: $email, name: $name, user: {username: $username, password: $password}) {
     id
     username
   }
@@ -35,18 +35,15 @@ query contacts($token: String!)
     user {
       id
       username
-      email
-      number
     }
     author {
       id
       username
-      email
-      number
     }
-    name
+    cardToken(token: $token)
+    cardName
     displayName
-    personName
+    name
     businessName
     address {
       address1
@@ -67,25 +64,21 @@ query contacts($token: String!)
 }
 `
 export const GET_CARD = gql`
-query card($token: String!, $id: ID!)
+query card($cardToken: String!)
 {
-  card(token: $token, id: $id) {
+  card(cardToken: $cardToken) {
     id
     user {
       id
       username
-      email
-      number
     }
     author {
       id
       username
-      email
-      number
     }
-    name
+    cardName
     displayName
-    personName
+    name
     businessName
     address {
       address1
@@ -114,18 +107,14 @@ query ownedCards($token: String!)
     user {
       id
       username
-      email
-      number
     }
     author {
       id
       username
-      email
-      number
     }
-    name
+    cardName
     displayName
-    personName
+    name
     businessName
     address {
       address1
@@ -154,23 +143,19 @@ mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $display
     createCard(token:$token, owned:$owned, cardName:$cardName, displayName:$displayName, name:$name,
                number:$number, email:$email, address: {address1:$address1, address2:$address2, city: $city,
                state:$state, postalCode:$postalCode}, twitter:$twitter, facebook:$facebook, linkedIn:$linkedIn,
-               instagram:$intagram) {
+               instagram:$instagram) {
       id
       user {
         id
         username
-        email
-        number
       }
       author {
         id
         username
-        email
-        number
       }
-      name
+      cardName
       displayName
-      personName
+      name
       businessName
       address {
         address1

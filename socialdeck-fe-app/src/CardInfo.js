@@ -24,7 +24,9 @@ class CardInfo extends Component {
     const { info } = this.props
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
-        {info.personName && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.personName}</div>}
+        {info.displayName && <div className='cardLine'>{info.cardName}</div>}
+        {info.displayName && <div className='cardLine'>{info.displayName}</div>}
+        {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}
         {info.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {info.number}</div>}
         {info.email && <div className='cardLine'><i className='fas fa-envelope cardIcon' /> {info.email}</div>}
@@ -44,7 +46,9 @@ class CardInfo extends Component {
         }}>Edit Card</button>
       </React.Fragment>
       : <React.Fragment>
-        {info.personName && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /><input type='text' defaultValue={info.personName} /></div>}
+        {info.cardName && <div className='cardLine'><input type='text' defaultValue={info.cardName} />  </div>}
+        {info.displayName && <div className='cardLine'><input type='text' defaultValue={info.displayName} />  </div>}
+        {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /><input type='text' defaultValue={info.name} /></div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' defaultValue={info.businessName} /></div>}
         {info.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' defaultValue={info.number} /></div>}
         {info.email && <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input type='text' defaultValue={info.email} /></div>}

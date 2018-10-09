@@ -52,16 +52,16 @@ class App extends Component {
             <RegisterForm path='register' />
 
             <Contacts path='contacts' username={this.state.username} token={this.state.token} />
-            <Match path='/contacts/:cardId'>
+            <Match path='/contacts/:cardToken'>
               {props =>
                 props.match ? (
-                  <Card cardId={props.match.cardId} />
+                  <Card cardToken={props.match.cardToken} />
                 ) : (
                   <div>Uncool</div>
                 )
               }
             </Match>
-            <Card path='/contacts/:cardId' />
+            <Card path='/contacts/:cardToken' />
             <MyCards path='/my-cards' />
             <ExampleCard path='/contacts/example-card' />
             <NewContact path='/contacts/new-contact' />

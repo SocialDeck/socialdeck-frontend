@@ -54,6 +54,8 @@ class MyCards extends Component {
           : <Mutation mutation={CREATE_CARD} update={this.logCache}>
             {(createCard) => (
               <div className='card'>
+                <div className='cardLine'><input type='text' defaultValue='private card name' />  </div>
+                <div className='cardLine'><input type='text' defaultValue='public card/display name' />  </div>
                 <div className='cardLine'><i className='fas fa-user-circle cardIcon' /><input type='text' defaultValue='name' /></div>
                 <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' defaultValue='business name' /></div>
                 <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' defaultValue='phone number' /></div>
@@ -77,11 +79,7 @@ class MyCards extends Component {
                     username: this.state.username,
                     password: this.state.password
                   } })
-                    .then(data => data.data.login)
                     .then(data => {
-                      window.localStorage.setItem('token', data.token)
-                      window.localStorage.setItem('username', this.state.username)
-                      this.props.setUser(data.token, this.state.username)
                       navigate('/my-cards')
                     })
                 }}>Add</button>
