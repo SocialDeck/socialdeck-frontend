@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { Link, Redirect } from '@reach/router'
 import { GET_CONTACTS } from './queries'
-import { constant } from 'async'
 
 class Contacts extends Component {
   render () {
@@ -17,7 +16,7 @@ class Contacts extends Component {
         </div>
         <h2>Contacts</h2>
         <Query
-          query={GET_CONTACTS} variables={{ token: window.localStorage.getItem('token') }}
+          query={GET_CONTACTS} variables={{ token: token }}
         >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>

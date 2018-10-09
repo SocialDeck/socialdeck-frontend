@@ -5,7 +5,18 @@ class CardInfo extends Component {
   constructor () {
     super()
     this.state = {
-      isEditing: false
+      isEditing: false,
+      newCardName: '',
+      newDisplayName: '',
+      newName: '',
+      newBusinessName: '',
+      newNumber: '',
+      newEmail: '',
+      newAddressLine1: '',
+      newAddressLine2: '',
+      newAddressCity: '',
+      newAddressState: '',
+      newAddressPostalCode: ''
     }
   }
 
