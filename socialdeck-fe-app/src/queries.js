@@ -176,6 +176,46 @@ mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $display
   }
 `
 
+export const UPDATE_CARD = gql`
+mutation updateCard($token:String!, $id: ID!, $cardName: String, $displayName:String, $name:String,
+             $number:String, $address1: String, $address2: String, $city: String, $state: String,
+             $postalCode: String, $twitter:String, $facebook:String, $linkedIn:String,
+             $instagram:String) {
+         updateCard(token:$token, id: $id, cardName: $cardName, displayName:$displayName, name:$name,
+              number:$number, address: {address1: $address1, address2: $address2, city: $city, state: $state,
+              postalCode: $postalCode}, twitter:$twitter, facebook:$facebook, linkedIn:$linkedIn,
+              instagram:$instagram){
+    id
+    user {
+      id
+      username
+    }
+    author {
+      id
+      username
+    }
+    cardName
+    displayName
+    name
+    businessName
+    address {
+      address1
+      address2
+      city
+      state
+      postalCode
+    }
+    number
+    email
+    birthDate
+    twitter
+    linkedIn
+    facebook
+    instagram
+    verified
+  }
+}
+`
 export const DELETE_CARD = gql`
 mutation destroyCard($token:String!, $id:ID!){
   destroyCard(token:$token, id:$id)
