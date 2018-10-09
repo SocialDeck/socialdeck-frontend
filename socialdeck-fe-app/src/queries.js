@@ -112,6 +112,7 @@ query ownedCards($token: String!)
       id
       username
     }
+    cardToken(token: $token)
     cardName
     displayName
     name
