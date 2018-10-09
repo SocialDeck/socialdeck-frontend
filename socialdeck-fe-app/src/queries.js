@@ -176,6 +176,15 @@ mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $display
   }
 `
 
+export const DELETE_CARD = gql`
+mutation destroyCard($token:String!, $id:ID!){
+  destroyCard(token:$token, id:$id)
+  {
+    message
+  }
+}
+`
+
 export const GET_USERS = gql`
 {
   users{

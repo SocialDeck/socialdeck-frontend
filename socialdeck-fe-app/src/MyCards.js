@@ -119,6 +119,7 @@ class MyCards extends Component {
 
                   } })
                     .then(data => {
+                      this.addNewCard()
                       navigate('/my-cards')
                     })
                 }}>Add</button>
