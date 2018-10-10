@@ -60,6 +60,7 @@ query contacts($token: String!)
     facebook
     instagram
     verified
+    mobile
   }
 }
 `
