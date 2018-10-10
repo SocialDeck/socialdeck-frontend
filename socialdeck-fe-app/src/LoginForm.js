@@ -62,7 +62,7 @@ class LoginForm extends Component {
                     navigate('/contacts')
                   })
               }}>Sign In</a>
-              <p>Don't have an account? <Link to='/register'>Register</Link></p>
+              <p>Don't have an account? <Link className='formLink' to='/register'>Register</Link></p>
 
             </div>
           )

@@ -1,33 +1,40 @@
 body {
-  background-color: #FAFAFA;
+  background-color: #EDEDED;
   height: 100vh;
-  /* overflow-y: scroll; */
 }
-::-webkit-scrollbar {
-  -webkit-appearance: none;
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+  background-color: #274156;
+  color: #F5F5F5;
 }
-::-webkit-scrollbar:vertical {
-  width: 12px;
+
+.navLinks {
+  color: #F5F5F5;
+  text-decoration: none;
 }
-::-webkit-scrollbar:horizontal {
-  height: 12px;
+
+.topRow {
+  display: flex;
 }
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, .5);
-  border-radius: 10px;
-  border: 2px solid #ffffff;
+
+.topLogo {
+  margin-top: 7px;
+  max-width: 50px;
+  max-height: 50px;
 }
-::-webkit-scrollbar-track {
-  background-color: #fafafa;
-}
+
 .loginForm {
   display: flex;
   flex-direction: column;
-  padding: 3vh;
-  margin: 0 auto;
-  max-width: 400px;
+  background-color: #FAFAFA;
+  padding: 2vh;
+  margin: 2vh;
   border: 1px solid black;
-  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .loginRow {
@@ -48,10 +55,11 @@ border: 1px solid black;
    text-align: center;
  }
 
- .contacts-nav {
-   display: flex;
-   justify-content: space-around;
- }
+.formLink {
+  text-decoration: none;
+  color: #1C6E8C;
+  margin: 5px;
+}
 
  .contactsLinks {
    list-style: none;
@@ -85,3 +93,11 @@ border: 1px solid black;
 .qrWrapper {
   margin: 10px;
 }
+
+
+@media only screen and (max-device-width : 400px) {
+  .topRow {
+    width: 100vw;
+    justify-content: center;
+  }
+  }

@@ -49,7 +49,7 @@ class MyCards extends Component {
     const token = window.localStorage.getItem('token')
     return (
       <React.Fragment>
-        <Link to='/contacts'>Contacts List</Link>
+        <Link className='formLink' to='/contacts'>Contacts List</Link>
         {token ? <Query
           query={GET_MY_CARDS} variables={{ token: token }}
         >
@@ -68,10 +68,10 @@ class MyCards extends Component {
           : <Redirect to='/login' noThrow />
         }
         {!this.state.newCard
-          ? <button onClick={() => {
+          ? <a className='formLink' onClick={() => {
             console.log('add my card to GraphQL for storage')
             this.startNewCard()
-          }}>Add New Card</button>
+          }}>Add New Card</a>
           : <Mutation mutation={CREATE_CARD} update={this.logCache}>
             {(createCard) => (
               <div className='card'>
@@ -98,7 +98,7 @@ class MyCards extends Component {
                 <div className='cardLine'> Facebook <input type='text' onChange={(e) => this.updateState(e, 'facebook')} /></div>
                 <div className='cardLine'> LinkedIn <input type='text' onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
                 <div className='cardLine'> Instagram <input type='text' onChange={(e) => this.updateState(e, 'instagram')} /></div>
-                <button onClick={e => {
+                <a className='formLink' onClick={e => {
                   createCard({ variables: {
                     token: token,
                     owned: true,
@@ -122,7 +122,7 @@ class MyCards extends Component {
                       this.addNewCard()
                       navigate('/my-cards')
                     })
-                }}>Add</button>
+                }}>Add</a>
               </div>
 
             )

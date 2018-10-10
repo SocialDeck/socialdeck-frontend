@@ -8,12 +8,6 @@ class Contacts extends Component {
     const token = window.localStorage.getItem('token')
     return <React.Fragment>{ token
       ? <div className='contactsLinks'>
-
-        <div className='contacts-nav'>
-          <Link to='connections'>Connections</Link>
-          <Link to='/my-cards'>My Cards</Link>
-          <Link to='new-contact'>New Contact</Link>
-        </div>
         <h2>Contacts</h2>
         <Query
           query={GET_CONTACTS} variables={{ token: token }}
