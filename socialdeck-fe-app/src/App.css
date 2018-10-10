@@ -1,5 +1,5 @@
 body {
-  background-color: #FAFAFA;
+  background-color: #EDEDED;
   height: 100vh;
 }
 
@@ -30,11 +30,11 @@ body {
 .loginForm {
   display: flex;
   flex-direction: column;
-  padding: 3vh;
-  margin: 0 auto;
-  max-width: 400px;
+  background-color: #FAFAFA;
+  padding: 2vh;
+  margin: 2vh;
   border: 1px solid black;
-  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .loginRow {
@@ -54,6 +54,12 @@ border: 1px solid black;
    border: 1px solid black;
    text-align: center;
  }
+
+.formLink {
+  text-decoration: none;
+  color: #1C6E8C;
+  margin: 5px;
+}
 
  .contactsLinks {
    list-style: none;

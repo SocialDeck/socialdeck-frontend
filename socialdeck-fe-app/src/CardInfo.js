@@ -76,20 +76,20 @@ class CardInfo extends Component {
           </div>
         </div>
         }
-        <button onClick={() => {
+        <a className='formLink' onClick={() => {
           this.editOn(info)
-        }}>Edit Card</button>
+        }}>Edit Card</a>
         <Mutation mutation={DELETE_CARD}>
           {(deleteCard) =>
-            <button onClick={() => {
+            <a className='formLink' onClick={() => {
               deleteCard({ variables: {
                 token: token,
                 id: info.id
               } })
-            }}>Delete Card</button>
+            }}>Delete Card</a>
           }
         </Mutation>
-        <Link to={info.cardToken} >Share</Link>
+        <Link className='formLink' to={info.cardToken} >Share</Link>
 
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
