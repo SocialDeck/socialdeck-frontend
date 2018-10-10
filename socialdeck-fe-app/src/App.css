@@ -29,7 +29,6 @@ body {
 }
 
 
-
 .loginForm {
   display: flex;
   flex-direction: column;
@@ -64,6 +63,48 @@ border: 1px solid black;
    flex-direction: column;
  }
 
+ .list {
+   overflow-y: scroll;
+   display: flex;
+   flex-direction: column;
+   list-style: none;
+   color: #FBFCFF;
+   margin-left: -35px;
+ }
+
+ .list-item {
+   display:flex;
+   justify-content: space-between;
+   margin: 5px
+ }
+
+.list-item__center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.list-item__right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.list-item__right a {
+  font-size: 1.5rem;
+  padding: 5px;
+
+}
+
+.list-item__hidden {
+  color: #FBFCFF;
+  font-size: 1.5rem;
+  padding: 5px;
+}
+
+
  .contactsItem {
     text-decoration: none;
     color: black;
@@ -89,4 +130,25 @@ border: 1px solid black;
 
 .qrWrapper {
   margin: 10px;
+}
+
+
+.monogram {
+  color: #FBFCFF;
+  background-color: #1C6E8C;
+  width:40px;
+  height:40px;
+  line-height: 40px;
+  font-size: 35px;
+  text-align:center;
+  margin-right: 15px
+}
+
+.contact{
+  text-decoration: none;
+  color: #274156;
+}
+
+i {
+  color: #274156;
 }
