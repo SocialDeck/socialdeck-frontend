@@ -1,7 +1,6 @@
 body {
   background-color: #FAFAFA;
   height: 100vh;
-  /* overflow-y: scroll; */
 }
 
 .navigation {
@@ -27,8 +26,6 @@ body {
   max-width: 50px;
   max-height: 50px;
 }
-
-
 
 .loginForm {
   display: flex;
@@ -90,3 +87,11 @@ border: 1px solid black;
 .qrWrapper {
   margin: 10px;
 }
+
+
+@media only screen and (max-device-width : 400px) {
+  .topRow {
+    width: 100vw;
+    justify-content: center;
+  }
+  }
