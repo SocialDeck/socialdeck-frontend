@@ -10,10 +10,10 @@ class Home extends Component {
         <nav className='navigation'>
           <div className='topRow'>
             <h1>Social Deck</h1>
-            <img className='topLogo' src={logo} />
+            <img className='topLogo' src={logo} alt='logo' />
           </div>
 
-          { !token && <Link to='/login'>Login</Link>}
+          { !token && <Link className='navLinks' to='/login'>Login</Link>}
           {token && <React.Fragment>
             <Link className='navLinks'to='/contacts/connections'>Connections</Link>
             <Link className='navLinks'to='/my-cards'>My Cards</Link>

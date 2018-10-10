@@ -97,7 +97,7 @@ class RegisterForm extends Component {
                 } })
                   .then(data => console.log(data))
               }} >Register</a>
-              <p>Already have an account? <Link to='/login'>Login</Link> </p>
+              <p>Already have an account? <Link className='formLink' to='/login'>Login</Link> </p>
 
             </div>
           )
