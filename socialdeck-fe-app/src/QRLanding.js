@@ -81,105 +81,109 @@ class QRLanding extends Component {
           </React.Fragment>
         }}
       </Query>
-      {token && <React.Fragment>
+      {token ? <React.Fragment>
         <div>Welcome to Social Deck!</div>
         <Mutation mutation={ADD_CONNECTION}>
-          {(deleteCard) =>
+          {(createConnection) =>
             <button onClick={() => {
-              deleteCard({ variables: {
+              createConnection({ variables: {
                 token: token,
                 cardToken: this.props.cardToken
               } })
+                .then(data => console.log(data))
             }}>Connect</button>
           }
         </Mutation>
-      </React.Fragment>}
-      {!register && <Mutation mutation={LOGIN_USER} update={this.logCache}>
-        {(login) => (
-          <div className='loginForm'>
-            <div className='loginRow'>
-              <label htmlFor='username'>Username</label>
-              <input
-                id='username'
-                type='text'
-                onChange={event => this.updateUsername(event.target.value)} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='password'>Password</label>
-              <input
-                id='password'
-                type='password'
-                onChange={event => this.updatePassword(event.target.value)} />
-            </div>
-            <a className='buttonSignIn' onClick={async e => {
-              await login({ variables: {
-                username: this.state.username,
-                password: this.state.password
-              } })
-                .then(data => data.data.login)
-                .then(data => {
-                  window.localStorage.setItem('token', data.token)
-                  window.localStorage.setItem('username', this.state.username)
-                  this.setToken(data.token)
-                })
-            }}>Sign In</a>
-            <p>Don't have an account? <a onClick={() => this.setRegister()}>Register</a></p>
-
-          </div>
-        )
-        }
-      </Mutation>}
-      {register &&
-        <Mutation mutation={CREATE_USER}>
-          {(createUser) => (
-            <div className='loginForm'>
-              <div className='loginRow'>
-                <label>Email</label>
-                <input
-                  className='signin_input'
-                  type='text'
-                  onChange={event => this.updateEmail(event.target.value)} />
-              </div>
-
-              <div className='loginRow'>
-                <label>Username</label>
-                <input
-                  className='signin_input'
-                  type='text'
-                  onChange={event => this.updateUsername(event.target.value)} />
-              </div>
-
-              <div className='loginRow'>
-                <label>Password</label>
-                <input
-                  className='signin_input'
-                  type='password'
-                  onChange={event => this.updatePassword(event.target.value)} />
-              </div>
-
-              <div className='loginRow'>
-                <label>Confirm Password</label>
-                <input
-                  className='signin_input'
-                  type='password'
-                  onChange={event => this.updateConfirmation(event.target.value)} />
+      </React.Fragment>
+        : <React.Fragemnt>
+          {!register && <Mutation mutation={LOGIN_USER} update={this.logCache}>
+            {(login) => (
+              <div className='loginForm'>
+                <div className='loginRow'>
+                  <label htmlFor='username'>Username</label>
+                  <input
+                    id='username'
+                    type='text'
+                    onChange={event => this.updateUsername(event.target.value)} />
+                </div>
+                <div className='loginRow'>
+                  <label htmlFor='password'>Password</label>
+                  <input
+                    id='password'
+                    type='password'
+                    onChange={event => this.updatePassword(event.target.value)} />
+                </div>
+                <a className='buttonSignIn' onClick={async e => {
+                  await login({ variables: {
+                    username: this.state.username,
+                    password: this.state.password
+                  } })
+                    .then(data => data.data.login)
+                    .then(data => {
+                      window.localStorage.setItem('token', data.token)
+                      window.localStorage.setItem('username', this.state.username)
+                      this.setToken(data.token)
+                    })
+                }}>Sign In</a>
+                <p>Don't have an account? <a onClick={() => this.setRegister()}>Register</a></p>
 
               </div>
+            )
+            }
+          </Mutation>}
+          {register &&
+          <Mutation mutation={CREATE_USER}>
+            {(createUser) => (
+              <div className='loginForm'>
+                <div className='loginRow'>
+                  <label>Email</label>
+                  <input
+                    className='signin_input'
+                    type='text'
+                    onChange={event => this.updateEmail(event.target.value)} />
+                </div>
 
-              <a className='buttonSignIn' onClick={e => {
-                createUser({ variables: {
-                  email: this.state.email,
-                  username: this.state.username,
-                  password: this.state.password
-                } })
-                  .then(data => console.log(data))
-              }} >Register</a>
-              <p>Already have an account? <a onClick={() => this.setLogin()}>Login</a></p>
+                <div className='loginRow'>
+                  <label>Username</label>
+                  <input
+                    className='signin_input'
+                    type='text'
+                    onChange={event => this.updateUsername(event.target.value)} />
+                </div>
 
-            </div>
-          )
+                <div className='loginRow'>
+                  <label>Password</label>
+                  <input
+                    className='signin_input'
+                    type='password'
+                    onChange={event => this.updatePassword(event.target.value)} />
+                </div>
+
+                <div className='loginRow'>
+                  <label>Confirm Password</label>
+                  <input
+                    className='signin_input'
+                    type='password'
+                    onChange={event => this.updateConfirmation(event.target.value)} />
+
+                </div>
+
+                <a className='buttonSignIn' onClick={e => {
+                  createUser({ variables: {
+                    email: this.state.email,
+                    username: this.state.username,
+                    password: this.state.password
+                  } })
+                    .then(data => console.log(data))
+                }} >Register</a>
+                <p>Already have an account? <a onClick={() => this.setLogin()}>Login</a></p>
+
+              </div>
+            )
+            }
+          </Mutation>
           }
-        </Mutation>
+        </React.Fragemnt>
       }
     </React.Fragment>
   }

@@ -232,28 +232,24 @@ mutation createConnection($token:String!,  $cardToken:ID!){
     user {
       id
       username
-      name
     }
     contact {
       id
       username
-      name
     }
     card {
       id
       user {
         id
         username
-        name
       }
       author {
         id
         username
-        name
       }
-      name
+      cardName
       displayName
-      personName
+      name
       businessName
       address {
         address1
