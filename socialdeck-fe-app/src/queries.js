@@ -225,6 +225,55 @@ mutation destroyCard($token:String!, $id:ID!){
   }
 }
 `
+export const ADD_CONNECTION = gql`
+mutation createConnection($token:String!,  $cardToken:ID!){
+  createConnection(token:$token,  cardToken:$cardToken) {
+    id
+    user {
+      id
+      username
+      name
+    }
+    contact {
+      id
+      username
+      name
+    }
+    card {
+      id
+      user {
+        id
+        username
+        name
+      }
+      author {
+        id
+        username
+        name
+      }
+      name
+      displayName
+      personName
+      businessName
+      address {
+        address1
+        address2
+        city
+        state
+        postalCode
+      }
+      number
+      email
+      birthDate
+      twitter
+      linkedIn
+      facebook
+      instagram
+      verified
+    }
+  }
+}
+`
 
 export const GET_USERS = gql`
 {
