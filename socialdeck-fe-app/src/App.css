@@ -61,18 +61,12 @@ border: 1px solid black;
   margin: 5px;
 }
 
- .contactsLinks {
-   list-style: none;
-   display: flex;
-   flex-direction: column;
- }
-
  .list {
    overflow-y: scroll;
    display: flex;
    flex-direction: column;
    list-style: none;
-   color: #FBFCFF;
+   background-color: #FBFCFF;
    margin-left: -35px;
  }
 
