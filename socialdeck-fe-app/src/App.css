@@ -3,23 +3,14 @@ body {
   height: 100vh;
   /* overflow-y: scroll; */
 }
-::-webkit-scrollbar {
-  -webkit-appearance: none;
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
 }
-::-webkit-scrollbar:vertical {
-  width: 12px;
-}
-::-webkit-scrollbar:horizontal {
-  height: 12px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, .5);
-  border-radius: 10px;
-  border: 2px solid #ffffff;
-}
-::-webkit-scrollbar-track {
-  background-color: #fafafa;
-}
+
 .loginForm {
   display: flex;
   flex-direction: column;
