@@ -89,7 +89,7 @@ class CardInfo extends Component {
             }}>Delete Card</button>
           }
         </Mutation>
-        <Link to={info.id} >Share</Link>
+        <Link to={info.cardToken} >Share</Link>
 
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>

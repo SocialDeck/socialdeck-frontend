@@ -10,6 +10,7 @@ import ExampleCard from './ExampleCard'
 import NewContact from './NewContact'
 import Connections from './Connections'
 import ShareQR from './ShareQR'
+import QRLanding from './QRLanding'
 import Home from './Home'
 
 class App extends Component {
@@ -64,36 +65,32 @@ class App extends Component {
             </Match>
             <Card path='/contacts/:cardToken' />
             <MyCards path='/my-cards' />
-            <Match path='/my-cards/:cardId'>
+            <Match path='/my-cards/:cardToken'>
               {props =>
                 props.match ? (
-                  <ShareQR cardId={props.match.cardId} />
+                  <ShareQR cardToken={props.match.cardToken} />
                 ) : (
                   <div>Uncool</div>
                 )
               }
             </Match>
-            <ShareQR path='/my-cards/:cardId' />
+            <ShareQR path='/my-cards/:cardToken' />
+            <Match path='/share/:cardToken'>
+              {props =>
+                props.match ? (
+                  <QRLanding cardToken={props.match.cardToken} />
+                ) : (
+                  <div>Uncool</div>
+                )
+              }
+            </Match>
+            <QRLanding path='/share/:cardToken' />
             <ExampleCard path='/contacts/example-card' />
             <NewContact path='/contacts/new-contact' />
             <Connections path='/contacts/connections' />
           </Home>
 
         </Router>
-        {/* <Query
-          query={GET_USERS}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <p>Loading...</p>
-            if (error) return <p>Error :(</p>
-
-            return data.users.map((user, idx) => (
-              <Link to='example-card' key={idx} className='contactsItem' ><i className='fas fa-address-card' /> {user.username}</Link>
-            ))
-          }
-
-          }
-        </Query> */}
       </div>
     )
   }

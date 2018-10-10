@@ -112,6 +112,7 @@ query ownedCards($token: String!)
       id
       username
     }
+    cardToken(token: $token)
     cardName
     displayName
     name
@@ -221,6 +222,55 @@ mutation destroyCard($token:String!, $id:ID!){
   destroyCard(token:$token, id:$id)
   {
     message
+  }
+}
+`
+export const ADD_CONNECTION = gql`
+mutation createConnection($token:String!,  $cardToken:ID!){
+  createConnection(token:$token,  cardToken:$cardToken) {
+    id
+    user {
+      id
+      username
+      name
+    }
+    contact {
+      id
+      username
+      name
+    }
+    card {
+      id
+      user {
+        id
+        username
+        name
+      }
+      author {
+        id
+        username
+        name
+      }
+      name
+      displayName
+      personName
+      businessName
+      address {
+        address1
+        address2
+        city
+        state
+        postalCode
+      }
+      number
+      email
+      birthDate
+      twitter
+      linkedIn
+      facebook
+      instagram
+      verified
+    }
   }
 }
 `
