@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
+import logo from './socialdecklogo.png'
 
 class Home extends Component {
   render () {
@@ -9,13 +10,14 @@ class Home extends Component {
         <nav className='navigation'>
           <div className='topRow'>
             <h1>Social Deck</h1>
+            <img className='topLogo' src={logo} />
           </div>
 
           { !token && <Link to='/login'>Login</Link>}
           {token && <React.Fragment>
-            <Link to='/contacts/connections'>Connections</Link>
-            <Link to='/my-cards'>My Cards</Link>
-            <Link to='/contacts/new-contact'>New Contact</Link>
+            <Link className='navLinks'to='/contacts/connections'>Connections</Link>
+            <Link className='navLinks'to='/my-cards'>My Cards</Link>
+            <Link className='navLinks'to='/contacts/new-contact'>New Contact</Link>
             <a className='logOutButton'onClick={() => this.props.logOut()}>Log Out</a>
           </React.Fragment>}
         </nav>

@@ -9,7 +9,26 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: baseline;
+  background-color: #274156;
+  color: #F5F5F5;
 }
+
+.navLinks {
+  color: #F5F5F5;
+  text-decoration: none;
+}
+
+.topRow {
+  display: flex;
+}
+
+.topLogo {
+  margin-top: 7px;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+
 
 .loginForm {
   display: flex;
@@ -37,11 +56,6 @@ border: 1px solid black;
    padding: 1vh;
    border: 1px solid black;
    text-align: center;
- }
-
- .contacts-nav {
-   display: flex;
-   justify-content: space-around;
  }
 
  .contactsLinks {
