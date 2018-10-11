@@ -14,7 +14,7 @@ class Card extends Component {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error :(</p>
           return <React.Fragment>
-            <Link to='/contacts'>Contacts List</Link>
+            <Link className='formLink' to='/contacts'>Contacts List</Link>
             <div className='card'>
               {data.card.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {data.card.name}</div>}
               {data.card.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {data.card.businessName}</div>}

@@ -6,7 +6,7 @@ class QRLanding extends Component {
   constructor () {
     super()
     this.state = {
-      token: window.localStorage.getItem('token'),
+      token: null,
       register: false,
       username: '',
       password: '',
@@ -95,7 +95,7 @@ class QRLanding extends Component {
           }
         </Mutation>
       </React.Fragment>
-        : <React.Fragemnt>
+        : <React.Fragment>
           {!register && <Mutation mutation={LOGIN_USER} update={this.logCache}>
             {(login) => (
               <div className='loginForm'>
@@ -183,9 +183,10 @@ class QRLanding extends Component {
             }
           </Mutation>
           }
-        </React.Fragemnt>
+        </React.Fragment>
       }
     </React.Fragment>
   }
 }
+
 export default QRLanding
