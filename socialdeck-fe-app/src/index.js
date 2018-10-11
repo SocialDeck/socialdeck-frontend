@@ -9,7 +9,7 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 
 const client = new ApolloClient({
-  uri: 'http://api.socialdeck.xyz/graphql'
+  uri: 'https://socialdeck.herokuapp.com/graphql'
 })
 
 ReactDOM.render(

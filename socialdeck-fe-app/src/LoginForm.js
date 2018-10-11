@@ -22,7 +22,7 @@ class LoginForm extends Component {
     this.setState({ password: value })
   }
 
-  updateRemember(value) {
+  updateRemember (value) {
     this.setState({ remember: !this.state.remember })
   }
 
@@ -60,7 +60,7 @@ class LoginForm extends Component {
                   type='checkbox'
                   onChange={event => this.updateRemember(event.target.value)} />
                 <label htmlFor='remember'>Remember me</label>
-              </div>              
+              </div>
               <a className='buttonSignIn' onClick={async e => {
                 await login({ variables: {
                   username: this.state.username,

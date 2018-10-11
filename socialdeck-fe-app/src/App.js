@@ -15,7 +15,7 @@ import QRLanding from './QRLanding'
 import UpdateUser from './UpdateUser'
 import Home from './Home'
 
-import SideBar from "./sidebar";
+import SideBar from './sidebar'
 
 class App extends Component {
   constructor () {
@@ -51,9 +51,9 @@ class App extends Component {
 
   render () {
     return (
-      
+
       <div className='app'>
-        <SideBar logOut={this.logOut}/>
+        <SideBar logOut={this.logOut} />
         <Router>
           <Home path='/' logOut={this.logOut}>
             <LoginForm path='login' setUser={this.setUser} />
