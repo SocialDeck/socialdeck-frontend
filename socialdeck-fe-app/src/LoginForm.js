@@ -9,7 +9,8 @@ class LoginForm extends Component {
     super()
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      remember: false
     }
   }
 
@@ -19,6 +20,10 @@ class LoginForm extends Component {
 
   updatePassword (value) {
     this.setState({ password: value })
+  }
+
+  updateRemember(value) {
+    this.setState({ remember: !this.state.remember })
   }
 
   sendUserLoginData (e) {
@@ -49,10 +54,18 @@ class LoginForm extends Component {
                   type='password'
                   onChange={event => this.updatePassword(event.target.value)} />
               </div>
+              <div className='loginRow--remember'>
+                <input
+                  id='remember'
+                  type='checkbox'
+                  onChange={event => this.updateRemember(event.target.value)} />
+                <label htmlFor='remember'>Remember me</label>
+              </div>              
               <a className='buttonSignIn' onClick={async e => {
                 await login({ variables: {
                   username: this.state.username,
-                  password: this.state.password
+                  password: this.state.password,
+                  remember: this.state.remember
                 } })
                   .then(data => data.data.login)
                   .then(data => {
