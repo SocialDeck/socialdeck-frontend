@@ -30,10 +30,10 @@ body {
 .loginForm {
   display: flex;
   flex-direction: column;
-  background-color: #FAFAFA;
+  background-color: #FBFCFF;
   padding: 2vh;
   margin: 2vh;
-  border: 1px solid black;
+  border: 1px solid #274156;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -45,13 +45,13 @@ body {
 }
 
 .loginRow input {
-border: 1px solid black;
+border: 1px solid #274156;
 }
 
  .buttonSignIn {
    margin: 1vh;
    padding: 1vh;
-   border: 1px solid black;
+   border: 1px solid #274156;
    text-align: center;
  }
 
@@ -105,8 +105,8 @@ border: 1px solid black;
 
  .contactsItem {
     text-decoration: none;
-    color: black;
-    border-bottom: 1px solid black;
+    color: #274156;
+    border-bottom: 1px solid #274156;
     padding: 1vh;
  }
 
@@ -114,7 +114,7 @@ border: 1px solid black;
   background-color: #F5F5F5;
   padding: 2vh;
   margin: 2vh;
-  border: 1px solid black;
+  border: 1px solid #274156;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 

@@ -13,8 +13,7 @@ export const GET_SCHEMA = gql`
 export const CREATE_USER = gql`
 mutation createUser($email: String!, $name: String!, $username: String!, $password: String!) {
   createUser(email: $email, name: $name, user: {username: $username, password: $password}) {
-    id
-    username
+    token
   }
 }
 `
@@ -23,6 +22,21 @@ export const LOGIN_USER = gql`
 mutation login($username: String!, $password: String!) {
   login(user: {username: $username, password: $password}) {
     token
+  }
+}
+`
+export const GET_SUBSCRIBERS = gql`
+query subscribers($token: String!)
+{
+  subscribers(token: $token) {
+    id
+    user {
+      id
+      name(token: $token)
+    }
+    card {
+      cardName
+    }
   }
 }
 `
