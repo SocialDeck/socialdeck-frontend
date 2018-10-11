@@ -7,6 +7,7 @@ class RegisterForm extends Component {
   constructor () {
     super()
     this.state = {
+      name: '',
       username: '',
       password: '',
       confirmation: '',
@@ -30,6 +31,10 @@ class RegisterForm extends Component {
     this.setState({
       email: value
     })
+  }
+
+  updateName (value) {
+    this.setState({ name: value })
   }
 
   sendRegisterData (e) {
@@ -56,6 +61,15 @@ class RegisterForm extends Component {
         <Mutation mutation={CREATE_USER}>
           {(createUser) => (
             <div className='loginForm'>
+
+              <div className='loginRow'>
+                <label>Name</label>
+                <input
+                  className='signin_input'
+                  type='text'
+                  onChange={event => this.updateName(event.target.value)} />
+              </div>
+
               <div className='loginRow'>
                 <label>Email</label>
                 <input
@@ -91,6 +105,7 @@ class RegisterForm extends Component {
 
               <a className='buttonSignIn' onClick={e => {
                 createUser({ variables: {
+                  name: this.state.name,
                   email: this.state.email,
                   username: this.state.username,
                   password: this.state.password

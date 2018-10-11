@@ -9,7 +9,7 @@ class Home extends Component {
       <div className='home'>
         <nav className='navigation'>
           <div className='topRow'>
-            <h1>Social Deck</h1>
+            <Link className='navLinks' to='/contacts' ><h1>SocialDeck</h1></Link>
             <img className='topLogo' src={logo} alt='logo' />
           </div>
 
