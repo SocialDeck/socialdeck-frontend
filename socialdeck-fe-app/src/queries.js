@@ -78,8 +78,47 @@ query contacts($token: String!)
   }
 }
 `
+
+export const GET_FAVORITES = gql`
+query favorites($token: String!)
+{
+  favorites(token: $token) {
+    id
+    user {
+      id
+      username
+    }
+    author {
+      id
+      username
+    }
+    cardToken(token: $token)
+    cardName
+    displayName
+    name
+    businessName
+    address {
+      address1
+      address2
+      city
+      state
+      postalCode
+    }
+    number
+    email
+    birthDate
+    twitter
+    linkedIn
+    facebook
+    instagram
+    verified
+    mobile
+  }
+}
+`
+
 export const GET_CARD = gql`
-query card($cardToken: String!)
+query card($cardToken: String!, $token:String)
 {
   card(cardToken: $cardToken) {
     id
@@ -110,6 +149,7 @@ query card($cardToken: String!)
     facebook
     instagram
     verified
+    favorite(token: $token)
   }
 }
 `
@@ -240,6 +280,22 @@ mutation destroyCard($token:String!, $id:ID!){
   }
 }
 `
+export const FAVORITE_CARD = gql`
+mutation favorite($token:String!, $cardId:ID!){
+  favorite(token:$token, cardId:$cardId) {
+    favorite
+  }
+}
+`
+
+export const UNFAVORITE_CARD = gql`
+mutation unfavorite($token:String!, $cardId:ID!){
+  unfavorite(token:$token, cardId:$cardId) {
+    favorite
+  }
+}
+`
+
 export const ADD_CONNECTION = gql`
 mutation createConnection($token:String!,  $cardToken:ID!){
   createConnection(token:$token,  cardToken:$cardToken) {
