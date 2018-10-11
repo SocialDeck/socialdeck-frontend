@@ -49,7 +49,7 @@ class MyCards extends Component {
     const token = window.localStorage.getItem('token')
     return (
       <React.Fragment>
-        <Link className='formLink' to='/contacts'>Contacts List</Link>
+        
         {token ? <Query
           query={GET_MY_CARDS} variables={{ token: token }}
         >

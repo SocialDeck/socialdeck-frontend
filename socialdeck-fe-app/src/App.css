@@ -10,9 +10,16 @@ body {
   align-items: baseline;
   background-color: #274156;
   color: #F5F5F5;
+  text-decoration: none;
 }
 
 .navLinks {
+  color: #F5F5F5;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+.logo {
   color: #F5F5F5;
   text-decoration: none;
 }
@@ -86,7 +93,7 @@ border: 1px solid #274156;
 .list-item__right {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 
 }
 
@@ -120,6 +127,12 @@ border: 1px solid #274156;
 
 .address {
   display: flex;
+}
+
+.cardHeader { 
+  display: flex;
+  justify-content:  space-between;
+  padding-top: 0;
 }
 
 .cardIcon {
@@ -159,6 +172,82 @@ border: 1px solid #274156;
 i {
   color: #274156;
 }
+
+#page-wrap {
+  text-align: center;
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #FBFCFF;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: absolute;
+  width: 36px;
+  height: 30px;
+  left: 15px;
+  top: 15px;
+  margin: 0;
+  padding: 0;
+  font-size: .5rem
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #FBFCFF;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #FBFCFF;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #274156;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #274156;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
 
 @media only screen and (max-device-width : 450px) {
   .topRow {
