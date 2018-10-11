@@ -5,10 +5,13 @@ import QRCode from 'qrcode-react'
 class ShareQR extends Component {
   render () {
     return <React.Fragment>
-      <Link to='/my-cards'>My Cards</Link>
-      <div className='qrWrapper'>
-        <QRCode value={'https://socialdeck-3c370.firebaseapp.com/share/' + this.props.cardToken} />
-        <Link to={'/share/' + this.props.cardToken}>QR Code Link</Link>
+      <Link className='formLink' to='/my-cards'>My Cards</Link>
+      <div className='qrPageWrapper card'>
+        <div className='qrCodeWrapper'>
+          <QRCode className='qrCode' value={'https://socialdeck.xyz/share/' + this.props.cardToken} />
+        </div>
+
+        <Link className='formLink' to={'/share/' + this.props.cardToken}>QR Code Link</Link>
       </div>
 
     </React.Fragment>

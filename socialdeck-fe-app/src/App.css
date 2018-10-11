@@ -126,10 +126,19 @@ border: 1px solid #274156;
   margin: 10px;
 }
 
-.qrWrapper {
-  margin: 10px;
+.qrPageWrapper {
+  height: 60vh;
+  width: 85vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.qrCodeWrapper {
+  border: 5px solid #274156;
+  padding: 20px;
+}
 
 .monogram {
   color: #FBFCFF;
@@ -151,7 +160,7 @@ i {
   color: #274156;
 }
 
-@media only screen and (max-device-width : 400px) {
+@media only screen and (max-device-width : 450px) {
   .topRow {
     width: 100vw;
     justify-content: center;
