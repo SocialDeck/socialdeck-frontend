@@ -25,6 +25,21 @@ mutation login($username: String!, $password: String!) {
   }
 }
 `
+export const GET_SUBSCRIBERS = gql`
+query subscribers($token: String!)
+{
+  subscribers(token: $token) {
+    id
+    user {
+      id
+      name(token: $token)
+    }
+    card {
+      cardName
+    }
+  }
+}
+`
 
 export const GET_CONTACTS = gql`
 query contacts($token: String!)

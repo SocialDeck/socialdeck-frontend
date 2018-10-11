@@ -1,18 +1,64 @@
 import React, { Component } from 'react'
-import { Link } from '@reach/router'
+import { Query } from 'react-apollo'
+import { Link, Redirect } from '@reach/router'
+import { GET_SUBSCRIBERS } from './queries'
 
 class Connections extends Component {
-  render () {
-    return (
-      <React.Fragment>
-        <Link to='/contacts'>Contacts List</Link>
-        <div>REQUEST NEW CONNECTION</div>
-        <div>show way to make new connections here, need mutation to send request to connect with others including token and card you wish to share with connection <button onClick={() => console.log('send request to other User')}>Send Request</button></div>
-        <div>ACCEPT REQUESTS FROM OTHERS</div>
-        <div>show requests for new connections here, need mutation to accept request and choose which card to share with accepted connection <button onClick={() => console.log('accept connection and add to contacts list')}>Accept Request</button></div>
-      </React.Fragment>
+  stripNumber(number) {
+    if (number) {
+      return number.replace(/\D+/g, '').replace(/^[01]/, '')
+    } else {
 
-    )
+    }
+  }
+  parseAddress(address) {
+    if (address) {
+      return address.address1.replace(' ', '+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+    } else {
+
+    }
+  }
+  render() {
+    const token = window.localStorage.getItem('token')
+    return <React.Fragment>{token
+      ? <ul className='list' >
+        <Query
+          query={GET_SUBSCRIBERS} variables={{ token: token }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return <p>Loading...</p>
+            if (error) return <p>Error :(</p>
+
+            return data.subscribers.map((subscriber, idx) => (
+              
+              <li key={idx} className='list-item' >
+                <Link to={subscriber.id} key={idx} className='list-item contact'>
+                  <div key={idx} className='list-item__left' >
+                    <div className='list-item__thumbnail monogram' >
+                      {subscriber.user.name[0]}
+                    </div>
+                  </div>
+
+                  <div className='list-item__center'>
+                    <div className='list-item__title' > {subscriber.user.name} </div>
+                    <div className='list-item__subtitle' > {subscriber.card.cardName} </div>
+                  </div>
+                  </Link>
+                <div className='list-item__right' >
+                  <Link to={"block/" + subscriber.user.id} key={idx} className='list-item contact'><i className="fas fa-user-times "></i> </Link>
+                </div>
+              </li>
+
+            ))
+          }
+
+          }
+        </Query>
+      </ul>
+
+      : <Redirect to='/login' noThrow />
+    }
+    </React.Fragment>
   }
 }
 export default Connections
