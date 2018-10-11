@@ -82,7 +82,7 @@ class QRLanding extends Component {
         }}
       </Query>
       {token ? <React.Fragment>
-        <div>Welcome to Social Deck!</div>
+        <div>Welcome to SocialDeck!</div>
         <Mutation mutation={ADD_CONNECTION}>
           {(createConnection) =>
             <button onClick={() => {
