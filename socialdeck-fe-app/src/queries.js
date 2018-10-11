@@ -13,8 +13,7 @@ export const GET_SCHEMA = gql`
 export const CREATE_USER = gql`
 mutation createUser($email: String!, $name: String!, $username: String!, $password: String!) {
   createUser(email: $email, name: $name, user: {username: $username, password: $password}) {
-    id
-    username
+    token
   }
 }
 `
