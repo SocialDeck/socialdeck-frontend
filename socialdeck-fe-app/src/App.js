@@ -4,6 +4,7 @@ import { Router, Match } from '@reach/router'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
 import Contacts from './Contacts'
+import Favorites from './Favorites'
 import Card from './Card'
 import MyCards from './MyCards'
 import ExampleCard from './ExampleCard'
@@ -13,6 +14,8 @@ import ShareQR from './ShareQR'
 import QRLanding from './QRLanding'
 import UpdateUser from './UpdateUser'
 import Home from './Home'
+
+import SideBar from "./sidebar";
 
 class App extends Component {
   constructor () {
@@ -48,13 +51,16 @@ class App extends Component {
 
   render () {
     return (
+      
       <div className='app'>
+        <SideBar logOut={this.logOut}/>
         <Router>
           <Home path='/' logOut={this.logOut}>
             <LoginForm path='login' setUser={this.setUser} />
             <RegisterForm path='register' />
 
             <Contacts path='contacts' username={this.state.username} token={this.state.token} />
+            <Favorites path='favorites' username={this.state.username} token={this.state.token} />
             <Match path='/contacts/:cardToken'>
               {props =>
                 props.match ? (

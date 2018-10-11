@@ -56,7 +56,7 @@ class QRLanding extends Component {
     const register = this.state.register
     return <React.Fragment>
       <Query
-        query={GET_CARD} variables={{ cardToken: this.props.cardToken }}
+        query={GET_CARD} variables={{ cardToken: this.props.cardToken, token: token }}
       >
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>

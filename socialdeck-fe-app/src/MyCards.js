@@ -51,6 +51,7 @@ class MyCards extends Component {
       <React.Fragment>
         <Link className='formLink' to='/contacts'>Contacts List</Link>
         <Link className='formLink' to='/editAccount'>Edit My Account</Link>
+
         {token ? <Query
           query={GET_MY_CARDS} variables={{ token: token }}
         >
