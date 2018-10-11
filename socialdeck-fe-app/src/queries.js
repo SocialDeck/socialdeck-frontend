@@ -285,7 +285,31 @@ mutation createConnection($token:String!,  $cardToken:ID!){
   }
 }
 `
+export const BLOCK_USER = gql`
+mutation blockUser($token:String!,  $userId:ID!){
+  blockUser(token:$token,  userId:$userId) {
+    card {
+      id
+    }
+  }
+}
+`
 
+export const DELETE_CONNECTION = gql`
+mutation destroyConnection($token: String!, $id: ID!){
+  destroyConnection(token: $token, id: $id){
+    message
+  }
+}
+`
+export const UPDATE_USER = gql`
+mutation updateUser($token: String!, $username: String, $name: String, $oldPassword: String!, $newPassword:String, $email: String){
+  updateUser(token: $token, username: $username, name: $name, oldPassword: $oldPassword, newPassword: $newPassword, email: $email){
+    id
+    username
+  }
+}
+`
 export const GET_USERS = gql`
 {
   users{

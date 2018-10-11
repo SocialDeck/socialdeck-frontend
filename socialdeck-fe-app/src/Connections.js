@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import { Link, Redirect } from '@reach/router'
-import { GET_SUBSCRIBERS } from './queries'
+import { GET_SUBSCRIBERS, DELETE_CONNECTION } from './queries'
 
 class Connections extends Component {
-  stripNumber(number) {
+  stripNumber (number) {
     if (number) {
       return number.replace(/\D+/g, '').replace(/^[01]/, '')
     } else {
 
     }
   }
-  parseAddress(address) {
+  parseAddress (address) {
     if (address) {
       return address.address1.replace(' ', '+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
     } else {
 
     }
   }
-  render() {
+  render () {
     const token = window.localStorage.getItem('token')
     return <React.Fragment>{token
       ? <ul className='list' >
@@ -30,7 +30,7 @@ class Connections extends Component {
             if (error) return <p>Error :(</p>
 
             return data.subscribers.map((subscriber, idx) => (
-              
+
               <li key={idx} className='list-item' >
                 <Link to={subscriber.id} key={idx} className='list-item contact'>
                   <div key={idx} className='list-item__left' >
@@ -43,9 +43,18 @@ class Connections extends Component {
                     <div className='list-item__title' > {subscriber.user.name} </div>
                     <div className='list-item__subtitle' > {subscriber.card.cardName} </div>
                   </div>
-                  </Link>
+                </Link>
                 <div className='list-item__right' >
-                  <Link to={"block/" + subscriber.user.id} key={idx} className='list-item contact'><i className="fas fa-user-times "></i> </Link>
+                  <Mutation mutation={DELETE_CONNECTION}>
+                    {(destroyConnection) =>
+                      <a className='list-item contact' onClick={() => {
+                        destroyConnection({ variables: {
+                          token: token,
+                          id: subscriber.id
+                        } })
+                      }}><i className='fas fa-user-times' /></a>
+                    }
+                  </Mutation>
                 </div>
               </li>
 

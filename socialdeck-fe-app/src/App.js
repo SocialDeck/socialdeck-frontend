@@ -11,6 +11,7 @@ import NewContact from './NewContact'
 import Connections from './Connections'
 import ShareQR from './ShareQR'
 import QRLanding from './QRLanding'
+import UpdateUser from './UpdateUser'
 import Home from './Home'
 
 class App extends Component {
@@ -86,6 +87,7 @@ class App extends Component {
             </Match>
             <QRLanding path='/share/:cardToken' />
             <ExampleCard path='/contacts/example-card' />
+            <UpdateUser path='/editAccount' />
             <NewContact path='/contacts/new-contact' />
             <Connections path='/contacts/connections' />
           </Home>
