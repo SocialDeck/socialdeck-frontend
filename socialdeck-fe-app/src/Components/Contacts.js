@@ -13,7 +13,7 @@ class Contacts extends Component {
   }
   parseAddress (address) {
     if (address) {
-      return address.address1.replace(' ', '+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+      return address.address1.split(/[ ,]+/).join('+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
     } else {
 
     }
@@ -45,11 +45,11 @@ class Contacts extends Component {
                   </div>
                 </Link>
                 <div className='list-item__right' >
-                  {contact.number && <a href={'tel:+' + this.stripNumber(contact.number)}> <i className='fas fa-phone list-item__icon' /></a>}
+                  {contact.number && <a href={'tel:' + this.stripNumber(contact.number)}> <i className='fas fa-phone list-item__icon' /></a>}
                   {!contact.number && <i className='fas fa-phone list-item__hidden' />}
-                  {contact.mobile && <a href={'sms:+' + this.stripNumber(contact.number)}> <i className='fas fa-comment-alt list-item__icon' /></a>}
+                  {contact.mobile && <a href={'sms:' + this.stripNumber(contact.number)}> <i className='fas fa-comment-alt list-item__icon' /></a>}
                   {!contact.mobile && <i className='fas fa-comment-alt list-item__hidden' />}
-                  {contact.address && <a href={'https://maps.google.com/maps/place/' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon' /></a>}
+                  {contact.address && <a href={'http://maps.apple.com/?address=' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon' /></a>}
                   {!contact.address && <i className='fas fa-directions list-item__hidden' />}
                   {contact.email && <a href={'mailto:' + contact.email}><i className='fas fa-envelope list-item__icon' /></a>}
                   {!contact.email && <i className='fas fa-envelope list-item__hidden' />}

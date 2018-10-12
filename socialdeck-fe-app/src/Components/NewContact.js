@@ -5,7 +5,6 @@ class NewContact extends Component {
   render () {
     return (
       <React.Fragment>
-        <Link to='/contacts'>Contacts List</Link>
         <div className='card'>
           <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> <input type='text' defaultValue='Name' /></div>
           <div className='cardLine'><i className='fas fa-briefcase cardIcon' /><input type='text' defaultValue='Business' /></div>
