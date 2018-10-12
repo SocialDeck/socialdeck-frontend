@@ -33,23 +33,6 @@ class CardInfo extends Component {
     const token = window.localStorage.getItem('token')
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
-        <div className='cardOptions'>
-          <Mutation mutation={DELETE_CARD}>
-            {(deleteCard) =>
-              <a className='cardOption cardDelete' onClick={() => {
-                deleteCard({ variables: {
-                  token: token,
-                  id: info.id
-                } })
-              }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
-            }
-          </Mutation>
-          <a className='cardOption' onClick={() => {
-            this.editOn(info)
-          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>
-          <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>
-
-        </div>
 
         {info.displayName && <div className='cardLine'>{info.displayName}</div>}
         {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
@@ -66,6 +49,26 @@ class CardInfo extends Component {
           </div>
         </div>
         }
+
+        <div className='cardOptions'>
+          <Mutation mutation={DELETE_CARD}>
+            {(deleteCard) =>
+              <a className='cardOption cardDelete' onClick={() => {
+                deleteCard({
+                  variables: {
+                    token: token,
+                    id: info.id
+                  }
+                })
+              }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
+            }
+          </Mutation>
+          <a className='cardOption' onClick={() => {
+            this.editOn(info)
+          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>
+          <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>
+
+        </div>
 
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
