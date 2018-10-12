@@ -1,6 +1,7 @@
 body {
   background-color: #EDEDED;
   height: 100vh;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
 }
 
 .navigation {
@@ -62,12 +63,14 @@ body {
 border: 1px solid #274156;
 }
 
- .buttonSignIn {
-   margin: 1vh;
-   padding: 1vh;
-   border: 1px solid #274156;
-   text-align: center;
- }
+.buttonSignIn {
+  margin: 1vh;
+  padding: 1vh;
+  border: 1px solid #274156;
+  background-color: #274156;
+  color: #F5F5F5;
+  text-align: center;
+}
 
 .formLink {
   text-decoration: none;
@@ -125,7 +128,7 @@ border: 1px solid #274156;
  }
 
 .card {
-  background-color: #F5F5F5;
+  background-color: #FBFCFF;
   padding: 2vh;
   margin: 2vh;
   border: 1px solid #274156;
@@ -136,7 +139,7 @@ border: 1px solid #274156;
   display: flex;
 }
 
-.cardHeader { 
+.cardHeader {
   display: flex;
   justify-content:  space-between;
   padding-top: 0;

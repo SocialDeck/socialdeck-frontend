@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from '@reach/router'
-import logo from './socialdecklogo.png'
+import logo from '../socialdecklogo.png'
 
 class Home extends Component {
   render () {

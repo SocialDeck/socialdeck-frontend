@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import { GET_CARD, LOGIN_USER, CREATE_USER, ADD_CONNECTION } from './queries'
+import { GET_CARD, LOGIN_USER, CREATE_USER, ADD_CONNECTION } from '../queries'
+import { navigate } from '@reach/router'
 
 class QRLanding extends Component {
   constructor () {
@@ -85,13 +86,13 @@ class QRLanding extends Component {
         <div>Welcome to SocialDeck!</div>
         <Mutation mutation={ADD_CONNECTION}>
           {(createConnection) =>
-            <button onClick={() => {
+            <a className='formLink' onClick={() => {
               createConnection({ variables: {
                 token: token,
                 cardToken: this.props.cardToken
               } })
-                .then(data => console.log(data))
-            }}>Connect</button>
+                .then(navigate('/contacts'))
+            }}>Connect</a>
           }
         </Mutation>
       </React.Fragment>
@@ -125,7 +126,7 @@ class QRLanding extends Component {
                       this.setToken(data.token)
                     })
                 }}>Sign In</a>
-                <p>Don't have an account? <a onClick={() => this.setRegister()}>Register</a></p>
+                <p>Don't have an account? <a className='formLink' onClick={() => this.setRegister()}>Register</a></p>
 
               </div>
             )
@@ -176,7 +177,7 @@ class QRLanding extends Component {
                   } })
                     .then(data => console.log(data))
                 }} >Register</a>
-                <p>Already have an account? <a onClick={() => this.setLogin()}>Login</a></p>
+                <p>Already have an account? <a className='formLink' onClick={() => this.setLogin()}>Login</a></p>
 
               </div>
             )

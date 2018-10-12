@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import { Link, Redirect } from '@reach/router'
-import { GET_SUBSCRIBERS, DELETE_CONNECTION } from './queries'
+import { GET_SUBSCRIBERS, DELETE_CONNECTION } from '../queries'
 
 class Connections extends Component {
   stripNumber (number) {

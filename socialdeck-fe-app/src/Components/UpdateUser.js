@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import { Link } from '@reach/router'
-import { UPDATE_USER } from './queries'
+// import { Link } from '@reach/router'
+import { UPDATE_USER } from '../queries'
 
 class UpdateUser extends Component {
   constructor () {

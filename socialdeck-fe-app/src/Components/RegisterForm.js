@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import { CREATE_USER } from './queries'
-import { Link } from '@reach/router'
+import { CREATE_USER } from '../queries'
+import { Link, navigate } from '@reach/router'
 
 class RegisterForm extends Component {
   constructor () {
@@ -110,7 +110,13 @@ class RegisterForm extends Component {
                   username: this.state.username,
                   password: this.state.password
                 } })
-                  .then(data => console.log(data))
+                  .then(data => data.data.createUser)
+                  .then(data => {
+                    window.localStorage.setItem('token', data.token)
+                    window.localStorage.setItem('username', this.state.username)
+                    this.props.setUser(data.token, this.state.username)
+                    navigate('/my-cards')
+                  })
               }} >Register</a>
               <p>Already have an account? <Link className='formLink' to='/login'>Login</Link> </p>
 
