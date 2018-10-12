@@ -23,11 +23,11 @@ class UpdateUser extends Component {
         {(updateUser) => (
           <React.Fragment>
             <div className='card'>
-              <div className='cardLine'>New Username<input type='text' onChange={(e) => this.updateState(e, 'username')} defaultValue='username' />  </div>
-              <div className='cardLine'>New Password<input type='text' onChange={(e) => this.updateState(e, 'newPassword')} defaultValue='new password' />  </div>
-              <div className='cardLine'>New Name <input type='text' onChange={(e) => this.updateState(e, 'name')} defaultValue='new name' /></div>
-              <div className='cardLine'>New Email<input type='text' onChange={(e) => this.updateState(e, 'email')} defaultValue='new email' /></div>
-              <div className='cardLine'>Verify Old Password (required) <input type='text' onChange={(e) => this.updateState(e, 'oldPassword')} defaultValue='' /></div>
+              <div className='cardLine'>New Username<input type='text' onChange={(e) => this.updateState(e, 'username')} />  </div>
+              <div className='cardLine'>New Password<input type='password' onChange={(e) => this.updateState(e, 'newPassword')} />  </div>
+              <div className='cardLine'>New Name <input type='text' onChange={(e) => this.updateState(e, 'name')} /></div>
+              <div className='cardLine'>New Email<input type='text' onChange={(e) => this.updateState(e, 'email')} /></div>
+              <div className='cardLine'>Verify Old Password (required) <input type='password' onChange={(e) => this.updateState(e, 'oldPassword')} /></div>
               <button onClick={e => {
                 updateUser({ variables: {
                   token: token,

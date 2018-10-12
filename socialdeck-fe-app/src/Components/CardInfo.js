@@ -34,19 +34,19 @@ class CardInfo extends Component {
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
         <div className='cardOptions'>
-          <a className='cardOption' onClick={() => {
-            this.editOn(info)
-          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>
           <Mutation mutation={DELETE_CARD}>
             {(deleteCard) =>
-              <a className='cardOption' onClick={() => {
+              <a className='cardOption cardDelete' onClick={() => {
                 deleteCard({ variables: {
                   token: token,
                   id: info.id
                 } })
-              }}><i className='fas fa-trash-alt cardOptionIcon cardDeleteIcon' /> Delete</a>
+              }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
             }
           </Mutation>
+          <a className='cardOption' onClick={() => {
+            this.editOn(info)
+          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>
           <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>
 
         </div>

@@ -177,6 +177,14 @@ border: 1px solid #274156;
   color: #274156;
 }
 
+.cardOptionIcon {
+  color: #1C6E8C;
+}
+
+.cardDelete {
+  color: red;
+}
+
 .qrPageWrapper {
   height: 60vh;
   width: 85vw;
