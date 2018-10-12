@@ -33,6 +33,24 @@ class CardInfo extends Component {
     const token = window.localStorage.getItem('token')
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
+        <div className='cardOptions'>
+          <a className='cardOption' onClick={() => {
+            this.editOn(info)
+          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>
+          <Mutation mutation={DELETE_CARD}>
+            {(deleteCard) =>
+              <a className='cardOption' onClick={() => {
+                deleteCard({ variables: {
+                  token: token,
+                  id: info.id
+                } })
+              }}><i className='fas fa-trash-alt cardOptionIcon cardDeleteIcon' /> Delete</a>
+            }
+          </Mutation>
+          <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>
+
+        </div>
+
         {info.displayName && <div className='cardLine'>{info.displayName}</div>}
         {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}
@@ -48,20 +66,6 @@ class CardInfo extends Component {
           </div>
         </div>
         }
-        <a className='formLink' onClick={() => {
-          this.editOn(info)
-        }}>Edit Card</a>
-        <Mutation mutation={DELETE_CARD}>
-          {(deleteCard) =>
-            <a className='formLink' onClick={() => {
-              deleteCard({ variables: {
-                token: token,
-                id: info.id
-              } })
-            }}>Delete Card</a>
-          }
-        </Mutation>
-        <Link className='formLink' to={info.cardToken} >Share</Link>
 
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
