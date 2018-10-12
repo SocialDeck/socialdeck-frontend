@@ -55,7 +55,6 @@ class MyCards extends Component {
         {!this.state.newCard
           ? <div className='card'>
             <a className='formLink' onClick={() => {
-              console.log('add my card to GraphQL for storage')
               this.startNewCard()
             }}>Add New Card</a></div>
 
