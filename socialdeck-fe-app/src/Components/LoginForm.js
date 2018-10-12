@@ -9,7 +9,8 @@ class LoginForm extends Component {
     this.state = {
       username: '',
       password: '',
-      remember: false
+      remember: false,
+      recovery: false
     }
   }
 
@@ -31,6 +32,12 @@ class LoginForm extends Component {
 
   logCache (cache, { data }) {
     console.log(cache, data)
+  }
+
+  setRecover () {
+    this.setState({
+      recovery: !this.state.recovery
+    })
   }
 
   render () {
@@ -75,6 +82,14 @@ class LoginForm extends Component {
                   })
               }}>Sign In</a>
               <p>Don't have an account? <Link className='formLink' to='/register'>Register</Link></p>
+              <p>Forgot your username or password? <a className='formLink' onClick={() => this.setRecover()}>Recover Account</a></p>
+              <div className='loginRow'>
+                <label htmlFor='recoveryEmail'>Email associated with account</label>
+                <input
+                  id='recoveryEmail'
+                  type='text'
+                  onChange={event => this.updateRecoverEmail(event.target.value)} />
+              </div>
 
             </div>
           )
