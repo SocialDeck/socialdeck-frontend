@@ -13,7 +13,7 @@ class Contacts extends Component {
   }
   parseAddress (address) {
     if (address) {
-      return address.address1.replace(' ', '+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+      return address.address1.split(/[ ,]+/).join('+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
     } else {
 
     }
