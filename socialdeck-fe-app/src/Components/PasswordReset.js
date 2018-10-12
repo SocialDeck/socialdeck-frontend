@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-// import { Link } from '@reach/router'
+import { navigate } from '@reach/router'
 import { UPDATE_USER } from '../queries'
 
-class UpdateUser extends Component {
+class PasswordReset extends Component {
   constructor () {
     super()
     this.state = {
@@ -17,27 +17,18 @@ class UpdateUser extends Component {
   }
 
   render () {
-    const token = window.localStorage.getItem('token')
     return <React.Fragment>
       <Mutation mutation={UPDATE_USER} update={this.logCache}>
         {(updateUser) => (
           <React.Fragment>
             <div className='card'>
-              <div className='cardLine'>New Username<input type='text' onChange={(e) => this.updateState(e, 'username')} />  </div>
               <div className='cardLine'>New Password<input type='password' onChange={(e) => this.updateState(e, 'newPassword')} />  </div>
-              <div className='cardLine'>New Name <input type='text' onChange={(e) => this.updateState(e, 'name')} /></div>
-              <div className='cardLine'>New Email<input type='text' onChange={(e) => this.updateState(e, 'email')} /></div>
               <button onClick={e => {
                 updateUser({ variables: {
-                  token: token,
-                  username: this.state.username,
-                  name: this.state.name,
-                  password: this.state.newPassword,
-                  email: this.state.email
+                  token: this.props.token,
+                  password: this.state.newPassword
                 } })
-                  .then(data => {
-                    console.log(data)
-                  })
+                  .then(navigate('/contacts'))
               }}>Update</button>
             </div>
 
@@ -49,4 +40,4 @@ class UpdateUser extends Component {
     </React.Fragment>
   }
 }
-export default UpdateUser
+export default PasswordReset

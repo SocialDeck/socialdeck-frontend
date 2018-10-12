@@ -3,7 +3,7 @@ import { Query, Mutation } from 'react-apollo'
 import { Link, Redirect } from '@reach/router'
 import { GET_SUBSCRIBERS, DELETE_CONNECTION } from '../queries'
 
-class Connections extends Component {
+class Subscribers extends Component {
   stripNumber (number) {
     if (number) {
       return number.replace(/\D+/g, '').replace(/^[01]/, '')
@@ -70,4 +70,4 @@ class Connections extends Component {
     </React.Fragment>
   }
 }
-export default Connections
+export default Subscribers

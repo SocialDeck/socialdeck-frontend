@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link, navigate } from '@reach/router'
 import { Mutation } from 'react-apollo'
-import { LOGIN_USER } from '../queries'
+import { LOGIN_USER, RECOVER_ACCOUNT } from '../queries'
 
 class LoginForm extends Component {
   constructor () {
@@ -24,6 +24,10 @@ class LoginForm extends Component {
 
   updateRemember (value) {
     this.setState({ remember: !this.state.remember })
+  }
+
+  updateRecoveryEmail (value) {
+    this.setState({ recoveryEmail: value })
   }
 
   sendUserLoginData (e) {
@@ -67,29 +71,41 @@ class LoginForm extends Component {
                   onChange={event => this.updateRemember(event.target.value)} />
                 <label htmlFor='remember'>Remember me</label>
               </div>
-              <a className='buttonSignIn' onClick={async e => {
-                await login({ variables: {
-                  username: this.state.username,
-                  password: this.state.password,
-                  remember: this.state.remember
-                } })
-                  .then(data => data.data.login)
-                  .then(data => {
-                    window.localStorage.setItem('token', data.token)
-                    window.localStorage.setItem('username', this.state.username)
-                    this.props.setUser(data.token, this.state.username)
-                    navigate('/contacts')
-                  })
-              }}>Sign In</a>
-              <p>Don't have an account? <Link className='formLink' to='/register'>Register</Link></p>
-              <p>Forgot your username or password? <a className='formLink' onClick={() => this.setRecover()}>Recover Account</a></p>
               <div className='loginRow'>
-                <label htmlFor='recoveryEmail'>Email associated with account</label>
+                <a className='buttonSignIn' onClick={async e => {
+                  await login({ variables: {
+                    username: this.state.username,
+                    password: this.state.password,
+                    remember: this.state.remember
+                  } })
+                    .then(data => data.data.login)
+                    .then(data => {
+                      window.localStorage.setItem('token', data.token)
+                      window.localStorage.setItem('username', this.state.username)
+                      this.props.setUser(data.token, this.state.username)
+                      navigate('/contacts')
+                    })
+                }}>Sign In</a>
+                <p>Don't have an account? <Link className='formLink' to='/register'>Register</Link></p>
+                <p>Forgot your username or password? <a className='formLink' onClick={() => this.setRecover()}>Recover Account</a></p>
+              </div>
+              {this.state.recovery && <div className='loginRow'>
+                <label htmlFor='recoveryEmail'>Please provide your email associated with account</label>
                 <input
                   id='recoveryEmail'
                   type='text'
-                  onChange={event => this.updateRecoverEmail(event.target.value)} />
-              </div>
+                  onChange={event => this.updateRecoveryEmail(event.target.value)} />
+                <Mutation mutation={RECOVER_ACCOUNT}>
+                  {(resetPassword) =>
+                    <a className='buttonSignIn' onClick={() => {
+                      resetPassword({ variables: {
+                        email: this.state.recoveryEmail
+                      } })
+                        .then(data => console.log(data))
+                    }}>Send Recovery Email</a>
+                  }
+                </Mutation>
+              </div>}
 
             </div>
           )

@@ -359,13 +359,22 @@ mutation destroyConnection($token: String!, $id: ID!){
 }
 `
 export const UPDATE_USER = gql`
-mutation updateUser($token: String!, $username: String, $name: String, $oldPassword: String!, $newPassword:String, $email: String){
-  updateUser(token: $token, username: $username, name: $name, oldPassword: $oldPassword, newPassword: $newPassword, email: $email){
+mutation updateUser($token: String!, $username: String, $name: String, $password:String, $email: String){
+  updateUser(token: $token, username: $username, name: $name, password: $password, email: $email){
     id
     username
   }
 }
 `
+
+export const RECOVER_ACCOUNT = gql`
+mutation resetPassword ($email: String!){
+  resetPassword(email: $email) {
+    message
+  }
+}
+`
+
 export const GET_USERS = gql`
 {
   users{
