@@ -126,7 +126,7 @@ class QRLanding extends Component {
                       this.setToken(data.token)
                     })
                 }}>Sign In</a>
-                <p>Don't have an account? <a onClick={() => this.setRegister()}>Register</a></p>
+                <p>Don't have an account? <a className='formLink' onClick={() => this.setRegister()}>Register</a></p>
 
               </div>
             )
@@ -177,7 +177,7 @@ class QRLanding extends Component {
                   } })
                     .then(data => console.log(data))
                 }} >Register</a>
-                <p>Already have an account? <a onClick={() => this.setLogin()}>Login</a></p>
+                <p>Already have an account? <a className='formLink' onClick={() => this.setLogin()}>Login</a></p>
 
               </div>
             )

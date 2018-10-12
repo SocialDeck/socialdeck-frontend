@@ -33,7 +33,6 @@ class CardInfo extends Component {
     const token = window.localStorage.getItem('token')
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
-        {info.cardName && <div className='cardLine'>{info.cardName}</div>}
         {info.displayName && <div className='cardLine'>{info.displayName}</div>}
         {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}
@@ -68,30 +67,96 @@ class CardInfo extends Component {
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
         {(updateCard) => (
           <React.Fragment>
-            <div className='cardLine'>Card Name (Private) <input type='text' onChange={(e) => this.updateState(e, 'cardName')} defaultValue={info.cardName} />  </div>
-            <div className='cardLine'>Display Name (Shared) <input type='text' onChange={(e) => this.updateState(e, 'displayName')} defaultValue={info.displayName} />  </div>
-            <div className='cardLine'><i className='fas fa-user-circle cardIcon' />Name <input type='text' onChange={(e) => this.updateState(e, 'name')} defaultValue={info.name} /></div>
-            <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> Business <input type='text' onChange={(e) => this.updateState(e, 'businessName')} defaultValue={info.businessName} /></div>
-            <div className='cardLine'><i className='fas fa-phone cardIcon' /> Number <input type='text' onChange={(e) => this.updateState(e, 'number')} defaultValue={info.number} /></div>
-            <div className='cardLine'><i className='fas fa-envelope cardIcon' /> Email <input type='text' onChange={(e) => this.updateState(e, 'email')} defaultValue={info.email} /></div>
-
-            <div className='address'>
-              <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
-              <div className='addressBlock'>
-                <div className='addressLine line1'> Address Line 1 <input type='text' onChange={(e) => this.updateState(e, 'address1')} defaultValue={info.address && info.address.address1} /></div>
-                <div className='addressLine line2'> Address Line 2 <input type='text' onChange={(e) => this.updateState(e, 'address2')} defaultValue={info.address && info.address.address2} /></div>
-                <div className='addressLine line3'>
-                City <input type='text' onChange={(e) => this.updateState(e, 'city')} defaultValue={info.address && info.address.city} />,
-                State <input type='text' onChange={(e) => this.updateState(e, 'state')} defaultValue={info.address && info.address.state} />
-                Zip <input type='text' onChange={(e) => this.updateState(e, 'postalCode')} defaultValue={info.address && info.address.postalCode} />
-                </div>
-              </div>
+            <div className='loginRow'>
+              <label htmlFor='cardName'>Card Name (Private)</label>
+              <input
+                id='cardName'
+                type='text'
+                onChange={(e) => this.updateState(e, 'cardName')}
+                defaultValue={info.cardName} />
             </div>
-            <div className='cardLine'> Twitter <input type='text' onChange={(e) => this.updateState(e, 'twitter')} defaultValue={info.twitter} /></div>
-            <div className='cardLine'> Facebook <input type='text' onChange={(e) => this.updateState(e, 'facebook')} defaultValue={info.facebook} /></div>
-            <div className='cardLine'> LinkedIn <input type='text' onChange={(e) => this.updateState(e, 'linkedIn')} defaultValue={info.linkedIn} /></div>
-            <div className='cardLine'> Instagram <input type='text' onChange={(e) => this.updateState(e, 'instagram')} defaultValue={info.instagram} /></div>
-            <button onClick={e => {
+            <div className='loginRow'>
+              <label htmlFor='displayName'>Display Name (Shared)</label>
+              <input
+                id='displayName'
+                type='text'
+                onChange={(e) => this.updateState(e, 'displayName')}
+                defaultValue={info.displayName} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='name'>Name</label>
+              <input
+                id='name'
+                type='text'
+                onChange={(e) => this.updateState(e, 'name')}
+                defaultValue={info.name} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='businessName'>Business</label>
+              <input
+                id='businessName'
+                type='text'
+                onChange={(e) => this.updateState(e, 'businessName')}
+                defaultValue={info.businessName} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='number'>Number</label>
+              <input
+                id='number'
+                type='text'
+                onChange={(e) => this.updateState(e, 'number')}
+                defaultValue={info.number} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='email'>Email</label>
+              <input
+                id='email'
+                type='text'
+                onChange={(e) => this.updateState(e, 'email')}
+                defaultValue={info.email} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='address1'>Address Line 1 </label>
+              <input
+                id='address1'
+                type='text'
+                onChange={(e) => this.updateState(e, 'address1')}
+                defaultValue={info.address && info.address.address1} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='address2'>Address Line 2 </label>
+              <input
+                id='address2'
+                type='text'
+                onChange={(e) => this.updateState(e, 'address2')}
+                defaultValue={info.address && info.address.address2} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='city'>City</label>
+              <input
+                id='city'
+                type='text'
+                onChange={(e) => this.updateState(e, 'city')}
+                defaultValue={info.address && info.address.city} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='state'>State</label>
+              <input
+                id='state'
+                type='text'
+                onChange={(e) => this.updateState(e, 'state')}
+                defaultValue={info.address && info.address.state} />
+            </div>
+            <div className='loginRow'>
+              <label htmlFor='postalCode'>Zip Code</label>
+              <input
+                id='postalCode'
+                type='postalCode'
+                onChange={(e) => this.updateState(e, 'postalCode')}
+                defaultValue={info.address && info.address.postalCode} />
+
+            </div>
+            <a className='formLink' onClick={e => {
               updateCard({ variables: {
                 token: token,
                 id: info.id,
@@ -104,16 +169,13 @@ class CardInfo extends Component {
                 address2: this.state.address2,
                 city: this.state.city,
                 state: this.state.state,
-                postalCode: this.state.postalCode,
-                twitter: this.state.twitter,
-                facebook: this.state.facebook,
-                linkedIn: this.state.linkedIn,
-                instagram: this.state.instagram
+                postalCode: this.state.postalCode
               } })
                 .then(data => {
                   this.editOff()
                 })
-            }}>Update</button>
+            }}>Update</a>
+            <a className='formLink' onClick={() => this.editOff()}>Cancel</a>
           </React.Fragment>
 
         )
