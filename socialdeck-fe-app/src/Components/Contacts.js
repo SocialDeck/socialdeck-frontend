@@ -45,9 +45,9 @@ class Contacts extends Component {
                   </div>
                 </Link>
                 <div className='list-item__right' >
-                  {contact.number && <a href={'tel:+' + this.stripNumber(contact.number)}> <i className='fas fa-phone list-item__icon' /></a>}
+                  {contact.number && <a href={'tel:' + this.stripNumber(contact.number)}> <i className='fas fa-phone list-item__icon' /></a>}
                   {!contact.number && <i className='fas fa-phone list-item__hidden' />}
-                  {contact.mobile && <a href={'sms:+' + this.stripNumber(contact.number)}> <i className='fas fa-comment-alt list-item__icon' /></a>}
+                  {contact.mobile && <a href={'sms:' + this.stripNumber(contact.number)}> <i className='fas fa-comment-alt list-item__icon' /></a>}
                   {!contact.mobile && <i className='fas fa-comment-alt list-item__hidden' />}
                   {contact.address && <a href={'https://maps.google.com/maps/place/' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon' /></a>}
                   {!contact.address && <i className='fas fa-directions list-item__hidden' />}
