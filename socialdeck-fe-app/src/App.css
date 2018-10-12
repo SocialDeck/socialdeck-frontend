@@ -155,7 +155,7 @@ border: 1px solid #274156;
 .cardOption {
   padding: 0 1em;
   text-decoration: none;
-  color: #1C6E8C
+  color: #1C6E8C;
 }
 
 .address {
@@ -170,6 +170,11 @@ border: 1px solid #274156;
 
 .cardIcon {
   margin: 10px;
+  color: #274156;
+}
+
+.standardIcon {
+  color: #274156;
 }
 
 .qrPageWrapper {
