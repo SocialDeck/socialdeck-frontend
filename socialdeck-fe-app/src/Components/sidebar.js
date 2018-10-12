@@ -40,6 +40,8 @@ class SideBar extends Component {
           <br />
           <Link className='navLinks' to='/contacts/new-contact' onClick={() => this.closeMenu()}>New Contact</Link>
           <br />
+          <Link className='navLinks' to='/editAccount' onClick={() => this.closeMenu()}>Edit Account</Link>
+          <br />
           <a className='logOutButton' onClick={() => {
             this.props.logOut()
             this.closeMenu()

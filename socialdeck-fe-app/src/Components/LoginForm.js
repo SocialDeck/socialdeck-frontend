@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import './App.css'
 import { Link, navigate } from '@reach/router'
 import { Mutation } from 'react-apollo'
-import { LOGIN_USER } from './queries'
+import { LOGIN_USER } from '../queries'
 
 class LoginForm extends Component {
   constructor () {

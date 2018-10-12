@@ -1,27 +1,13 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { Link } from '@reach/router'
-import { UPDATE_CARD, DELETE_CARD } from './queries'
+import { UPDATE_CARD, DELETE_CARD } from '../queries'
 
 class CardInfo extends Component {
   constructor () {
     super()
     this.state = {
-      isEditing: false,
-      cardName: '',
-      displayName: '',
-      name: '',
-      number: '',
-      email: '',
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      postalCode: '',
-      twitter: '',
-      facebook: '',
-      linkedIn: '',
-      instagram: ''
+      isEditing: false
     }
   }
 
@@ -33,21 +19,7 @@ class CardInfo extends Component {
 
   editOn (info) {
     this.setState({
-      isEditing: true,
-      cardName: info.cardName,
-      displayName: info.displayName,
-      name: info.name,
-      businessName: info.businessName,
-      number: info.number,
-      address1: info.address1,
-      address2: info.address2,
-      city: info.city,
-      state: info.state,
-      postalCode: info.postalCode,
-      twitter: info.twitter,
-      facebook: info.facebook,
-      linkedIn: info.linkedIn,
-      instagram: info.instagram
+      isEditing: true
     })
   }
 
@@ -61,7 +33,7 @@ class CardInfo extends Component {
     const token = window.localStorage.getItem('token')
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
-        {info.displayName && <div className='cardLine'>{info.cardName}</div>}
+        {info.cardName && <div className='cardLine'>{info.cardName}</div>}
         {info.displayName && <div className='cardLine'>{info.displayName}</div>}
         {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}

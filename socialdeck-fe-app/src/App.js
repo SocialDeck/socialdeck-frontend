@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import './App.css'
 import { Router, Match } from '@reach/router'
-import LoginForm from './LoginForm'
-import RegisterForm from './RegisterForm'
-import Contacts from './Contacts'
-import Favorites from './Favorites'
-import Card from './Card'
-import MyCards from './MyCards'
-import ExampleCard from './ExampleCard'
-import NewContact from './NewContact'
-import Connections from './Connections'
-import ShareQR from './ShareQR'
-import QRLanding from './QRLanding'
-import UpdateUser from './UpdateUser'
-import Home from './Home'
+import LoginForm from './Components/LoginForm'
+import RegisterForm from './Components/RegisterForm'
+import Contacts from './Components/Contacts'
+import Favorites from './Components/Favorites'
+import Card from './Components/Card'
+import MyCards from './Components/MyCards'
+import ExampleCard from './Components/ExampleCard'
+import NewContact from './Components/NewContact'
+import Connections from './Components/Connections'
+import ShareQR from './Components/ShareQR'
+import QRLanding from './Components/QRLanding'
+import UpdateUser from './Components/UpdateUser'
+import Home from './Components/Home'
 
-import SideBar from './sidebar'
+import SideBar from './Components/sidebar'
 
 class App extends Component {
   constructor () {
@@ -57,7 +57,7 @@ class App extends Component {
         <Router>
           <Home path='/' logOut={this.logOut}>
             <LoginForm path='login' setUser={this.setUser} />
-            <RegisterForm path='register' />
+            <RegisterForm path='register' setUser={this.setUser} />
 
             <Contacts path='contacts' username={this.state.username} token={this.state.token} />
             <Favorites path='favorites' username={this.state.username} token={this.state.token} />

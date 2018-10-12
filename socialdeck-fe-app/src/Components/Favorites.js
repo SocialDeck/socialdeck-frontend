@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import { Link, Redirect } from '@reach/router'
-import { GET_FAVORITES } from './queries'
+import { GET_FAVORITES } from '../queries'
 
 class Favorites extends Component {
   stripNumber (number) {
@@ -32,7 +32,7 @@ class Favorites extends Component {
             return data.favorites.map((contact, idx) => (
 
               <li key={idx} className='list-item' >
-                <Link to={'/contacts/' +contact.cardToken} key={idx} className='list-item contact'>
+                <Link to={'/contacts/' + contact.cardToken} key={idx} className='list-item contact'>
                   <div className='list-item__left' >
                     <div className='list-item__thumbnail monogram' >
                       {contact.name[0]}

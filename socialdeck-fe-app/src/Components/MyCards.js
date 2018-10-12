@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import { Link, Redirect, navigate } from '@reach/router'
-import { GET_MY_CARDS, CREATE_CARD } from './queries'
+import { Redirect, navigate } from '@reach/router'
+import { GET_MY_CARDS, CREATE_CARD } from '../queries'
 import CardInfo from './CardInfo'
 
 class MyCards extends Component {
@@ -9,21 +9,7 @@ class MyCards extends Component {
     super()
     this.state = {
       newCard: false,
-      owned: true,
-      cardName: '',
-      displayName: '',
-      name: '',
-      number: '',
-      email: '',
-      address1: '',
-      address2: '',
-      city: '',
-      state: '',
-      postalCode: '',
-      twitter: '',
-      facebook: '',
-      linkedIn: '',
-      instagram: ''
+      owned: true
     }
   }
 
@@ -49,9 +35,6 @@ class MyCards extends Component {
     const token = window.localStorage.getItem('token')
     return (
       <React.Fragment>
-        <Link className='formLink' to='/contacts'>Contacts List</Link>
-        <Link className='formLink' to='/editAccount'>Edit My Account</Link>
-
         {token ? <Query
           query={GET_MY_CARDS} variables={{ token: token }}
         >
@@ -70,10 +53,12 @@ class MyCards extends Component {
           : <Redirect to='/login' noThrow />
         }
         {!this.state.newCard
-          ? <a className='formLink' onClick={() => {
-            console.log('add my card to GraphQL for storage')
-            this.startNewCard()
-          }}>Add New Card</a>
+          ? <div className='card'>
+            <a className='formLink' onClick={() => {
+              console.log('add my card to GraphQL for storage')
+              this.startNewCard()
+            }}>Add New Card</a></div>
+
           : <Mutation mutation={CREATE_CARD} update={this.logCache}>
             {(createCard) => (
               <div className='card'>
