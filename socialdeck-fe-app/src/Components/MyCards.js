@@ -61,7 +61,7 @@ class MyCards extends Component {
           : <Mutation mutation={CREATE_CARD} update={this.logCache}>
             {(createCard) => (
               <div className='loginForm'>
-                <div className='cardHeader'><div className='cardLine'><input type='text' placeholder='Card Type' onChange={(e) => this.updateState(e, 'cardName')} /> <input type='text' placeholder='Display Card Type' onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.addNewCard()}><i className="fas fa-times"></i></a></div>
+                <div className='cardHeader'><div className='cardLine'><input type='text' placeholder='Card Type' onChange={(e) => this.updateState(e, 'cardName')} /> <input type='text' placeholder='Display Card Type' onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.addNewCard()}><i className='fas fa-times' /></a></div>
                 <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> <input type='text' placeholder='Name' onChange={(e) => this.updateState(e, 'name')} /></div>
                 <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' placeholder='Business' onChange={(e) => this.updateState(e, 'businessName')} /></div>
                 <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' placeholder='999-999-9999' onChange={(e) => this.updateState(e, 'number')} /></div>
@@ -80,8 +80,7 @@ class MyCards extends Component {
                 <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='LinkedIn' onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
                 <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='Instagram' onChange={(e) => this.updateState(e, 'instagram')} /></div>
 
-           
-                <a className='buttonSignIn'  onClick={e => {
+                <a className='buttonSignIn' onClick={e => {
                   createCard({ variables: {
                     token: token,
                     owned: true,
@@ -99,14 +98,14 @@ class MyCards extends Component {
                     facebook: this.state.facebook,
                     twitter: this.state.twitter,
                     linkedIn: this.state.linkedIn,
-                    instagram: this.state.instagram 
+                    instagram: this.state.instagram
                   } })
                     .then(data => {
                       this.addNewCard()
                       navigate('/my-cards')
                     })
                 }}>Add</a>
-          
+
               </div>
 
             )

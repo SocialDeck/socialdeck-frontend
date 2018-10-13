@@ -3,17 +3,17 @@ import { Link } from '@reach/router'
 import QRCode from 'qrcode-react'
 
 class ShareQR extends Component {
-  share() {
-    var text = 'Add text to share with the URL';
+  share () {
+    var text = 'Add text to share with the URL'
     if ('share' in navigator) {
       navigator.share({
-        title: "Join SocialDeck",
+        title: 'Join SocialDeck',
         text: text,
-        url: 'https://socialdeck.xyz/share/' + this.props.cardToken,
+        url: 'https://socialdeck.xyz/share/' + this.props.cardToken
       })
     }
   }
-  render() {
+  render () {
     return <React.Fragment>
       <div className='qrPageWrapper card'>
         <div className='qrCodeWrapper'>

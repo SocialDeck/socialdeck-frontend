@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Query, Mutation } from 'react-apollo'
+import { Query } from 'react-apollo'
 import { Redirect } from '@reach/router'
-import { FAVORITE_CARD, UNFAVORITE_CARD, GET_CARD } from '../queries'
+import { GET_CARD } from '../queries'
 import CardInfo from './CardInfo'
 
 class Card extends Component {

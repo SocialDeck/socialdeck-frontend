@@ -43,14 +43,14 @@ class UpdateUser extends Component {
                   id='name'
                   type='text'
                   onChange={(e) => this.updateState(e, 'name')} />
-              </div>       
+              </div>
               <div className='loginRow'>
                 <label htmlFor='email'>New Email</label>
                 <input
                   id='email'
                   type='email'
                   onChange={(e) => this.updateState(e, 'email')} />
-              </div>                        
+              </div>
               <a className='buttonSignIn' onClick={e => {
                 updateUser({ variables: {
                   token: token,

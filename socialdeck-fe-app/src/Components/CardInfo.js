@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { Link } from '@reach/router'
-import { UPDATE_CARD, DELETE_CARD } from '../queries'
-import { FAVORITE_CARD, UNFAVORITE_CARD } from '../queries'
+import { UPDATE_CARD, DELETE_CARD, FAVORITE_CARD, UNFAVORITE_CARD } from '../queries'
+
 class CardInfo extends Component {
   constructor () {
     super()
@@ -35,21 +35,21 @@ class CardInfo extends Component {
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
         <div className='cardHeader'>
-        {info.displayName && info.displayName}
+          {info.displayName && info.displayName}
           {(!info.user || (info.user && username !== info.user.username)) && (('favorite' in this.state ? this.state.favorite : info.favorite) ? <Mutation mutation={UNFAVORITE_CARD}>
-          {(favorite) =>
-            <a className='formLink' onClick={() => {
-              favorite({
-                variables: {
-                  token: token,
-                  cardId: info.id
-                }
-              }).then(this.setState({
-                favorite: !this.state.favorite
-              }))
-            }}><i className='fas fa-star' /></a>
-          }
-        </Mutation> : <Mutation mutation={FAVORITE_CARD}>
+            {(favorite) =>
+              <a className='formLink' onClick={() => {
+                favorite({
+                  variables: {
+                    token: token,
+                    cardId: info.id
+                  }
+                }).then(this.setState({
+                  favorite: !this.state.favorite
+                }))
+              }}><i className='fas fa-star' /></a>
+            }
+          </Mutation> : <Mutation mutation={FAVORITE_CARD}>
             {(favorite) =>
               <a className='formLink' onClick={() => {
                 favorite({
@@ -62,7 +62,7 @@ class CardInfo extends Component {
                 }))
               }}><i className='far fa-star' /></a>
             }
-            </Mutation>)}</div>
+          </Mutation>)}</div>
         {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}
         {info.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {info.number}</div>}
@@ -83,8 +83,8 @@ class CardInfo extends Component {
         {info.facebook && <div className='cardLine'><i className='fab fa-facebook-f cardIcon' />{info.facebook}</div>}
         {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' />{info.instagram}</div>}
 
-        {( (info.author && username == info.author.username) || (info.user && username == info.user.username) ) && <div className='cardOptions'>
-          {(info.author && username == info.author.username) && <Mutation mutation={DELETE_CARD}>
+        {((info.author && username === info.author.username) || (info.user && username === info.user.username)) && <div className='cardOptions'>
+          {(info.author && username === info.author.username) && <Mutation mutation={DELETE_CARD}>
             {(deleteCard) =>
               <a className='cardOption cardDelete' onClick={() => {
                 deleteCard({
@@ -96,10 +96,10 @@ class CardInfo extends Component {
               }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
             }
           </Mutation>}
-          {(info.author && username == info.author.username) && <a className='cardOption' onClick={() => {
-            this.editOn(info) 
+          {(info.author && username === info.author.username) && <a className='cardOption' onClick={() => {
+            this.editOn(info)
           }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>}
-          {(info.user && username == info.user.username) && <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>}
+          {(info.user && username === info.user.username) && <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>}
 
         </div>}
 
@@ -107,8 +107,8 @@ class CardInfo extends Component {
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
         {(updateCard) => (
           <React.Fragment>
-            
-            <div className='cardHeader'><div className='cardLine'><input type='text' defaultValue={info.cardName} onChange={(e) => this.updateState(e, 'cardName')} /><input type='text' defaultValue={info.displayName} onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.editOff()}><i className="fas fa-times"></i></a></div>
+
+            <div className='cardHeader'><div className='cardLine'><input type='text' defaultValue={info.cardName} onChange={(e) => this.updateState(e, 'cardName')} /><input type='text' defaultValue={info.displayName} onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.editOff()}><i className='fas fa-times' /></a></div>
             <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> <input type='text' placeholder='Name' defaultValue={info.name} onChange={(e) => this.updateState(e, 'name')} /></div>
             <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' placeholder='Business Name' defaultValue={info.businessName} onChange={(e) => this.updateState(e, 'businessName')} /></div>
             <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' placeholder='Phone Number' defaultValue={info.number} onChange={(e) => this.updateState(e, 'number')} /></div>
@@ -122,10 +122,10 @@ class CardInfo extends Component {
               </div>
             </div>
             <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> <input type='date' defaultValue={info.birthDate} onChange={(e) => this.updateState(e, 'birthDate')} /></div>
-            <div className='cardLine'><i className='fab fa-facebook cardIcon' /> <input type='text' placeholder='Facebook' defaultValue={info.facebook}  onChange={(e) => this.updateState(e, 'facebook')} /></div>
-            <div className='cardLine'><i className='fab fa-twitter cardIcon' /> <input type='text' placeholder='Twitter' defaultValue={info.twitter}  onChange={(e) => this.updateState(e, 'twitter')} /></div>
-            <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='LinkedIn' defaultValue={info.linkedIn}  onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
-            <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='Instagram' defaultValue={info.instagram}  onChange={(e) => this.updateState(e, 'instagram')} /></div>
+            <div className='cardLine'><i className='fab fa-facebook cardIcon' /> <input type='text' placeholder='Facebook' defaultValue={info.facebook} onChange={(e) => this.updateState(e, 'facebook')} /></div>
+            <div className='cardLine'><i className='fab fa-twitter cardIcon' /> <input type='text' placeholder='Twitter' defaultValue={info.twitter} onChange={(e) => this.updateState(e, 'twitter')} /></div>
+            <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='LinkedIn' defaultValue={info.linkedIn} onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
+            <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='Instagram' defaultValue={info.instagram} onChange={(e) => this.updateState(e, 'instagram')} /></div>
 
             <a className='buttonSignIn' onClick={e => {
               updateCard({ variables: {
@@ -145,7 +145,7 @@ class CardInfo extends Component {
                 facebook: this.state.facebook,
                 twitter: this.state.twitter,
                 linkedIn: this.state.linkedIn,
-                instagram: this.state.instagram 
+                instagram: this.state.instagram
               } })
                 .then(data => {
                   this.editOff()
