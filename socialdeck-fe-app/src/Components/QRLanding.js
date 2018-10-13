@@ -188,7 +188,12 @@ class QRLanding extends Component {
                     username: this.state.username,
                     password: this.state.password
                   } })
-                    .then(data => console.log(data))
+                    .then(data => data.data.createUser)
+                    .then(data => {
+                      window.localStorage.setItem('token', data.token)
+                      window.localStorage.setItem('username', this.state.username)
+                      this.setToken(data.token)
+                    })
                 }} >Register</a>
                 <p>Already have an account? <a className='formLink' onClick={() => this.setLogin()}>Login</a></p>
 
