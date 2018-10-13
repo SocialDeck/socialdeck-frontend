@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { Link } from '@reach/router'
 import { UPDATE_CARD, DELETE_CARD } from '../queries'
-
+import { FAVORITE_CARD, UNFAVORITE_CARD } from '../queries'
 class CardInfo extends Component {
   constructor () {
     super()
@@ -31,10 +31,38 @@ class CardInfo extends Component {
   render () {
     const { info } = this.props
     const token = window.localStorage.getItem('token')
+    const username = window.localStorage.getItem('username')
     return <React.Fragment> { !this.state.isEditing
       ? <React.Fragment>
-
-        {info.displayName && <div className='cardLine'>{info.displayName}</div>}
+        <div className='cardHeader'>
+        {info.displayName && info.displayName}
+          {(!info.user || (info.user && username !== info.user.username)) && (('favorite' in this.state ? this.state.favorite : info.favorite) ? <Mutation mutation={UNFAVORITE_CARD}>
+          {(favorite) =>
+            <a className='formLink' onClick={() => {
+              favorite({
+                variables: {
+                  token: token,
+                  cardId: info.id
+                }
+              }).then(this.setState({
+                favorite: !this.state.favorite
+              }))
+            }}><i className='fas fa-star' /></a>
+          }
+        </Mutation> : <Mutation mutation={FAVORITE_CARD}>
+            {(favorite) =>
+              <a className='formLink' onClick={() => {
+                favorite({
+                  variables: {
+                    token: token,
+                    cardId: info.id
+                  }
+                }).then(this.setState({
+                  favorite: !this.state.favorite
+                }))
+              }}><i className='far fa-star' /></a>
+            }
+            </Mutation>)}</div>
         {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
         {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}
         {info.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {info.number}</div>}
@@ -49,9 +77,14 @@ class CardInfo extends Component {
           </div>
         </div>
         }
+        {info.birthDate && <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> {info.birthDate}</div>}
+        {info.twitter && <div className='cardLine'><i className='fab fa-twitter cardIcon' />{info.twitter}</div>}
+        {info.linkedIn && <div className='cardLine'><i className='fab fa-linkedin cardIcon' />{info.linkedIn}</div>}
+        {info.facebook && <div className='cardLine'><i className='fab fa-facebook-f cardIcon' />{info.facebook}</div>}
+        {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' />{info.instagram}</div>}
 
-        <div className='cardOptions'>
-          <Mutation mutation={DELETE_CARD}>
+        {( (info.author && username == info.author.username) || (info.user && username == info.user.username) ) && <div className='cardOptions'>
+          {(info.author && username == info.author.username) && <Mutation mutation={DELETE_CARD}>
             {(deleteCard) =>
               <a className='cardOption cardDelete' onClick={() => {
                 deleteCard({
@@ -62,127 +95,62 @@ class CardInfo extends Component {
                 })
               }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
             }
-          </Mutation>
-          <a className='cardOption' onClick={() => {
-            this.editOn(info)
-          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>
-          <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>
+          </Mutation>}
+          {(info.author && username == info.author.username) && <a className='cardOption' onClick={() => {
+            this.editOn(info) 
+          }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>}
+          {(info.user && username == info.user.username) && <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>}
 
-        </div>
+        </div>}
 
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
         {(updateCard) => (
           <React.Fragment>
-            <div className='loginRow'>
-              <label htmlFor='cardName'>Card Name (Private)</label>
-              <input
-                id='cardName'
-                type='text'
-                onChange={(e) => this.updateState(e, 'cardName')}
-                defaultValue={info.cardName} />
+            
+            <div className='cardHeader'><div className='cardLine'><input type='text' defaultValue={info.cardName} onChange={(e) => this.updateState(e, 'cardName')} /><input type='text' defaultValue={info.displayName} onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.editOff()}><i className="fas fa-times"></i></a></div>
+            <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> <input type='text' placeholder='Name' defaultValue={info.name} onChange={(e) => this.updateState(e, 'name')} /></div>
+            <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' placeholder='Business Name' defaultValue={info.businessName} onChange={(e) => this.updateState(e, 'businessName')} /></div>
+            <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' placeholder='Phone Number' defaultValue={info.number} onChange={(e) => this.updateState(e, 'number')} /></div>
+            <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input placeholder='Email' type='text' defaultValue={info.email} onChange={(e) => this.updateState(e, 'email')} /></div>
+            <div className='address'>
+              <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /> </div>
+              <div className='addressBlock'>
+                <div className='addressLine line1'> <input type='text' placeholder='Address Line 1' defaultValue={info.address && info.address.address1} onChange={(e) => this.updateState(e, 'address1')} /></div>
+                <div className='addressLine line2'> <input type='text' placeholder='Address Line 2'defaultValue={info.address && info.address.address2} onChange={(e) => this.updateState(e, 'address2')} /></div>
+                <div className='addressLine line3'> <input type='text' className='city' placeholder='City' defaultValue={info.address && info.address.city} onChange={(e) => this.updateState(e, 'city')} />, <input type='text' className='state' placeholder='State' defaultValue={info.address && info.address.state} onChange={(e) => this.updateState(e, 'state')} /> <input type='text' placeholder='ZIP Code' defaultValue={info.address && info.address.postalCode} onChange={(e) => this.updateState(e, 'postalCode')} /></div>
+              </div>
             </div>
-            <div className='loginRow'>
-              <label htmlFor='displayName'>Display Name (Shared)</label>
-              <input
-                id='displayName'
-                type='text'
-                onChange={(e) => this.updateState(e, 'displayName')}
-                defaultValue={info.displayName} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='name'>Name</label>
-              <input
-                id='name'
-                type='text'
-                onChange={(e) => this.updateState(e, 'name')}
-                defaultValue={info.name} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='businessName'>Business</label>
-              <input
-                id='businessName'
-                type='text'
-                onChange={(e) => this.updateState(e, 'businessName')}
-                defaultValue={info.businessName} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='number'>Number</label>
-              <input
-                id='number'
-                type='text'
-                onChange={(e) => this.updateState(e, 'number')}
-                defaultValue={info.number} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='email'>Email</label>
-              <input
-                id='email'
-                type='text'
-                onChange={(e) => this.updateState(e, 'email')}
-                defaultValue={info.email} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='address1'>Address Line 1 </label>
-              <input
-                id='address1'
-                type='text'
-                onChange={(e) => this.updateState(e, 'address1')}
-                defaultValue={info.address && info.address.address1} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='address2'>Address Line 2 </label>
-              <input
-                id='address2'
-                type='text'
-                onChange={(e) => this.updateState(e, 'address2')}
-                defaultValue={info.address && info.address.address2} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='city'>City</label>
-              <input
-                id='city'
-                type='text'
-                onChange={(e) => this.updateState(e, 'city')}
-                defaultValue={info.address && info.address.city} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='state'>State</label>
-              <input
-                id='state'
-                type='text'
-                onChange={(e) => this.updateState(e, 'state')}
-                defaultValue={info.address && info.address.state} />
-            </div>
-            <div className='loginRow'>
-              <label htmlFor='postalCode'>Zip Code</label>
-              <input
-                id='postalCode'
-                type='postalCode'
-                onChange={(e) => this.updateState(e, 'postalCode')}
-                defaultValue={info.address && info.address.postalCode} />
+            <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> <input type='date' defaultValue={info.birthDate} onChange={(e) => this.updateState(e, 'birthDate')} /></div>
+            <div className='cardLine'><i className='fab fa-facebook cardIcon' /> <input type='text' placeholder='Facebook' defaultValue={info.facebook}  onChange={(e) => this.updateState(e, 'facebook')} /></div>
+            <div className='cardLine'><i className='fab fa-twitter cardIcon' /> <input type='text' placeholder='Twitter' defaultValue={info.twitter}  onChange={(e) => this.updateState(e, 'twitter')} /></div>
+            <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='LinkedIn' defaultValue={info.linkedIn}  onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
+            <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='Instagram' defaultValue={info.instagram}  onChange={(e) => this.updateState(e, 'instagram')} /></div>
 
-            </div>
-            <a className='formLink' onClick={e => {
+            <a className='buttonSignIn' onClick={e => {
               updateCard({ variables: {
                 token: token,
                 id: info.id,
                 cardName: this.state.cardName,
-                businessName: this.state.businessName,
                 displayName: this.state.displayName,
                 name: this.state.name,
                 number: this.state.number,
+                email: this.state.email,
                 address1: this.state.address1,
                 address2: this.state.address2,
                 city: this.state.city,
                 state: this.state.state,
-                postalCode: this.state.postalCode
+                postalCode: this.state.postalCode,
+                birthDate: this.state.birthDate,
+                facebook: this.state.facebook,
+                twitter: this.state.twitter,
+                linkedIn: this.state.linkedIn,
+                instagram: this.state.instagram 
               } })
                 .then(data => {
                   this.editOff()
                 })
             }}>Update</a>
-            <a className='formLink' onClick={() => this.editOff()}>Cancel</a>
           </React.Fragment>
 
         )
