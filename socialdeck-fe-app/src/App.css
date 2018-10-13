@@ -166,6 +166,45 @@ border: 1px solid #274156;
   border: 1px solid #274156;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+.card i {
+  width: 20px;
+  height: 20px;
+
+}
+
+.cardLine input {
+  border: 0;
+  outline: 0;
+  padding: 1vh 0;
+  background: transparent;
+  width: 85%;
+  border-bottom: 1px solid #274156;
+}
+
+.address input {
+  border: 0;
+  outline: 0;
+  padding: 1vh 0;
+  background: transparent;
+  border-bottom: 1px solid #274156;
+}
+
+.line1 input {
+  width: 100%;
+}
+
+.line2 input {
+  width: 100%;
+
+}
+
+.city {
+  width: 64%;
+}
+
+.state {
+  width: 33%;
+}
 
 .cardOptions {
   display: flex;
@@ -181,6 +220,11 @@ border: 1px solid #274156;
   color: #1C6E8C;
 }
 
+
+.addressBlock {
+  width: 86%;
+
+}
 .address {
   display: flex;
 }
