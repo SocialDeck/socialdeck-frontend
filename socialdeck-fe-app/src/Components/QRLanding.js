@@ -183,6 +183,7 @@ class QRLanding extends Component {
 
                 <a className='buttonSignIn' onClick={e => {
                   createUser({ variables: {
+                    name: this.state.name,
                     email: this.state.email,
                     username: this.state.username,
                     password: this.state.password
