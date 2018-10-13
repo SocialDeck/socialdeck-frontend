@@ -12,7 +12,8 @@ class QRLanding extends Component {
       username: '',
       password: '',
       confirmation: '',
-      email: ''
+      email: '',
+      name: ''
     }
   }
 
@@ -32,6 +33,10 @@ class QRLanding extends Component {
     this.setState({
       register: false
     })
+  }
+
+  updateName (value) {
+    this.setState({ name: value })
   }
 
   updateUsername (value) {
@@ -137,6 +142,13 @@ class QRLanding extends Component {
             {(createUser) => (
               <div className='loginForm'>
                 <div className='loginRow'>
+                  <label>Name</label>
+                  <input
+                    className='signin_input'
+                    type='text'
+                    onChange={event => this.updateName(event.target.value)} />
+                </div>
+                <div className='loginRow'>
                   <label>Email</label>
                   <input
                     className='signin_input'
@@ -171,11 +183,17 @@ class QRLanding extends Component {
 
                 <a className='buttonSignIn' onClick={e => {
                   createUser({ variables: {
+                    name: this.state.name,
                     email: this.state.email,
                     username: this.state.username,
                     password: this.state.password
                   } })
-                    .then(data => console.log(data))
+                    .then(data => data.data.createUser)
+                    .then(data => {
+                      window.localStorage.setItem('token', data.token)
+                      window.localStorage.setItem('username', this.state.username)
+                      this.setToken(data.token)
+                    })
                 }} >Register</a>
                 <p>Already have an account? <a className='formLink' onClick={() => this.setLogin()}>Login</a></p>
 

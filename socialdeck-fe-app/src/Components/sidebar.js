@@ -34,7 +34,7 @@ class SideBar extends Component {
           <br />
           <Link className='navLinks' to='/favorites' onClick={() => this.closeMenu()}>Favorites</Link>
           <br />
-          <Link className='navLinks' to='/contacts/connections' onClick={() => this.closeMenu()}>Subscribers</Link>
+          <Link className='navLinks' to='/contacts/subscribers' onClick={() => this.closeMenu()}>Subscribers</Link>
           <br />
           <Link className='navLinks' to='/my-cards' onClick={() => this.closeMenu()}>Profiles</Link>
           <br />

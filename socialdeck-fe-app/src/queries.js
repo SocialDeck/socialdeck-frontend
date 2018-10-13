@@ -19,8 +19,8 @@ mutation createUser($email: String!, $name: String!, $username: String!, $passwo
 `
 
 export const LOGIN_USER = gql`
-mutation login($username: String!, $password: String!, $remember:Boolean) {
-  login(user: {username: $username, password: $password, remember: $remember}) {
+mutation login($username: String!, $password: String!) {
+  login(user: {username: $username, password: $password}) {
     token
   }
 }
@@ -42,9 +42,9 @@ query subscribers($token: String!)
 `
 
 export const GET_CONTACTS = gql`
-query contacts($token: String!)
+query contacts($token: String!, $search:String)
 {
-  contacts(token: $token) {
+  contacts(token: $token, search: $search) {
     id
     user {
       id
@@ -193,8 +193,8 @@ query ownedCards($token: String!)
 
 export const CREATE_CARD = gql`
 mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $displayName:String, $name:String!,
-  $number:String, $email:String, $address1:String!, $address2:String, $city: String!,
-  $state:String!, $postalCode:String!, $twitter:String, $facebook:String, $linkedIn:String,
+  $number:String, $email:String, $address1:String, $address2:String, $city: String,
+  $state:String, $postalCode:String, $twitter:String, $facebook:String, $linkedIn:String,
   $instagram:String) {
     createCard(token:$token, owned:$owned, cardName:$cardName, displayName:$displayName, name:$name,
                number:$number, email:$email, address: {address1:$address1, address2:$address2, city: $city,
@@ -232,15 +232,16 @@ mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $display
   }
 `
 
+
 export const UPDATE_CARD = gql`
 mutation updateCard($token:String!, $id: ID!, $cardName: String, $displayName:String, $name:String,
              $number:String, $address1: String, $address2: String, $city: String, $state: String,
              $postalCode: String, $twitter:String, $facebook:String, $linkedIn:String,
-             $instagram:String) {
+             $instagram:String, $birthDate: DateTime) {
          updateCard(token:$token, id: $id, cardName: $cardName, displayName:$displayName, name:$name,
               number:$number, address: {address1: $address1, address2: $address2, city: $city, state: $state,
               postalCode: $postalCode}, twitter:$twitter, facebook:$facebook, linkedIn:$linkedIn,
-              instagram:$instagram){
+              instagram:$instagram, birthDate:$birthDate){
     id
     user {
       id
@@ -359,13 +360,22 @@ mutation destroyConnection($token: String!, $id: ID!){
 }
 `
 export const UPDATE_USER = gql`
-mutation updateUser($token: String!, $username: String, $name: String, $oldPassword: String!, $newPassword:String, $email: String){
-  updateUser(token: $token, username: $username, name: $name, oldPassword: $oldPassword, newPassword: $newPassword, email: $email){
+mutation updateUser($token: String!, $username: String, $name: String, $password:String, $email: String){
+  updateUser(token: $token, username: $username, name: $name, password: $password, email: $email){
     id
     username
   }
 }
 `
+
+export const RECOVER_ACCOUNT = gql`
+mutation resetPassword ($email: String!){
+  resetPassword(email: $email) {
+    message
+  }
+}
+`
+
 export const GET_USERS = gql`
 {
   users{

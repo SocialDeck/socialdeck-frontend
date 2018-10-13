@@ -9,13 +9,13 @@ import Card from './Components/Card'
 import MyCards from './Components/MyCards'
 import ExampleCard from './Components/ExampleCard'
 import NewContact from './Components/NewContact'
-import Connections from './Components/Connections'
+import Subscribers from './Components/Subscribers'
 import ShareQR from './Components/ShareQR'
 import QRLanding from './Components/QRLanding'
 import UpdateUser from './Components/UpdateUser'
+import PasswordReset from './Components/PasswordReset'
 import Home from './Components/Home'
-
-import SideBar from './Components/sidebar'
+import SideBar from './Components/Sidebar'
 
 class App extends Component {
   constructor () {
@@ -77,7 +77,7 @@ class App extends Component {
                 props.match ? (
                   <ShareQR cardToken={props.match.cardToken} />
                 ) : (
-                  <div>Uncool</div>
+                  <div>Token not found</div>
                 )
               }
             </Match>
@@ -87,7 +87,7 @@ class App extends Component {
                 props.match ? (
                   <QRLanding cardToken={props.match.cardToken} />
                 ) : (
-                  <div>Uncool</div>
+                  <div>Token not found</div>
                 )
               }
             </Match>
@@ -95,7 +95,17 @@ class App extends Component {
             <ExampleCard path='/contacts/example-card' />
             <UpdateUser path='/editAccount' />
             <NewContact path='/contacts/new-contact' />
-            <Connections path='/contacts/connections' />
+            <Subscribers path='/contacts/subscribers' />
+            <Match path='/passwordreset/:token'>
+              {props =>
+                props.match ? (
+                  <PasswordReset token={props.match.token} />
+                ) : (
+                  <div>Uncool</div>
+                )
+              }
+            </Match>
+            <PasswordReset path='/passwordreset/:token' />
           </Home>
 
         </Router>

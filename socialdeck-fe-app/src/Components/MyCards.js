@@ -43,7 +43,7 @@ class MyCards extends Component {
             if (error) return <p>Error :(</p>
 
             return data.ownedCards.map((card, idx) => (
-              <div key={idx} className='card'>
+              <div key={idx} className='loginForm'>
                 <CardInfo info={card} />
               </div>
             ))
@@ -60,86 +60,27 @@ class MyCards extends Component {
 
           : <Mutation mutation={CREATE_CARD} update={this.logCache}>
             {(createCard) => (
-              <div className='card'>
-                <div className='loginRow'>
-                  <label htmlFor='cardName'>Card Name (Private)</label>
-                  <input
-                    id='cardName'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'cardName')} />
+              <div className='loginForm'>
+                <div className='cardHeader'><div className='cardLine'><input type='text' placeholder='Card Type' onChange={(e) => this.updateState(e, 'cardName')} /> <input type='text' placeholder='Display Card Type' onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.addNewCard()}><i className='fas fa-times' /></a></div>
+                <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> <input type='text' placeholder='Name' onChange={(e) => this.updateState(e, 'name')} /></div>
+                <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> <input type='text' placeholder='Business' onChange={(e) => this.updateState(e, 'businessName')} /></div>
+                <div className='cardLine'><i className='fas fa-phone cardIcon' /> <input type='text' placeholder='999-999-9999' onChange={(e) => this.updateState(e, 'number')} /></div>
+                <div className='cardLine'><i className='fas fa-envelope cardIcon' /> <input type='text' placeholder='example@example.com' onChange={(e) => this.updateState(e, 'email')} /></div>
+                <div className='address'>
+                  <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /> </div>
+                  <div className='addressBlock'>
+                    <div className='addressLine line1'> <input type='text' placeholder='Address Line 1' onChange={(e) => this.updateState(e, 'address1')} /></div>
+                    <div className='addressLine line2'> <input type='text' placeholder='Address Line 2' onChange={(e) => this.updateState(e, 'address2')} /></div>
+                    <div className='addressLine line3'> <input type='text' className='city' placeholder='City' onChange={(e) => this.updateState(e, 'city')} />, <input type='text' className='state' placeholder='State' onChange={(e) => this.updateState(e, 'state')} /> <input type='text' placeholder='ZipCode' onChange={(e) => this.updateState(e, 'postalCode')} /></div>
+                  </div>
                 </div>
-                <div className='loginRow'>
-                  <label htmlFor='displayName'>Display Name (Shared)</label>
-                  <input
-                    id='displayName'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'displayName')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='name'>Name</label>
-                  <input
-                    id='name'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'name')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='businessName'>Business</label>
-                  <input
-                    id='businessName'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'businessName')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='number'>Number</label>
-                  <input
-                    id='number'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'number')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='email'>Email</label>
-                  <input
-                    id='email'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'email')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='address1'>Address Line 1 </label>
-                  <input
-                    id='address1'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'address1')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='address2'>Address Line 2 </label>
-                  <input
-                    id='address2'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'address2')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='city'>City</label>
-                  <input
-                    id='city'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'city')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='state'>State</label>
-                  <input
-                    id='state'
-                    type='text'
-                    onChange={(e) => this.updateState(e, 'state')} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='postalCode'>Zip Code</label>
-                  <input
-                    id='postalCode'
-                    type='postalCode'
-                    onChange={(e) => this.updateState(e, 'postalCode')} />
+                <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> <input type='date' placeholder='Birthday' onChange={(e) => this.updateState(e, 'birthDate')} /></div>
+                <div className='cardLine'><i className='fab fa-facebook cardIcon' /> <input type='text' placeholder='Facebook' onChange={(e) => this.updateState(e, 'facebook')} /></div>
+                <div className='cardLine'><i className='fab fa-twitter cardIcon' /> <input type='text' placeholder='Twitter' onChange={(e) => this.updateState(e, 'twitter')} /></div>
+                <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='LinkedIn' onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
+                <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='Instagram' onChange={(e) => this.updateState(e, 'instagram')} /></div>
 
-                </div>
-                <a className='formLink' onClick={e => {
+                <a className='buttonSignIn' onClick={e => {
                   createCard({ variables: {
                     token: token,
                     owned: true,
@@ -152,14 +93,19 @@ class MyCards extends Component {
                     address2: this.state.address2,
                     city: this.state.city,
                     state: this.state.state,
-                    postalCode: this.state.postalCode
+                    postalCode: this.state.postalCode,
+                    birthDate: this.state.birthDate,
+                    facebook: this.state.facebook,
+                    twitter: this.state.twitter,
+                    linkedIn: this.state.linkedIn,
+                    instagram: this.state.instagram
                   } })
                     .then(data => {
                       this.addNewCard()
                       navigate('/my-cards')
                     })
                 }}>Add</a>
-                <a className='formLink' onClick={() => this.addNewCard()}>Cancel</a>
+
               </div>
 
             )

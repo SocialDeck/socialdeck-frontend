@@ -22,25 +22,47 @@ class UpdateUser extends Component {
       <Mutation mutation={UPDATE_USER} update={this.logCache}>
         {(updateUser) => (
           <React.Fragment>
-            <div className='card'>
-              <div className='cardLine'>New Username<input type='text' onChange={(e) => this.updateState(e, 'username')} defaultValue='username' />  </div>
-              <div className='cardLine'>New Password<input type='text' onChange={(e) => this.updateState(e, 'newPassword')} defaultValue='new password' />  </div>
-              <div className='cardLine'>New Name <input type='text' onChange={(e) => this.updateState(e, 'name')} defaultValue='new name' /></div>
-              <div className='cardLine'>New Email<input type='text' onChange={(e) => this.updateState(e, 'email')} defaultValue='new email' /></div>
-              <div className='cardLine'>Verify Old Password (required) <input type='text' onChange={(e) => this.updateState(e, 'oldPassword')} defaultValue='' /></div>
-              <button onClick={e => {
+            <div className='loginForm'>
+              <div className='loginRow'>
+                <label htmlFor='username'>New Username</label>
+                <input
+                  id='username'
+                  type='text'
+                  onChange={(e) => this.updateState(e, 'username')} />
+              </div>
+              <div className='loginRow'>
+                <label htmlFor='password'>New Password</label>
+                <input
+                  id='password'
+                  type='password'
+                  onChange={(e) => this.updateState(e, 'newPassword')} />
+              </div>
+              <div className='loginRow'>
+                <label htmlFor='name'>New Name</label>
+                <input
+                  id='name'
+                  type='text'
+                  onChange={(e) => this.updateState(e, 'name')} />
+              </div>
+              <div className='loginRow'>
+                <label htmlFor='email'>New Email</label>
+                <input
+                  id='email'
+                  type='email'
+                  onChange={(e) => this.updateState(e, 'email')} />
+              </div>
+              <a className='buttonSignIn' onClick={e => {
                 updateUser({ variables: {
                   token: token,
                   username: this.state.username,
                   name: this.state.name,
-                  oldPassword: this.state.oldPassword,
-                  newPassword: this.state.newPassword,
+                  password: this.state.newPassword,
                   email: this.state.email
                 } })
                   .then(data => {
                     console.log(data)
                   })
-              }}>Update</button>
+              }}>Update</a>
             </div>
 
           </React.Fragment>
