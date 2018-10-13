@@ -82,13 +82,15 @@ border: 1px solid #274156;
   width: 100vw;
 }
 .searchField {
-  width: 70vw;
+  font-size: 1.5em;
+  width: 79vw;
   height: 5vh;
   background:rgba(50, 50, 50, 0.2);
   border:0px solid #FBFCFF;
 }
 .searchButton {
-  width: 29vw;
+  font-size: 1.5em;
+  width: 20vw;
   height: 5vh;
   position:relative;
   border:0px solid #1C6E8C;

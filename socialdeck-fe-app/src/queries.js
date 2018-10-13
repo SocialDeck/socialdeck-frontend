@@ -42,9 +42,9 @@ query subscribers($token: String!)
 `
 
 export const GET_CONTACTS = gql`
-query contacts($token: String!)
+query contacts($token: String!, $search:String)
 {
-  contacts(token: $token) {
+  contacts(token: $token, search: $search) {
     id
     user {
       id
