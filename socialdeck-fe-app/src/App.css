@@ -10,18 +10,18 @@ body {
   justify-content: space-around;
   align-items: baseline;
   background-color: #274156;
-  color: #F5F5F5;
+  color: #FBFCFF;
   text-decoration: none;
 }
 
 .navLinks {
-  color: #F5F5F5;
+  color: #FBFCFF;
   font-size: 2rem;
   text-decoration: none;
 }
 
 .logo {
-  color: #F5F5F5;
+  color: #FBFCFF;
   text-decoration: none;
 }
 
@@ -68,7 +68,7 @@ border: 1px solid #274156;
   padding: 1vh;
   border: 1px solid #274156;
   background-color: #274156;
-  color: #F5F5F5;
+  color: #FBFCFF;
   text-align: center;
 }
 
@@ -76,6 +76,24 @@ border: 1px solid #274156;
   text-decoration: none;
   color: #1C6E8C;
   margin: 5px;
+}
+
+.searchForm {
+  width: 100vw;
+}
+.searchField {
+  width: 70vw;
+  height: 5vh;
+  background:rgba(50, 50, 50, 0.2);
+  border:0px solid #FBFCFF;
+}
+.searchButton {
+  width: 29vw;
+  height: 5vh;
+  position:relative;
+  border:0px solid #1C6E8C;
+  background-color:#1C6E8C;
+  color:#FBFCFF;
 }
 
  .list {
@@ -241,7 +259,7 @@ border: 1px solid #274156;
   color: white;
 }
 
-/* The rest copied directly from react-burger-menu docs */
+/* The rest copied directly from react-burger-menu docs
 
 /* Position and sizing of burger button */
 .bm-burger-button {
