@@ -12,7 +12,8 @@ class QRLanding extends Component {
       username: '',
       password: '',
       confirmation: '',
-      email: ''
+      email: '',
+      name: ''
     }
   }
 
@@ -32,6 +33,10 @@ class QRLanding extends Component {
     this.setState({
       register: false
     })
+  }
+
+  updateName (value) {
+    this.setState({ name: value })
   }
 
   updateUsername (value) {
@@ -136,6 +141,13 @@ class QRLanding extends Component {
           <Mutation mutation={CREATE_USER}>
             {(createUser) => (
               <div className='loginForm'>
+                <div className='loginRow'>
+                  <label>Name</label>
+                  <input
+                    className='signin_input'
+                    type='text'
+                    onChange={event => this.updateName(event.target.value)} />
+                </div>
                 <div className='loginRow'>
                   <label>Email</label>
                   <input
