@@ -15,6 +15,7 @@ import QRLanding from './Components/QRLanding'
 import UpdateUser from './Components/UpdateUser'
 import PasswordReset from './Components/PasswordReset'
 import Home from './Components/Home'
+import HomeIndex from './Components/HomeIndex'
 import SideBar from './Components/Sidebar'
 
 class App extends Component {
@@ -56,6 +57,7 @@ class App extends Component {
         <SideBar logOut={this.logOut} />
         <Router>
           <Home path='/' logOut={this.logOut}>
+            <HomeIndex path='/' />
             <LoginForm path='login' setUser={this.setUser} />
             <RegisterForm path='register' setUser={this.setUser} />
 
