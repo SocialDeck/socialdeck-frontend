@@ -281,6 +281,15 @@ mutation destroyCard($token:String!, $id:ID!){
   }
 }
 `
+export const UNSUBSCRIBE = gql`
+mutation unsubscribe($token:String!, $cardId:ID!){
+  unsubscribe(token:$token, cardId:$cardId)
+  {
+    message
+  }
+}
+`
+
 export const FAVORITE_CARD = gql`
 mutation favorite($token:String!, $cardId:ID!){
   favorite(token:$token, cardId:$cardId) {

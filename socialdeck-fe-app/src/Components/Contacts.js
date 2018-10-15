@@ -45,7 +45,7 @@ class Contacts extends Component {
     return <React.Fragment>{token
       ? <React.Fragment>
         <div className='searchForm'>
-          <button className='searchButton' onClick={() => this.searchResults()}>{this.state.searched ? <span>X</span> : <i className='fas fa-search' />}</button>
+          <button className='searchButton' onClick={() => this.searchResults()}>{this.state.searched ? <i className='fas fa-times' /> : <i className='fas fa-search' />}</button>
           <input className='searchField' type='text' placeholder='Search...' onChange={(e) => this.updateSearch(e)}required />
         </div>
         <ul className='list' >

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from '@reach/router'
 import { slide as Menu } from 'react-burger-menu'
 
-class SideBar extends Component {
+class Sidebar extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -54,4 +54,4 @@ class SideBar extends Component {
     )
   }
 }
-export default SideBar
+export default Sidebar
