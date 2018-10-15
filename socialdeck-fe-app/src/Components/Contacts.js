@@ -4,9 +4,11 @@ import { Link, Redirect } from '@reach/router'
 import { GET_CONTACTS } from '../queries'
 
 class Contacts extends Component {
-  constructor () {
-    super()
-    this.state = {}
+  constructor (props) {
+    super(props)
+    this.state = {
+      searched: props.searched
+    }
   }
   stripNumber (number) {
     if (number) {
@@ -27,18 +29,6 @@ class Contacts extends Component {
     }
   }
 
-  searchResults () {
-    if (!this.state.searched) {
-      this.setState({
-        searched: true
-      })
-    } else {
-      this.setState({
-        searched: !this.state.searched
-      })
-    }
-  }
-
   updateSearch (e) {
     this.setState({ searchTerm: e.target.value })
   }
@@ -48,12 +38,11 @@ class Contacts extends Component {
     const searchTerm = this.state.searchTerm
     return <React.Fragment>{token
       ? <React.Fragment>
-        <div className='searchForm'>
-          <button className='searchButton' onClick={() => this.searchResults()}>{this.state.searched ? <i className='fas fa-times' /> : <i className='fas fa-search' />}</button>
+        {this.props.searchingStatus && <div className='searchForm'>
           <input className='searchField' type='text' placeholder='Search...' onChange={(e) => this.updateSearch(e)}required />
-        </div>
+        </div>}
         <ul className='list' >
-          {this.state.searched
+          {this.props.searchingStatus
             ? <Query
               query={GET_CONTACTS} variables={{ token: token, search: searchTerm }}
             >

@@ -8,7 +8,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: baseline;
+  align-items: center;
   background-color: #274156;
   color: #FBFCFF;
   text-decoration: none;
@@ -27,6 +27,7 @@ body {
 
 .topRow {
   display: flex;
+  justify-content: center;
 }
 
 .topLogo {
@@ -83,18 +84,19 @@ border: 1px solid #274156;
 }
 .searchField {
   font-size: 1.5em;
-  width: 79vw;
+  width: 100vw;
   height: 5vh;
   background:rgba(50, 50, 50, 0.2);
   border:0px solid #FBFCFF;
+  padding-left: 10px;
 }
 .searchButton {
   font-size: 1.5em;
   width: 20vw;
   height: 5vh;
   position:relative;
-  border:0px solid #1C6E8C;
-  background-color:#1C6E8C;
+  border:0px solid #274156;
+  background-color:#274156;
   color:#FBFCFF;
 }
 
@@ -360,7 +362,7 @@ border: 1px solid #274156;
 
 @media only screen and (max-device-width : 450px) {
   .topRow {
-    width: 100vw;
-    justify-content: center;
+    width: 70vw;
+    justify-content: flex-end;
   }
   }

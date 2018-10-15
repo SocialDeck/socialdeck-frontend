@@ -23,7 +23,8 @@ class App extends Component {
     super()
     this.state = {
       token: null,
-      username: null
+      username: null,
+      searching: false
     }
     const token = window.localStorage.getItem('token')
     const username = window.localStorage.getItem('username')
@@ -33,6 +34,13 @@ class App extends Component {
     }
     this.setUser = this.setUser.bind(this)
     this.logOut = this.logOut.bind(this)
+    this.searching = this.searching.bind(this)
+  }
+
+  searching () {
+    this.setState({
+      searching: !this.state.searching
+    })
   }
 
   setUser (token, username) {
@@ -56,13 +64,13 @@ class App extends Component {
       <div className='app'>
         <SideBar logOut={this.logOut} />
         <Router>
-          <Home path='/' logOut={this.logOut}>
+          <Home path='/' logOut={this.logOut} searchingStatus={this.state.searching} searching={this.searching}>
             <HomeIndex path='/' />
             <HomeIndex path='/index.html' />
             <LoginForm path='login' setUser={this.setUser} />
             <RegisterForm path='register' setUser={this.setUser} />
 
-            <Contacts path='contacts' username={this.state.username} token={this.state.token} />
+            <Contacts path='contacts' username={this.state.username} token={this.state.token} searchingStatus={this.state.searching} />
             <Favorites path='favorites' username={this.state.username} token={this.state.token} />
             <Match path='/contacts/:cardToken'>
               {props =>
