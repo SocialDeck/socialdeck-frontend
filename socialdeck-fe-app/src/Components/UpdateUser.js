@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 // import { Link } from '@reach/router'
 import { UPDATE_USER } from '../queries'
+import { navigate } from '@reach/router'
 
 class UpdateUser extends Component {
   constructor () {
@@ -59,9 +60,7 @@ class UpdateUser extends Component {
                   password: this.state.newPassword,
                   email: this.state.email
                 } })
-                  .then(data => {
-                    console.log(data)
-                  })
+                  .then(navigate('/contacts'))
               }}>Update</a>
             </div>
 
