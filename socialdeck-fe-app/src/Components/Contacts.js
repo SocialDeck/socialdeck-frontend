@@ -48,7 +48,7 @@ class Contacts extends Component {
             >
               {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>
-                if (error) return <p>Error :(</p>
+                if (error) return <p>Failed to retrieve contacts, please log out and log back in to refresh user token</p>
 
                 return data.contacts.map((contact, idx) => (
 
