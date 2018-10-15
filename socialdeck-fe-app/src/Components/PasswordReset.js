@@ -22,7 +22,13 @@ class PasswordReset extends Component {
         {(updateUser) => (
           <React.Fragment>
             <div className='card'>
-              <div className='cardLine'>New Password<input type='password' onChange={(e) => this.updateState(e, 'newPassword')} />  </div>
+              <div className='loginRow'>
+                <label htmlFor='password'>New Password</label>
+                <input
+                  id='password'
+                  type='password'
+                  onChange={(e) => this.updateState(e, 'newPassword')} />
+              </div>
               <button onClick={e => {
                 updateUser({ variables: {
                   token: this.props.token,
