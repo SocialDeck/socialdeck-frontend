@@ -78,10 +78,10 @@ class CardInfo extends Component {
         </div>
         }
         {info.birthDate && <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> {info.birthDate}</div>}
-        {info.twitter && <div className='cardLine'><i className='fab fa-twitter cardIcon' />{info.twitter}</div>}
-        {info.linkedIn && <div className='cardLine'><i className='fab fa-linkedin cardIcon' />{info.linkedIn}</div>}
-        {info.facebook && <div className='cardLine'><i className='fab fa-facebook-f cardIcon' />{info.facebook}</div>}
-        {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' />{info.instagram}</div>}
+        {info.twitter && <div className='cardLine'><i className='fab fa-twitter cardIcon' /> {info.twitter}</div>}
+        {info.linkedIn && <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> {info.linkedIn}</div>}
+        {info.facebook && <div className='cardLine'><i className='fab fa-facebook cardIcon' /> {info.facebook}</div>}
+        {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' /> {info.instagram}</div>}
 
         <div className='cardOptions'>
           {(info.author && username === info.author.username) && <Mutation mutation={DELETE_CARD}>

@@ -4,7 +4,7 @@ import QRCode from 'qrcode-react'
 
 class ShareQR extends Component {
   share () {
-    var text = 'Add text to share with the URL'
+    var text = 'Add me to your Contacts on SocialDeck!'
     if ('share' in navigator) {
       navigator.share({
         title: 'Join SocialDeck',
