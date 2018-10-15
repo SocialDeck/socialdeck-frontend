@@ -192,11 +192,11 @@ query ownedCards($token: String!)
 `
 
 export const CREATE_CARD = gql`
-mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $displayName:String, $name:String!,
+mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $displayName:String, $name:String!, $businessName: String,
   $number:String, $email:String, $address1:String, $address2:String, $city: String,
   $state:String, $postalCode:String, $twitter:String, $facebook:String, $linkedIn:String,
   $instagram:String) {
-    createCard(token:$token, owned:$owned, cardName:$cardName, displayName:$displayName, name:$name,
+    createCard(token:$token, owned:$owned, cardName:$cardName, displayName:$displayName, name:$name, businessName: $businessName,
                number:$number, email:$email, address: {address1:$address1, address2:$address2, city: $city,
                state:$state, postalCode:$postalCode}, twitter:$twitter, facebook:$facebook, linkedIn:$linkedIn,
                instagram:$instagram) {
@@ -232,13 +232,12 @@ mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $display
   }
 `
 
-
 export const UPDATE_CARD = gql`
-mutation updateCard($token:String!, $id: ID!, $cardName: String, $displayName:String, $name:String,
+mutation updateCard($token:String!, $id: ID!, $cardName: String, $displayName:String, $name:String, $businessName: String, $email: String,
              $number:String, $address1: String, $address2: String, $city: String, $state: String,
              $postalCode: String, $twitter:String, $facebook:String, $linkedIn:String,
              $instagram:String, $birthDate: DateTime) {
-         updateCard(token:$token, id: $id, cardName: $cardName, displayName:$displayName, name:$name,
+         updateCard(token:$token, id: $id, cardName: $cardName, displayName:$displayName, name:$name, businessName: $businessName, email: $email,
               number:$number, address: {address1: $address1, address2: $address2, city: $city, state: $state,
               postalCode: $postalCode}, twitter:$twitter, facebook:$facebook, linkedIn:$linkedIn,
               instagram:$instagram, birthDate:$birthDate){

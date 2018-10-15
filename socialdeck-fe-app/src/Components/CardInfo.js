@@ -109,7 +109,7 @@ class CardInfo extends Component {
                 })
               }}><i className='fas fa-user-times cardOptionIcon cardDelete' /> Unsubscribe</a>
             }
-          </Mutation>}          
+          </Mutation>}
           {(info.author && username === info.author.username) && <a className='cardOption' onClick={() => {
             this.editOn(info)
           }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>}
@@ -148,6 +148,7 @@ class CardInfo extends Component {
                 cardName: this.state.cardName,
                 displayName: this.state.displayName,
                 name: this.state.name,
+                businessName: this.state.businessName,
                 number: this.state.number,
                 email: this.state.email,
                 address1: this.state.address1,

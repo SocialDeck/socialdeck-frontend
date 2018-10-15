@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import { Link, Redirect } from '@reach/router'
+import { Redirect } from '@reach/router'
 import { GET_SUBSCRIBERS, DELETE_CONNECTION } from '../queries'
 
 class Subscribers extends Component {
@@ -32,7 +32,7 @@ class Subscribers extends Component {
             return data.subscribers.map((subscriber, idx) => (
 
               <li key={idx} className='list-item' >
-                <Link to={subscriber.id} key={idx} className='list-item contact'>
+                <div className='list-item contact'>
                   <div key={idx} className='list-item__left' >
                     <div className='list-item__thumbnail monogram' >
                       {subscriber.user.name[0]}
@@ -43,7 +43,7 @@ class Subscribers extends Component {
                     <div className='list-item__title' > {subscriber.user.name} </div>
                     <div className='list-item__subtitle' > {subscriber.card.cardName} </div>
                   </div>
-                </Link>
+                </div>
                 <div className='list-item__right' >
                   <Mutation mutation={DELETE_CONNECTION}>
                     {(destroyConnection) =>

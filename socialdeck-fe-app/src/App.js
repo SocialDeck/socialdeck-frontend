@@ -58,6 +58,7 @@ class App extends Component {
         <Router>
           <Home path='/' logOut={this.logOut}>
             <HomeIndex path='/' />
+            <HomeIndex path='/index.html' />
             <LoginForm path='login' setUser={this.setUser} />
             <RegisterForm path='register' setUser={this.setUser} />
 
