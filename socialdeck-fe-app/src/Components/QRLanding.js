@@ -103,7 +103,7 @@ class QRLanding extends Component {
       </React.Fragment>
         : <React.Fragment>
           {!register && <Mutation mutation={LOGIN_USER} update={this.logCache}>
-            {(login) => (
+            {(login, { loading, error }) => (
               <div className='loginForm'>
                 <div className='loginRow'>
                   <label htmlFor='username'>Username</label>
@@ -119,6 +119,7 @@ class QRLanding extends Component {
                     type='password'
                     onChange={event => this.updatePassword(event.target.value)} />
                 </div>
+                {error && <p className='errorMessage' >Invalid Username/Password</p>}
                 <a className='buttonSignIn' onClick={async e => {
                   await login({ variables: {
                     username: this.state.username,
@@ -139,7 +140,7 @@ class QRLanding extends Component {
           </Mutation>}
           {register &&
           <Mutation mutation={CREATE_USER}>
-            {(createUser) => (
+            {(createUser, { loading, error }) => (
               <div className='loginForm'>
                 <div className='loginRow'>
                   <label>Name</label>
@@ -180,7 +181,7 @@ class QRLanding extends Component {
                     onChange={event => this.updateConfirmation(event.target.value)} />
 
                 </div>
-
+                {error && <p className='errorMessage' >Please complete all fields before submission</p>}
                 <a className='buttonSignIn' onClick={e => {
                   createUser({ variables: {
                     name: this.state.name,
