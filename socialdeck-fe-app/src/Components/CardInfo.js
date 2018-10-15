@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import { Link } from '@reach/router'
-import { UPDATE_CARD, DELETE_CARD, FAVORITE_CARD, UNFAVORITE_CARD } from '../queries'
+import { Link, navigate } from '@reach/router'
+import { UPDATE_CARD, DELETE_CARD, FAVORITE_CARD, UNFAVORITE_CARD, UNSUBSCRIBE } from '../queries'
 
 class CardInfo extends Component {
   constructor () {
@@ -83,7 +83,7 @@ class CardInfo extends Component {
         {info.facebook && <div className='cardLine'><i className='fab fa-facebook-f cardIcon' />{info.facebook}</div>}
         {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' />{info.instagram}</div>}
 
-        {((info.author && username === info.author.username) || (info.user && username === info.user.username)) && <div className='cardOptions'>
+        <div className='cardOptions'>
           {(info.author && username === info.author.username) && <Mutation mutation={DELETE_CARD}>
             {(deleteCard) =>
               <a className='cardOption cardDelete' onClick={() => {
@@ -96,12 +96,26 @@ class CardInfo extends Component {
               }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
             }
           </Mutation>}
+          {(!(info.author && username === info.author.username) && !(info.user && username === info.user.username)) && <Mutation mutation={UNSUBSCRIBE}>
+            {(unsubscribe) =>
+              <a className='cardOption cardDelete' onClick={() => {
+                unsubscribe({
+                  variables: {
+                    token: token,
+                    cardId: info.id
+                  }
+                }).then(data => {
+                  navigate('/contacts/')
+                })
+              }}><i className='fas fa-user-times cardOptionIcon cardDelete' /> Unsubscribe</a>
+            }
+          </Mutation>}          
           {(info.author && username === info.author.username) && <a className='cardOption' onClick={() => {
             this.editOn(info)
           }}><i className='fas fa-edit cardOptionIcon' /> Edit</a>}
           {(info.user && username === info.user.username) && <Link className='cardOption' to={info.cardToken} ><i className='fas fa-share-alt cardOptionIcon' /> Share</Link>}
 
-        </div>}
+        </div>
 
       </React.Fragment>
       : <Mutation mutation={UPDATE_CARD} update={this.logCache}>
