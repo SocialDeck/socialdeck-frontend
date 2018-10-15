@@ -59,7 +59,7 @@ class RegisterForm extends Component {
     return (
       <React.Fragment>
         <Mutation mutation={CREATE_USER}>
-          {(createUser) => (
+          {(createUser, { loading, error }) => (
             <div className='loginForm'>
 
               <div className='loginRow'>
@@ -102,7 +102,7 @@ class RegisterForm extends Component {
                   onChange={event => this.updateConfirmation(event.target.value)} />
 
               </div>
-
+              {error && <p className='errorMessage'>Please complete all fields before submission</p>}
               <a className='buttonSignIn' onClick={e => {
                 createUser({ variables: {
                   name: this.state.name,
