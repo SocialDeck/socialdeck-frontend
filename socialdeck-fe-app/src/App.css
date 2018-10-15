@@ -360,6 +360,10 @@ border: 1px solid #274156;
 }
 
 
+.errorMessage {
+  color: red;
+}
+
 @media only screen and (max-device-width : 450px) {
   .topRow {
     width: 70vw;
