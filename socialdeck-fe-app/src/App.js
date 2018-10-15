@@ -15,7 +15,7 @@ import QRLanding from './Components/QRLanding'
 import UpdateUser from './Components/UpdateUser'
 import PasswordReset from './Components/PasswordReset'
 import Home from './Components/Home'
-import SideBar from './Components/Sidebar'
+import Sidebar from './Components/Sidebar'
 
 class App extends Component {
   constructor () {
@@ -53,7 +53,7 @@ class App extends Component {
     return (
 
       <div className='app'>
-        <SideBar logOut={this.logOut} />
+        <Sidebar logOut={this.logOut} />
         <Router>
           <Home path='/' logOut={this.logOut}>
             <LoginForm path='login' setUser={this.setUser} />
