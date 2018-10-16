@@ -13,7 +13,11 @@ class Favorites extends Component {
   }
   parseAddress (address) {
     if (address) {
-      return address.address1.replace(' ', '+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+      if (address.address1) {
+        return address.address1.split(/[ ,]+/).join('+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+      } else {
+        return address.city + ',+' + address.state + '+' + address.postalCode
+      }
     } else {
 
     }
