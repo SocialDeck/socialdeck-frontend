@@ -20,14 +20,20 @@ body {
   text-decoration: none;
 }
 
+.logoWrapper {
+  display: flex;
+}
+
 .logo {
   color: #FBFCFF;
   text-decoration: none;
 }
 
 .topRow {
+  width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .topLogo {
@@ -364,9 +370,9 @@ border: 1px solid #274156;
   color: red;
 }
 
-@media only screen and (max-device-width : 450px) {
+/* @media only screen and (max-device-width : 450px) {
   .topRow {
     width: 70vw;
     justify-content: flex-end;
   }
-  }
+  } */
