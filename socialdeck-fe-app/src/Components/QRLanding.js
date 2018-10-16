@@ -90,7 +90,7 @@ class QRLanding extends Component {
               {info.linkedIn && <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> {info.linkedIn}</div>}
               {info.facebook && <div className='cardLine'><i className='fab fa-facebook cardIcon' /> {info.facebook}</div>}
               {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' /> {info.instagram}</div>}
-               { (token && info.user.username !== username) && <Mutation mutation={ADD_CONNECTION}>
+              { (token && info.user.username !== username) && <Mutation mutation={ADD_CONNECTION}>
                 {(createConnection) =>
                   <a className='buttonSignIn' onClick={() => {
                     createConnection({
@@ -108,43 +108,43 @@ class QRLanding extends Component {
         }}
       </Query>
       {!token && <React.Fragment>
-          {!register && <Mutation mutation={LOGIN_USER} update={this.logCache}>
-            {(login, { loading, error }) => (
-              <div className='loginForm'>
-                <div className='loginRow'>
-                  <label htmlFor='username'>Username</label>
-                  <input
-                    id='username'
-                    type='text'
-                    onChange={event => this.updateUsername(event.target.value)} />
-                </div>
-                <div className='loginRow'>
-                  <label htmlFor='password'>Password</label>
-                  <input
-                    id='password'
-                    type='password'
-                    onChange={event => this.updatePassword(event.target.value)} />
-                </div>
-                {error && <p className='errorMessage' >Invalid Username/Password</p>}
-                <a className='buttonSignIn' onClick={async e => {
-                  await login({ variables: {
-                    username: this.state.username,
-                    password: this.state.password
-                  } })
-                    .then(data => data.data.login)
-                    .then(data => {
-                      window.localStorage.setItem('token', data.token)
-                      window.localStorage.setItem('username', this.state.username)
-                      this.setToken(data.token)
-                    })
-                }}>Sign In</a>
-                <p>Don't have an account? <a className='formLink' onClick={() => this.setRegister()}>Register</a></p>
-
+        {!register && <Mutation mutation={LOGIN_USER}>
+          {(login, { loading, error }) => (
+            <div className='loginForm'>
+              <div className='loginRow'>
+                <label htmlFor='username'>Username</label>
+                <input
+                  id='username'
+                  type='text'
+                  onChange={event => this.updateUsername(event.target.value)} />
               </div>
-            )
-            }
-          </Mutation>}
-          {register &&
+              <div className='loginRow'>
+                <label htmlFor='password'>Password</label>
+                <input
+                  id='password'
+                  type='password'
+                  onChange={event => this.updatePassword(event.target.value)} />
+              </div>
+              <a className='buttonSignIn' onClick={async e => {
+                await login({ variables: {
+                  username: this.state.username,
+                  password: this.state.password
+                } })
+                  .then(data => data.data.login)
+                  .then(data => {
+                    window.localStorage.setItem('token', data.token)
+                    window.localStorage.setItem('username', this.state.username)
+                    this.setToken(data.token)
+                  })
+                  .catch(error => { error && this.props.notifyError('Invalid Username/Password') })
+              }}>Sign In</a>
+              <p>Don't have an account? <a className='formLink' onClick={() => this.setRegister()}>Register</a></p>
+
+            </div>
+          )
+          }
+        </Mutation>}
+        {register &&
           <Mutation mutation={CREATE_USER}>
             {(createUser, { loading, error }) => (
               <div className='loginForm'>
@@ -187,7 +187,6 @@ class QRLanding extends Component {
                     onChange={event => this.updateConfirmation(event.target.value)} />
 
                 </div>
-                {error && <p className='errorMessage' >Please complete all fields before submission</p>}
                 <a className='buttonSignIn' onClick={e => {
                   createUser({ variables: {
                     name: this.state.name,
@@ -201,6 +200,7 @@ class QRLanding extends Component {
                       window.localStorage.setItem('username', this.state.username)
                       this.setToken(data.token)
                     })
+                    .catch(error => { error && this.props.notifyError('Please complete all fields before submission') })
                 }} >Register</a>
                 <p>Already have an account? <a className='formLink' onClick={() => this.setLogin()}>Login</a></p>
 
@@ -208,8 +208,8 @@ class QRLanding extends Component {
             )
             }
           </Mutation>
-          }
-        </React.Fragment>
+        }
+      </React.Fragment>
       }
     </React.Fragment>
   }

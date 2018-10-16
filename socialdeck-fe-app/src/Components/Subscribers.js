@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import { Link, Redirect, navigate } from '@reach/router'
+import { Redirect, navigate } from '@reach/router'
 import { GET_SUBSCRIBERS, DELETE_CONNECTION, REQUEST_CONNECTION } from '../queries'
 
 class Subscribers extends Component {
