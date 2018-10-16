@@ -23,7 +23,7 @@ class Subscribers extends Component {
     return <React.Fragment>{token
       ? <ul className='list' >
         <Query
-          query={GET_SUBSCRIBERS} variables={{ token: token }}
+          query={GET_SUBSCRIBERS} variables={{ token: token }} pollInterval={500}
         >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>

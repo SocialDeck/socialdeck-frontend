@@ -36,7 +36,7 @@ class MyCards extends Component {
     return (
       <React.Fragment>
         {token ? <Query
-          query={GET_MY_CARDS} variables={{ token: token }}
+          query={GET_MY_CARDS} variables={{ token: token }} pollInterval={500}
         >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>
@@ -58,7 +58,7 @@ class MyCards extends Component {
               this.startNewCard()
             }}>Add New Card</a></div>
 
-          : <Mutation mutation={CREATE_CARD} update={this.logCache}>
+          : <Mutation mutation={CREATE_CARD}>
             {(createCard) => (
               <div className='loginForm'>
                 <div className='cardHeader'><div className='cardLine'><input type='text' placeholder='Card Type' onChange={(e) => this.updateState(e, 'cardName')} /> <input type='text' placeholder='Display Card Type' onChange={(e) => this.updateState(e, 'displayName')} /></div><a className='formLink' onClick={() => this.addNewCard()}><i className='fas fa-times' /></a></div>

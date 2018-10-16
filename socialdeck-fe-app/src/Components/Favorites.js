@@ -23,7 +23,7 @@ class Favorites extends Component {
     return <React.Fragment>{token
       ? <ul className='list' >
         <Query
-          query={GET_FAVORITES} variables={{ token: token }}
+          query={GET_FAVORITES} variables={{ token: token }} pollInterval={500}
         >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>

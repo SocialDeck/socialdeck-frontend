@@ -44,7 +44,7 @@ class Contacts extends Component {
         <ul className='list' >
           {this.props.searchingStatus
             ? <Query
-              query={GET_CONTACTS} variables={{ token: token, search: searchTerm }}
+              query={GET_CONTACTS} variables={{ token: token, search: searchTerm }} pollInterval={500}
             >
               {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>
@@ -83,7 +83,7 @@ class Contacts extends Component {
               }
             </Query>
             : <Query
-              query={GET_CONTACTS} variables={{ token: token }}
+              query={GET_CONTACTS} variables={{ token: token }} pollInterval={500}
             >
               {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>
