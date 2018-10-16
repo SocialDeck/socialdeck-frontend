@@ -50,10 +50,10 @@ class NewContact extends Component {
                 </div>
               </div>
               <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> <input type='date' placeholder='Birthday' onChange={(e) => this.updateState(e, 'birthDate')} /></div>
-              <div className='cardLine'><i className='fab fa-facebook cardIcon' /> <input type='text' placeholder='Name' onChange={(e) => this.updateState(e, 'facebook')} /></div>
-              <div className='cardLine'><i className='fab fa-twitter cardIcon' /> <input type='text' placeholder='Business' onChange={(e) => this.updateState(e, 'twitter')} /></div>
-              <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='999-999-9999' onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
-              <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='example@example.com' onChange={(e) => this.updateState(e, 'instagram')} /></div>
+              <div className='cardLine'><i className='fab fa-facebook cardIcon' /> <input type='text' placeholder='Facebook' onChange={(e) => this.updateState(e, 'facebook')} /></div>
+              <div className='cardLine'><i className='fab fa-twitter cardIcon' /> <input type='text' placeholder='Twitter' onChange={(e) => this.updateState(e, 'twitter')} /></div>
+              <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> <input type='text' placeholder='LinkedIn' onChange={(e) => this.updateState(e, 'linkedIn')} /></div>
+              <div className='cardLine'><i className='fab fa-instagram cardIcon' /> <input type='text' placeholder='Instagram' onChange={(e) => this.updateState(e, 'instagram')} /></div>
 
               <a className='buttonSignIn' onClick={e => {
                 createCard({
@@ -62,6 +62,7 @@ class NewContact extends Component {
                     owned: false,
                     cardName: this.state.cardName,
                     name: this.state.name,
+                    businessName: this.state.businessName,
                     number: this.state.number,
                     email: this.state.email,
                     address1: this.state.address1,
