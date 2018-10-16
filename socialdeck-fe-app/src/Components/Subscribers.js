@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import { Redirect } from '@reach/router'
-import { GET_SUBSCRIBERS, DELETE_CONNECTION } from '../queries'
+import { Link, Redirect, navigate } from '@reach/router'
+import { GET_SUBSCRIBERS, DELETE_CONNECTION, REQUEST_CONNECTION } from '../queries'
 
 class Subscribers extends Component {
   stripNumber (number) {
@@ -23,11 +23,11 @@ class Subscribers extends Component {
     return <React.Fragment>{token
       ? <ul className='list' >
         <Query
-          query={GET_SUBSCRIBERS} variables={{ token: token }}
+          query={GET_SUBSCRIBERS} variables={{ token: token }} pollInterval={500}
         >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>
-            if (error) return <p>Error :(</p>
+            if (error) return <p>{console.log(error)}</p>
 
             return data.subscribers.map((subscriber, idx) => (
 
@@ -45,13 +45,25 @@ class Subscribers extends Component {
                   </div>
                 </div>
                 <div className='list-item__right' >
+                  {!subscriber.mutual && <Mutation mutation={REQUEST_CONNECTION}>
+                    {(requestConnection) =>
+                      <a className='list-item contact' onClick={() => {
+                        requestConnection({ variables: {
+                          token: token,
+                          userId: subscriber.user.id
+                        } })
+                      }}><i className='fas fa-user-plus' /></a>
+                    }
+                  </Mutation>}
                   <Mutation mutation={DELETE_CONNECTION}>
                     {(destroyConnection) =>
                       <a className='list-item contact' onClick={() => {
-                        destroyConnection({ variables: {
-                          token: token,
-                          id: subscriber.id
-                        } })
+                        destroyConnection({
+                          variables: {
+                            token: token,
+                            id: subscriber.id
+                          }
+                        }).then(navigate('/contacts/subscribers/'))
                       }}><i className='fas fa-user-times' /></a>
                     }
                   </Mutation>

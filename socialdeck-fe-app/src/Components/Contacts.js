@@ -4,9 +4,11 @@ import { Link, Redirect } from '@reach/router'
 import { GET_CONTACTS } from '../queries'
 
 class Contacts extends Component {
-  constructor () {
-    super()
-    this.state = {}
+  constructor (props) {
+    super(props)
+    this.state = {
+      searched: props.searched
+    }
   }
   stripNumber (number) {
     if (number) {
@@ -17,21 +19,13 @@ class Contacts extends Component {
   }
   parseAddress (address) {
     if (address) {
-      return address.address1.split(/[ ,]+/).join('+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+      if (address.address1) {
+        return address.address1.split(/[ ,]+/).join('+') + ',+' + address.city + ',+' + address.state + '+' + address.postalCode
+      } else {
+        return address.city + ',+' + address.state + '+' + address.postalCode
+      }
     } else {
 
-    }
-  }
-
-  searchResults () {
-    if (!this.state.searched) {
-      this.setState({
-        searched: true
-      })
-    } else {
-      this.setState({
-        searched: !this.state.searched
-      })
     }
   }
 
@@ -44,18 +38,17 @@ class Contacts extends Component {
     const searchTerm = this.state.searchTerm
     return <React.Fragment>{token
       ? <React.Fragment>
-        <div className='searchForm'>
-          <button className='searchButton' onClick={() => this.searchResults()}>{this.state.searched ? <i className='fas fa-times' /> : <i className='fas fa-search' />}</button>
+        {this.props.searchingStatus && <div className='searchForm'>
           <input className='searchField' type='text' placeholder='Search...' onChange={(e) => this.updateSearch(e)}required />
-        </div>
+        </div>}
         <ul className='list' >
-          {this.state.searched
+          {this.props.searchingStatus
             ? <Query
-              query={GET_CONTACTS} variables={{ token: token, search: searchTerm }}
+              query={GET_CONTACTS} variables={{ token: token, search: searchTerm }} pollInterval={500}
             >
               {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>
-                if (error) return <p>Error :(</p>
+                if (error) return <p>{error} Failed to retrieve contacts, please sign out and sign back in to try again.</p>
 
                 return data.contacts.map((contact, idx) => (
 
@@ -77,8 +70,8 @@ class Contacts extends Component {
                       {!contact.number && <i className='fas fa-phone list-item__hidden' />}
                       {contact.mobile && <a href={'sms:' + this.stripNumber(contact.number)}> <i className='fas fa-comment-alt list-item__icon standardIcon' /></a>}
                       {!contact.mobile && <i className='fas fa-comment-alt list-item__hidden' />}
-                      {contact.address.address1 && <a href={'http://maps.apple.com/?address=' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon standardIcon' /></a>}
-                      {!contact.address.address1 && <i className='fas fa-directions list-item__hidden' />}
+                      {contact.address && <a href={'http://maps.apple.com/?address=' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon standardIcon' /></a>}
+                      {!contact.address && <i className='fas fa-directions list-item__hidden' />}
                       {contact.email && <a href={'mailto:' + contact.email}><i className='fas fa-envelope list-item__icon standardIcon' /></a>}
                       {!contact.email && <i className='fas fa-envelope list-item__hidden' />}
                     </div>
@@ -90,11 +83,11 @@ class Contacts extends Component {
               }
             </Query>
             : <Query
-              query={GET_CONTACTS} variables={{ token: token }}
+              query={GET_CONTACTS} variables={{ token: token }} pollInterval={500}
             >
               {({ loading, error, data }) => {
                 if (loading) return <p>Loading...</p>
-                if (error) return <p>Error :(</p>
+                if (error) return <p className='errorMessage' >Failed to retrieve contacts, please sign out and sign back in to try again.</p>
 
                 return data.contacts.map((contact, idx) => (
 
@@ -108,7 +101,7 @@ class Contacts extends Component {
 
                       <div className='list-item__center'>
                         <div className='list-item__title' > {contact.name} </div>
-                        <div className='list-item__subtitle' > {contact.displayName} </div>
+                        <div className='list-item__subtitle' > {contact.displayName} {(contact.verified && contact.mutual) && <i className='fas fa-exchange-alt statusIcon'></i>} {(contact.verified && !contact.mutual) && <i className='fas fa-long-arrow-alt-left statusIcon'></i>}</div>
                       </div>
                     </Link>
                     <div className='list-item__right' >
@@ -116,8 +109,8 @@ class Contacts extends Component {
                       {!contact.number && <i className='fas fa-phone list-item__hidden' />}
                       {contact.mobile && <a href={'sms:' + this.stripNumber(contact.number)}> <i className='fas fa-comment-alt list-item__icon standardIcon' /></a>}
                       {!contact.mobile && <i className='fas fa-comment-alt list-item__hidden' />}
-                      {contact.address.address1 && <a href={'http://maps.apple.com/?address=' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon standardIcon' /></a>}
-                      {!contact.address.address1 && <i className='fas fa-directions list-item__hidden' />}
+                      {contact.address && <a href={'http://maps.apple.com/?address=' + this.parseAddress(contact.address)}><i className='fas fa-directions list-item__icon standardIcon' /></a>}
+                      {!contact.address && <i className='fas fa-directions list-item__hidden' />}
                       {contact.email && <a href={'mailto:' + contact.email}><i className='fas fa-envelope list-item__icon standardIcon' /></a>}
                       {!contact.email && <i className='fas fa-envelope list-item__hidden' />}
                     </div>

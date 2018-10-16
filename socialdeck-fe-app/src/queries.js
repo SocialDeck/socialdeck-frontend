@@ -26,7 +26,7 @@ mutation login($username: String!, $password: String!) {
 }
 `
 export const GET_SUBSCRIBERS = gql`
-query subscribers($token: String!)
+query subscribers($token: ID!)
 {
   subscribers(token: $token) {
     id
@@ -35,14 +35,16 @@ query subscribers($token: String!)
       name(token: $token)
     }
     card {
+      id
       cardName
     }
+    mutual
   }
 }
 `
 
 export const GET_CONTACTS = gql`
-query contacts($token: String!, $search:String)
+query contacts($token: ID!, $search:String)
 {
   contacts(token: $token, search: $search) {
     id
@@ -55,10 +57,8 @@ query contacts($token: String!, $search:String)
       username
     }
     cardToken(token: $token)
-    cardName
     displayName
     name
-    businessName
     address {
       address1
       address2
@@ -69,18 +69,15 @@ query contacts($token: String!, $search:String)
     number
     email
     birthDate
-    twitter
-    linkedIn
-    facebook
-    instagram
     verified
+    mutual(token: $token)
     mobile
   }
 }
 `
 
 export const GET_FAVORITES = gql`
-query favorites($token: String!)
+query favorites($token: ID!)
 {
   favorites(token: $token) {
     id
@@ -93,10 +90,8 @@ query favorites($token: String!)
       username
     }
     cardToken(token: $token)
-    cardName
     displayName
     name
-    businessName
     address {
       address1
       address2
@@ -106,11 +101,6 @@ query favorites($token: String!)
     }
     number
     email
-    birthDate
-    twitter
-    linkedIn
-    facebook
-    instagram
     verified
     mobile
   }
@@ -118,7 +108,7 @@ query favorites($token: String!)
 `
 
 export const GET_CARD = gql`
-query card($cardToken: String!, $token:String)
+query card($cardToken: ID!, $token:ID)
 {
   card(cardToken: $cardToken) {
     id
@@ -150,12 +140,13 @@ query card($cardToken: String!, $token:String)
     instagram
     verified
     favorite(token: $token)
+    mutual(token: $token)
   }
 }
 `
 
 export const GET_MY_CARDS = gql`
-query ownedCards($token: String!)
+query ownedCards($token: ID!)
 {
   ownedCards(token: $token) {
     id
@@ -192,7 +183,7 @@ query ownedCards($token: String!)
 `
 
 export const CREATE_CARD = gql`
-mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $displayName:String, $name:String!, $businessName: String,
+mutation createCard($token:ID!, $owned:Boolean!, $cardName:String!, $displayName:String, $name:String!, $businessName: String,
   $number:String, $email:String, $address1:String, $address2:String, $city: String,
   $state:String, $postalCode:String, $twitter:String, $facebook:String, $linkedIn:String,
   $instagram:String) {
@@ -233,7 +224,7 @@ mutation createCard($token:String!, $owned:Boolean!, $cardName:String!, $display
 `
 
 export const UPDATE_CARD = gql`
-mutation updateCard($token:String!, $id: ID!, $cardName: String, $displayName:String, $name:String, $businessName: String, $email: String,
+mutation updateCard($token:ID!, $id: ID!, $cardName: String, $displayName:String, $name:String, $businessName: String, $email: String,
              $number:String, $address1: String, $address2: String, $city: String, $state: String,
              $postalCode: String, $twitter:String, $facebook:String, $linkedIn:String,
              $instagram:String, $birthDate: DateTime) {
@@ -272,8 +263,18 @@ mutation updateCard($token:String!, $id: ID!, $cardName: String, $displayName:St
   }
 }
 `
+export const REQUEST_CONNECTION = gql`
+mutation requestConnection($token:ID!, $userId:ID!){
+  requestConnection(token:$token, userId:$userId)
+  {
+    message
+  }
+}
+`
+
+
 export const DELETE_CARD = gql`
-mutation destroyCard($token:String!, $id:ID!){
+mutation destroyCard($token:ID!, $id:ID!){
   destroyCard(token:$token, id:$id)
   {
     message
@@ -281,7 +282,7 @@ mutation destroyCard($token:String!, $id:ID!){
 }
 `
 export const UNSUBSCRIBE = gql`
-mutation unsubscribe($token:String!, $cardId:ID!){
+mutation unsubscribe($token:ID!, $cardId:ID!){
   unsubscribe(token:$token, cardId:$cardId)
   {
     message
@@ -290,7 +291,7 @@ mutation unsubscribe($token:String!, $cardId:ID!){
 `
 
 export const FAVORITE_CARD = gql`
-mutation favorite($token:String!, $cardId:ID!){
+mutation favorite($token:ID!, $cardId:ID!){
   favorite(token:$token, cardId:$cardId) {
     favorite
   }
@@ -298,7 +299,7 @@ mutation favorite($token:String!, $cardId:ID!){
 `
 
 export const UNFAVORITE_CARD = gql`
-mutation unfavorite($token:String!, $cardId:ID!){
+mutation unfavorite($token:ID!, $cardId:ID!){
   unfavorite(token:$token, cardId:$cardId) {
     favorite
   }
@@ -306,7 +307,7 @@ mutation unfavorite($token:String!, $cardId:ID!){
 `
 
 export const ADD_CONNECTION = gql`
-mutation createConnection($token:String!,  $cardToken:ID!){
+mutation createConnection($token:ID!,  $cardToken:ID!){
   createConnection(token:$token,  cardToken:$cardToken) {
     id
     user {
@@ -350,8 +351,55 @@ mutation createConnection($token:String!,  $cardToken:ID!){
   }
 }
 `
+
+export const BRIDGE_CONNECTION = gql`
+mutation bridgeConnection($token:ID!, $userId:ID!, $cardToken:ID!){
+  bridgeConnection(token:$token, userId:$userId, cardToken:$cardToken) {
+    id
+    user {
+      id
+      username
+    }
+    contact {
+      id
+      username
+    }
+    card {
+      id
+      user {
+        id
+        username
+      }
+      author {
+        id
+        username
+      }
+      cardName
+      displayName
+      name
+      businessName
+      address {
+        address1
+        address2
+        city
+        state
+        postalCode
+      }
+      number
+      email
+      birthDate
+      twitter
+      linkedIn
+      facebook
+      instagram
+      verified
+    }
+  }
+}
+`
+
 export const BLOCK_USER = gql`
-mutation blockUser($token:String!,  $userId:ID!){
+mutation blockUser($token:ID!,  $userId:ID!){
   blockUser(token:$token,  userId:$userId) {
     card {
       id
@@ -361,14 +409,14 @@ mutation blockUser($token:String!,  $userId:ID!){
 `
 
 export const DELETE_CONNECTION = gql`
-mutation destroyConnection($token: String!, $id: ID!){
+mutation destroyConnection($token: ID!, $id: ID!){
   destroyConnection(token: $token, id: $id){
     message
   }
 }
 `
 export const UPDATE_USER = gql`
-mutation updateUser($token: String!, $username: String, $name: String, $password:String, $email: String){
+mutation updateUser($token: ID!, $username: String, $name: String, $password:String, $email: String){
   updateUser(token: $token, username: $username, name: $name, password: $password, email: $email){
     id
     username
@@ -393,7 +441,7 @@ export const GET_USERS = gql`
 `
 
 export const SHARE_QR = gql`
-query shareCard($token: String!, $id: ID!)
+query shareCard($token: ID!, $id: ID!)
 { shareCard(token:$token, id:$id)
 }
 `

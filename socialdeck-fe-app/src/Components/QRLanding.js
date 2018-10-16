@@ -59,6 +59,7 @@ class QRLanding extends Component {
 
   render () {
     const token = window.localStorage.getItem('token')
+    const username = window.localStorage.getItem('username')
     const register = this.state.register
     return <React.Fragment>
       <Query
@@ -67,43 +68,48 @@ class QRLanding extends Component {
         {({ loading, error, data }) => {
           if (loading) return <p>Loading...</p>
           if (error) return <p>Error :(</p>
+          const info = data.card
           return <React.Fragment>
-            <div className='card'>
-              {data.card.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {data.card.name}</div>}
-              {data.card.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {data.card.businessName}</div>}
-              {data.card.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {data.card.number}</div>}
-              {data.card.email && <div className='cardLine'><i className='fas fa-envelope cardIcon' /> {data.card.email}</div>}
-              {data.card.address &&
-              <div className='address'>
-                <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
-                <div className='addressBlock'>
-                  <div className='addressLine line1'> {data.card.address.address1}</div>
-                  <div className='addressLine line2'> {data.card.address.address2}</div>
-                  <div className='addressLine line3'> {data.card.address.city}, {data.card.address.state} {data.card.address.postalCode}</div>
+            <div className='loginForm'>
+              {info.name && <div className='cardLine'><i className='fas fa-user-circle cardIcon' /> {info.name}</div>}
+              {info.businessName && <div className='cardLine'><i className='fas fa-briefcase cardIcon' /> {info.businessName}</div>}
+              {info.number && <div className='cardLine'><i className='fas fa-phone cardIcon' /> {info.number}</div>}
+              {info.email && <div className='cardLine'><i className='fas fa-envelope cardIcon' /> {info.email}</div>}
+              {info.address &&
+                <div className='address'>
+                  <div className='addressIconWrapper'><i className='fas fa-map-marked cardIcon' /></div>
+                  <div className='addressBlock'>
+                    <div className='addressLine line1'> {info.address.address1}</div>
+                    <div className='addressLine line2'> {info.address.address2}</div>
+                    <div className='addressLine line3'> {info.address.city}, {info.address.state} {info.address.postalCode}</div>
+                  </div>
                 </div>
-              </div>
               }
+              {info.birthDate && <div className='cardLine'><i className='fas fa-birthday-cake cardIcon' /> {info.birthDate}</div>}
+              {info.twitter && <div className='cardLine'><i className='fab fa-twitter cardIcon' /> {info.twitter}</div>}
+              {info.linkedIn && <div className='cardLine'><i className='fab fa-linkedin cardIcon' /> {info.linkedIn}</div>}
+              {info.facebook && <div className='cardLine'><i className='fab fa-facebook cardIcon' /> {info.facebook}</div>}
+              {info.instagram && <div className='cardLine'><i className='fab fa-instagram cardIcon' /> {info.instagram}</div>}
+               { (token && info.user.username !== username) && <Mutation mutation={ADD_CONNECTION}>
+                {(createConnection) =>
+                  <a className='buttonSignIn' onClick={() => {
+                    createConnection({
+                      variables: {
+                        token: token,
+                        cardToken: this.props.cardToken
+                      }
+                    })
+                      .then(navigate('/contacts/' + this.props.cardToken))
+                  }}>Connect</a>
+                }
+              </Mutation>}
             </div>
           </React.Fragment>
         }}
       </Query>
-      {token ? <React.Fragment>
-        <div>Welcome to SocialDeck!</div>
-        <Mutation mutation={ADD_CONNECTION}>
-          {(createConnection) =>
-            <a className='formLink' onClick={() => {
-              createConnection({ variables: {
-                token: token,
-                cardToken: this.props.cardToken
-              } })
-                .then(navigate('/contacts'))
-            }}>Connect</a>
-          }
-        </Mutation>
-      </React.Fragment>
-        : <React.Fragment>
+      {!token && <React.Fragment>
           {!register && <Mutation mutation={LOGIN_USER} update={this.logCache}>
-            {(login) => (
+            {(login, { loading, error }) => (
               <div className='loginForm'>
                 <div className='loginRow'>
                   <label htmlFor='username'>Username</label>
@@ -119,6 +125,7 @@ class QRLanding extends Component {
                     type='password'
                     onChange={event => this.updatePassword(event.target.value)} />
                 </div>
+                {error && <p className='errorMessage' >Invalid Username/Password</p>}
                 <a className='buttonSignIn' onClick={async e => {
                   await login({ variables: {
                     username: this.state.username,
@@ -139,7 +146,7 @@ class QRLanding extends Component {
           </Mutation>}
           {register &&
           <Mutation mutation={CREATE_USER}>
-            {(createUser) => (
+            {(createUser, { loading, error }) => (
               <div className='loginForm'>
                 <div className='loginRow'>
                   <label>Name</label>
@@ -180,7 +187,7 @@ class QRLanding extends Component {
                     onChange={event => this.updateConfirmation(event.target.value)} />
 
                 </div>
-
+                {error && <p className='errorMessage' >Please complete all fields before submission</p>}
                 <a className='buttonSignIn' onClick={e => {
                   createUser({ variables: {
                     name: this.state.name,
