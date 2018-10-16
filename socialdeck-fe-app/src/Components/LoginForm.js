@@ -43,7 +43,7 @@ class LoginForm extends Component {
     return (
       <React.Fragment>
         <Mutation mutation={LOGIN_USER} update={this.logCache}>
-          {(login) => (
+          {(login, { loading, error }) => (
             <div className='loginForm'>
               <div className='loginRow'>
                 <label htmlFor='username'>Username</label>
@@ -60,6 +60,7 @@ class LoginForm extends Component {
                   onChange={event => this.updatePassword(event.target.value)} />
               </div>
               <div className='loginRow'>
+                {error && <p className='errorMessage' >Invalid Username/Password</p>}
                 <a className='buttonSignIn' onClick={async e => {
                   await login({ variables: {
                     username: this.state.username,

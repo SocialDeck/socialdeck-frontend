@@ -3,6 +3,10 @@ import { Link } from '@reach/router'
 import logo from '../socialdecklogo.png'
 
 class Home extends Component {
+  constructor () {
+    super()
+    this.state = {}
+  }
   render () {
     return (
       <div className='home'>
@@ -10,7 +14,9 @@ class Home extends Component {
           <div className='topRow'>
             <Link className='logo' to='/contacts' ><h1>SocialDeck</h1></Link>
             <img className='topLogo' src={logo} alt='logo' />
+
           </div>
+          <button className='searchButton' onClick={() => this.props.searching()}>{this.props.searchingStatus ? <i className='fas fa-times' /> : <i className='fas fa-search' />}</button>
         </nav>
 
         {this.props.children}

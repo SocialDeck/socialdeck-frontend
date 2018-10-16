@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from '@reach/router'
-import logo from '../socialdecklogo.png'
+import { Link, Redirect } from '@reach/router'
 
 class HomeIndex extends Component {
   render () {
-    return (
+    const token = window.localStorage.getItem('token')
+    return <React.Fragment>
+      {token && <Redirect to='/contacts' noThrow />}
       <div className='card'>
         <h4>Welcome to SocialDeck!</h4>
 
@@ -12,7 +13,7 @@ class HomeIndex extends Component {
         <p>New to SocialDeck? <Link className='formLink' to='/register'>Register!</Link> </p>
 
       </div>
-    )
+    </React.Fragment>
   }
 }
 

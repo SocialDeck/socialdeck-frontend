@@ -23,10 +23,8 @@ class Subscribers extends Component {
     return <React.Fragment>{token
       ? <ul className='list' >
         <Query
-          query={GET_SUBSCRIBERS} 
-          variables={{ token: token, v: Math.random() }}
-          fetchPolicy='no-cache'
-      >
+          query={GET_SUBSCRIBERS} variables={{ token: token }} pollInterval={500}
+        >
           {({ loading, error, data }) => {
             if (loading) return <p>Loading...</p>
             if (error) return <p>{console.log(error)}</p>
@@ -34,7 +32,7 @@ class Subscribers extends Component {
             return data.subscribers.map((subscriber, idx) => (
 
               <li key={idx} className='list-item' >
-                <Link to={subscriber.id} key={idx} className='list-item contact'>
+                <div className='list-item contact'>
                   <div key={idx} className='list-item__left' >
                     <div className='list-item__thumbnail monogram' >
                       {subscriber.user.name[0]}
@@ -45,7 +43,7 @@ class Subscribers extends Component {
                     <div className='list-item__title' > {subscriber.user.name} </div>
                     <div className='list-item__subtitle' > {subscriber.card.cardName} </div>
                   </div>
-                </Link>
+                </div>
                 <div className='list-item__right' >
                   {!subscriber.mutual && <Mutation mutation={REQUEST_CONNECTION}>
                     {(requestConnection) =>
