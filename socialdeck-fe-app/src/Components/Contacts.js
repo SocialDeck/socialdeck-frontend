@@ -108,7 +108,7 @@ class Contacts extends Component {
 
                       <div className='list-item__center'>
                         <div className='list-item__title' > {contact.name} </div>
-                        <div className='list-item__subtitle' > {contact.displayName} </div>
+                        <div className='list-item__subtitle' > {contact.displayName} {(contact.verified && contact.mutual) && <i className='fas fa-exchange-alt statusIcon'></i>} {(contact.verified && !contact.mutual) && <i className='fas fa-long-arrow-alt-left statusIcon'></i>}</div>
                       </div>
                     </Link>
                     <div className='list-item__right' >

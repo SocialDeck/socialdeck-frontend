@@ -281,7 +281,9 @@ border: 1px solid #274156;
   text-decoration: none;
   color: #274156;
 }
-
+ .statusIcon {
+   font-size: .75rem;
+ }
 #page-wrap {
   text-align: center;
 
