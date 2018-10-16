@@ -18,6 +18,9 @@ import Home from './Components/Home'
 import HomeIndex from './Components/HomeIndex'
 import SideBar from './Components/Sidebar'
 
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 class App extends Component {
   constructor () {
     super()
@@ -35,6 +38,18 @@ class App extends Component {
     this.setUser = this.setUser.bind(this)
     this.logOut = this.logOut.bind(this)
     this.searching = this.searching.bind(this)
+  }
+
+  notifyError (message) {
+    toast.error(message, {
+      position: toast.POSITION.BOTTOM_CENTER
+    })
+  }
+
+  notifySuccess (message) {
+    toast.success(message, {
+      position: toast.POSITION.BOTTOM_CENTER
+    })
   }
 
   searching () {
@@ -67,8 +82,8 @@ class App extends Component {
           <Home path='/' logOut={this.logOut} searchingStatus={this.state.searching} searching={this.searching}>
             <HomeIndex path='/' />
             <HomeIndex path='/index.html' />
-            <LoginForm path='login' setUser={this.setUser} />
-            <RegisterForm path='register' setUser={this.setUser} />
+            <LoginForm path='login' setUser={this.setUser} notifyError={this.notifyError} />
+            <RegisterForm path='register' setUser={this.setUser} notifyError={this.notifyError} />
 
             <Contacts path='contacts' username={this.state.username} token={this.state.token} searchingStatus={this.state.searching} />
             <Favorites path='favorites' username={this.state.username} token={this.state.token} />
@@ -102,11 +117,11 @@ class App extends Component {
                 )
               }
             </Match>
-            <QRLanding path='/share/:cardToken' />
+            <QRLanding path='/share/:cardToken' notifyError={this.notifyError} />
             <ExampleCard path='/contacts/example-card' />
             <UpdateUser path='/editAccount' />
             <NewContact path='/contacts/new-contact' />
-            <Subscribers path='/contacts/subscribers' />
+            <Subscribers path='/contacts/subscribers' notifySuccess={this.notifySuccess} />
             <Match path='/passwordreset/:token'>
               {props =>
                 props.match ? (
@@ -120,6 +135,7 @@ class App extends Component {
           </Home>
 
         </Router>
+        <ToastContainer />
       </div>
     )
   }

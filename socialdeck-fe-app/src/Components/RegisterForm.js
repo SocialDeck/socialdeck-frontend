@@ -102,7 +102,6 @@ class RegisterForm extends Component {
                   onChange={event => this.updateConfirmation(event.target.value)} />
 
               </div>
-              {error && <p className='errorMessage'>Please complete all fields before submission</p>}
               <a className='buttonSignIn' onClick={e => {
                 createUser({ variables: {
                   name: this.state.name,
@@ -117,6 +116,7 @@ class RegisterForm extends Component {
                     this.props.setUser(data.token, this.state.username)
                     navigate('/my-cards')
                   })
+                  .catch(error => { error && this.props.notifyError('Please complete all fields before submission') })
               }} >Register</a>
               <p>Already have an account? <Link className='formLink' to='/login'>Login</Link> </p>
 

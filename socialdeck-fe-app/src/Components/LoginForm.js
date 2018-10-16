@@ -42,7 +42,7 @@ class LoginForm extends Component {
   render () {
     return (
       <React.Fragment>
-        <Mutation mutation={LOGIN_USER} update={this.logCache}>
+        <Mutation mutation={LOGIN_USER} >
           {(login, { loading, error }) => (
             <div className='loginForm'>
               <div className='loginRow'>
@@ -60,7 +60,6 @@ class LoginForm extends Component {
                   onChange={event => this.updatePassword(event.target.value)} />
               </div>
               <div className='loginRow'>
-                {error && <p className='errorMessage' >Invalid Username/Password</p>}
                 <a className='buttonSignIn' onClick={async e => {
                   await login({ variables: {
                     username: this.state.username,
@@ -73,6 +72,7 @@ class LoginForm extends Component {
                       this.props.setUser(data.token, this.state.username)
                       navigate('/contacts')
                     })
+                    .catch(error => { error && this.props.notifyError('Invalid Username/Password') })
                 }}>Sign In</a>
                 <p>Don't have an account? <Link className='formLink' to='/register'>Register</Link></p>
                 <p>Forgot your username or password? <a className='formLink' onClick={() => this.setRecover()}>Recover Account</a></p>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Query, Mutation } from 'react-apollo'
-import { Link, Redirect, navigate } from '@reach/router'
+import { Redirect } from '@reach/router'
 import { GET_SUBSCRIBERS, DELETE_CONNECTION, REQUEST_CONNECTION } from '../queries'
 
 class Subscribers extends Component {
@@ -52,18 +52,21 @@ class Subscribers extends Component {
                           token: token,
                           userId: subscriber.user.id
                         } })
+                          .then(data => this.props.notifySuccess('Request for Connection Sent'))
                       }}><i className='fas fa-user-plus' /></a>
                     }
                   </Mutation>}
                   <Mutation mutation={DELETE_CONNECTION}>
                     {(destroyConnection) =>
                       <a className='list-item contact' onClick={() => {
-                        destroyConnection({
-                          variables: {
-                            token: token,
-                            id: subscriber.id
-                          }
-                        }).then(navigate('/contacts/subscribers/'))
+                        if (window.confirm('Are you sure you wish to delete this item?')) {
+                          destroyConnection({
+                            variables: {
+                              token: token,
+                              id: subscriber.id
+                            }
+                          }).then(data => this.props.notifySuccess('Subscriber Removed'))
+                        }
                       }}><i className='fas fa-user-times' /></a>
                     }
                   </Mutation>
