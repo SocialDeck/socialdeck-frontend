@@ -87,26 +87,30 @@ class CardInfo extends Component {
           {(info.author && username === info.author.username) && <Mutation mutation={DELETE_CARD}>
             {(deleteCard) =>
               <a className='cardOption cardDelete' onClick={() => {
-                deleteCard({
-                  variables: {
-                    token: token,
-                    id: info.id
-                  }
-                })
+                if (window.confirm('Are you sure you wish to delete this item?')) {
+                  deleteCard({
+                    variables: {
+                      token: token,
+                      id: info.id
+                    }
+                  })
+                }
               }}><i className='fas fa-trash-alt cardOptionIcon cardDelete' /> Delete</a>
             }
           </Mutation>}
           {(!(info.author && username === info.author.username) && !(info.user && username === info.user.username)) && <Mutation mutation={UNSUBSCRIBE}>
             {(unsubscribe) =>
               <a className='cardOption cardDelete' onClick={() => {
-                unsubscribe({
-                  variables: {
-                    token: token,
-                    cardId: info.id
-                  }
-                }).then(data => {
-                  navigate('/contacts/')
-                })
+                if (window.confirm('Are you sure you wish to delete this item?')) {
+                  unsubscribe({
+                    variables: {
+                      token: token,
+                      cardId: info.id
+                    }
+                  }).then(data => {
+                    navigate('/contacts/')
+                  })
+                }
               }}><i className='fas fa-user-times cardOptionIcon cardDelete' /> Unsubscribe</a>
             }
           </Mutation>}

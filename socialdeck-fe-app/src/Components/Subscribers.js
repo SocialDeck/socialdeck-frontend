@@ -59,12 +59,14 @@ class Subscribers extends Component {
                   <Mutation mutation={DELETE_CONNECTION}>
                     {(destroyConnection) =>
                       <a className='list-item contact' onClick={() => {
-                        destroyConnection({
-                          variables: {
-                            token: token,
-                            id: subscriber.id
-                          }
-                        }).then(data => this.props.notifySuccess('Subscriber Removed'))
+                        if (window.confirm('Are you sure you wish to delete this item?')) {
+                          destroyConnection({
+                            variables: {
+                              token: token,
+                              id: subscriber.id
+                            }
+                          }).then(data => this.props.notifySuccess('Subscriber Removed'))
+                        }
                       }}><i className='fas fa-user-times' /></a>
                     }
                   </Mutation>
