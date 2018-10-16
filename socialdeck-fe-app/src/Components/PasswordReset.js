@@ -21,7 +21,7 @@ class PasswordReset extends Component {
       <Mutation mutation={UPDATE_USER} update={this.logCache}>
         {(updateUser) => (
           <React.Fragment>
-            <div className='card'>
+            <div className='loginForm'>
               <div className='loginRow'>
                 <label htmlFor='password'>New Password</label>
                 <input
@@ -29,13 +29,13 @@ class PasswordReset extends Component {
                   type='password'
                   onChange={(e) => this.updateState(e, 'newPassword')} />
               </div>
-              <button onClick={e => {
+              <a className='buttonSignIn' onClick={e => {
                 updateUser({ variables: {
                   token: this.props.token,
                   password: this.state.newPassword
                 } })
                   .then(navigate('/contacts'))
-              }}>Update</button>
+              }}>Update</a>
             </div>
 
           </React.Fragment>
