@@ -59,7 +59,7 @@ class Subscribers extends Component {
                   <Mutation mutation={DELETE_CONNECTION}>
                     {(destroyConnection) =>
                       <a className='list-item contact' onClick={() => {
-                        if (window.confirm('Are you sure you wish to delete this item?')) {
+                        if (window.confirm('Are you sure you wish to revoke your information from this user?')) {
                           destroyConnection({
                             variables: {
                               token: token,
