@@ -46,6 +46,12 @@ class App extends Component {
     })
   }
 
+  notifySuccess (message) {
+    toast.success(message, {
+      position: toast.POSITION.BOTTOM_CENTER
+    })
+  }
+
   searching () {
     this.setState({
       searching: !this.state.searching
@@ -115,7 +121,7 @@ class App extends Component {
             <ExampleCard path='/contacts/example-card' />
             <UpdateUser path='/editAccount' />
             <NewContact path='/contacts/new-contact' />
-            <Subscribers path='/contacts/subscribers' />
+            <Subscribers path='/contacts/subscribers' notifySuccess={this.notifySuccess} />
             <Match path='/passwordreset/:token'>
               {props =>
                 props.match ? (
